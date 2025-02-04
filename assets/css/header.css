@@ -1,0 +1,45 @@
+header{
+  height: 100px;
+  text-align: center;
+  background-color:#343a40!important;
+  position: sticky;
+  top: 0;
+  z-index: 5;
+}
+
+.logo{
+  height: 90px;
+  width: 10%;
+}
+
+ul{
+    list-style: none;
+  }
+
+  .btn:hover{
+    color:lightgrey;
+  }
+
+  .btn{
+    color: white;
+    font-weight: bold;
+    font-size: small;
+  }
+  
+  .menu-items{
+    display: flex;
+  }
+
+  .dropdown-menu.show{
+    background-color: rgb(235, 238, 238);
+  }
+  li a {
+    font-weight: bold !important;
+    color: rgb(11, 80, 42) !important;
+  }
+
+
+  .doctor-icon {
+    margin-right: 20px;
+  }
+  

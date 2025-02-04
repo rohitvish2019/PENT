@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bill</title>
+    <link rel="stylesheet" href="/css/bill.css">
+
+</head>
+
+<body>
+
+    <body>
+        <div class="bill-container" style="border: 1px solid black; padding: 5px;">
+            <header>
+                <div
+                    style="display: flex; border-bottom: 1px dotted black; font-size: small; justify-content: space-between;">
+                    <span style="font-size: medium;"><i>Cash Memo</i></span>
+                    <span>Reg No. NH/9255/JUN-2023</span>
+                </div>
+                <div style="display: flex; justify-content: space-between;">
+                    <div style="justify-content: left;">
+                        <img style="height: 60px;" src="/images/CJNH_Logo_Black.png" alt="CJNH Logo">
+                    </div>
+                    <span style="margin-top: 1.5%;" class="heading">Dr. Chanda Jain Nursing Home</span>
+                    <img style="height: 50px; padding: 5px;" src="/images/doctorLogo.jpg" alt="Doctor-Logo">
+                </div>
+                <label class="sub-heading">323, Civil Ward No. 7, Damoh. (MP) Pin - 470661</label>
+                <div style="display: flex;justify-content: space-between;margin-bottom: 10px;">
+                    <label for="">Date :
+                        <%=bill.createdAt.toLocaleString()%></label>
+                       
+                    <label for="">Receipt No : <%=bill.ReportNo%></label>
+                    
+                </div>
+                <%if(bill.type != 'DischargeBill' && bill.type != 'IPDAdvance'){%>
+                    <div style="display: flex;justify-content: space-between;margin-bottom: 10px;">
+                        <label for="" style="font-weight: bold;">Doctor :
+                            <%=bill.Doctor%></label>
+                            <label for="">Patient Id : <%=bill.PatiendID%></label>
+                    </div>
+                <%}%>
+                
+            </header>
+
+            <div>
+                <label class="sub-heading">Patient Details</label>
+                <div class="patient-info" style="margin-bottom: 15px;">
+                    <div style="width: 50%; text-align:right;">
+                        <div class="inner-table" style="display: inline-block;">
+                            <table>
+                                <tr>
+                                    <th>Name</th>
+                                    <td><%=bill.Name%></td>
+                                </tr>
+                                <tr>
+                                    <th>W/O</th>
+                                    <td><%=bill.Husband%></td>
+                                </tr>
+                                <tr>
+                                    <th>Age</th>
+                                    <td><%=bill.Age%></td>
+                                </tr>
+                                <tr>
+                                    <th>Gender</th>
+                                    <td><%=bill.Gender%></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div style="width: 50%; text-align:left;">
+                        <div class="inner-table" style="display: inline-block;">
+                            <table>
+                                <tr>
+                                    <th>Mobile</th>
+                                    <td><%=bill.Mobile%></td>
+                                </tr>
+                                <tr>
+                                    <th>Address</th>
+                                    <td><%=bill.Address%></td>
+                                </tr>
+                                <tr>
+                                    <th>Id Proof</th>
+                                    <td><%=bill.IdProof%></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <label class="sub-heading">Billing Details</label>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th style="text-align: left;">Description</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                            <th>Total</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="billingDetails">
+                        <% let total = 0%>
+                        <% let counter = 1%>
+                        <%for(let i=0;i<bill.Items.length;i++){%>
+                        <% if(bill.Items[i].length > 0) {%>
+                        <% let item = bill.Items[i].split('$')%>
+                        <% total = total + +(item[2] * item[1])%>
+                        <tr>
+                            <td><%=counter++%></td>
+                            <td style="text-align: left;"><%=item[0]%></td>
+                            <td>₹<%=item[2]%></td>
+                            <td><%=item[1]%></td>
+                            <td><%=parseInt(item[1]) * parseInt(item[2])%></td>
+                            <td><%=item[3]%></td>
+                        </tr>
+                        <%}%>
+                            
+                        <%}%>
+                        <tr>
+                            
+                            <td style="text-align: right;" colspan="4"><b>Grand Total</b></td>
+                            <td><b>₹<%=total%></b></td>
+                            <td>Cash : ₹<%=bill.CashPaid%>, Online : ₹<%=bill.OnlinePaid%></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+                <div style="font-size: small; margin-top:10px; text-align: left;">
+                    <span><b>Bank Details:</b></span><br>
+                    <span>HDFC BANK, Damoh</span><br>
+                    <span>A/c Name: Dr. Chanda Jain Nursing Home</span><br>
+                    <span>A/c No. : 50200025216267</span><br>
+                    <span>IFSC Code - HDFC0000914</span>
+                </div>
+                <div style="margin-top: 9%; margin-right: 5%;">
+                    <span><i>Signature</i></span>
+                </div>
+            </div>
+        </div>
+
+        <script src="bill.js"></script>
+    </body>
+    <div class="printButtonContainer">
+        <button id="printButton" onclick="printMe()" class="btn btn-success">Print</button>
+    </div>
+    <script>
+        function printMe() {
+            document.getElementById('printButton').style.display = 'none'
+            window.print()
+        }
+    </script>
+
+</html>

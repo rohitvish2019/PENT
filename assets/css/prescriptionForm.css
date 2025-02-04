@@ -1,0 +1,200 @@
+body{
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+    width: 99%;
+}
+
+.main-body{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(7, 6, 6);
+    width: 730px;
+    height: 1040px;
+    overflow-x: hidden;
+}
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.header{
+    height: 6%;
+    width: 99.9%;
+    display: flex;
+}
+
+.doctors-info{
+    height: 11%;
+    width: 99.9%;
+    display: flex;
+    margin-top: 5%;
+}
+.patient-info{
+    height: 5%;
+    border-top: 1px dotted rgb(20, 19, 19);
+    border-bottom: 1px dotted rgb(20, 19, 19);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding-left: 2px;
+    padding-right: 1px;
+}
+
+
+
+.doc-info-left{
+    width: 40%;
+    text-align: left;
+    margin-left: 1%;
+}
+
+.doc-info-right{
+    width: 40%;
+    text-align: right;
+    margin-right: 1%;
+}
+
+.hospital-photo{
+    width: 25%;
+}
+
+.old-info{
+    font-size: 11px;
+    margin-bottom: 0.3%;
+}
+
+.name label{
+    text-align: center;
+    display: block;
+    margin-left: -20%;
+}
+.doc-name{
+    font-weight: bold;
+    font-size: 23px;
+    margin-bottom: .5%;
+    margin-top: 2%;
+}
+
+.tests{
+    width: 27%;
+    border-right: 1px dotted black;
+    height: 100%;
+    padding-left: 1%;
+    padding-right: 1%;
+}
+
+.logo{
+    width: 12%;
+    height: 70%;
+}
+
+.name{
+    width: 100%;
+}
+
+
+.footer{
+    height: 3%;
+    width: 99.9%;
+}
+
+
+
+.patient-data input{
+    border: none;
+    height: 20% !important;
+}
+.patient-data label{
+    display: block;
+    font-size: 14px;
+    padding: 1%;
+}
+
+.patient-data small{
+    display: block;
+    font-size: 13px;
+    padding: 1%;
+    font-weight: bold;
+}
+
+
+.patient-address label{
+    display: block;
+    font-size: medium;
+    padding: 1%;
+}
+
+.patient-data small{
+    padding: 1%;
+}
+.patient-address small{
+    padding: 1%;
+}
+.patient-address{
+    width: 40%;
+}
+
+.prescription-data{
+    height: 100%;
+    display: flex;
+}
+.left-side{
+    width: 69%;
+    height: 100%;
+}
+
+.right-side{
+    width: 31%;
+    height: 100%;
+}
+
+
+.investigationItems label{
+    margin-top: 4px;
+}
+.investigationItems{
+    border-left: .5px dashed black;
+    padding-left: 5px;
+}
+textarea{
+    border: none;
+    border-bottom: .5px dotted black;
+    resize: none !important;
+    overflow: hidden;
+}
+td, th{
+    border-bottom: 1px dotted black !important;
+}
+
+
+#result {
+    margin-top: 20px;
+    font-size: 1.5em;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    display: inline-block;
+}
+button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin: 10px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #007BFF;
+    color: white;
+}
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
+
+#audioInput{
+    background-color:#d0d0d0;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 2);
+}

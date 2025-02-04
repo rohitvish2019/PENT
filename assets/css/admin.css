@@ -1,0 +1,167 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #F8F9FA; /* Light Grey */
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+
+.sidebar{
+    padding-top: 2%;
+}
+
+#wrapper {
+    display: flex;
+    align-items: stretch;
+}
+
+.form-floating{
+    text-align: center;
+    width: 90%;
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+#sidebar-wrapper {
+    min-height: 86.2vh;
+    margin-left: -15rem;
+    transition: margin 0.25s ease-out;
+}
+.input-group-text{
+    font-weight: 600 !important;
+    width:auto;
+    font-size:small !important;
+}
+
+.input-group-value{
+    margin-left:2%;
+    width:4rem;
+    text-align: center;
+}
+
+#sidebar-wrapper .sidebar-heading {
+    padding: 0.875rem 1.25rem;
+    font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+    width: 15rem;
+}
+
+#page-content-wrapper {
+    width: 100%;
+    padding: 20px;
+}
+
+#menu-toggle {
+    margin-right: 10px;
+}
+
+.card {
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+    
+    font-weight: bold;
+}
+
+.card-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+#users, #settings, #profile, #Medicine{
+    display: none;
+}
+
+.bgusertable th{
+    text-align: center;
+    color: white;
+    background-color: #025E73 !important ;
+    
+}
+
+
+.bgmedicinetable th{
+    text-align: center;
+    color: white;
+    background-color: #025E73 !important ;
+    
+}
+.MedicineListTable td{
+    text-align: center;
+}
+
+.bg th{
+    vertical-align: middle !important;
+    color: white;
+    background-color: #025E73 !important ;
+    position: sticky;
+    top: 0;
+    font-size: small;
+}
+#addnewservice{
+    background-color: #d0d0d0;
+    border-radius: 20px;
+    display:none; 
+    position:absolute;
+    height: fit-content; 
+    width: 40%;
+    margin-left: 15%;
+}
+
+ /* Popup text box for Add New Services */
+.left, .right{
+    font-size: small;
+}
+
+
+#addnewuser{
+    background-color: #d0d0d0;
+    border-radius: 20px;
+    display:none; 
+    position:absolute;
+    height: fit-content; 
+    width: 40%;
+    margin-left: 15%;
+    z-index: 5;
+}
+
+#addnewmedicine{
+    background-color: #d0d0d0;
+    border-radius: 20px;
+    display:none; 
+    position:absolute;
+    height: fit-content; 
+    width: 40%;
+    margin-left: 15%;
+    z-index: 5;
+}
+
+span{
+    
+    color: red;
+}
+.table-body{
+    
+    scrollbar-width: thin;          /* "auto" or "thin" */
+    scrollbar-color: grey #ffffff;   /* scroll thumb and track */ 
+    
+}
+
+
+table{
+    align-items: center;
+    text-align: left;
+    width: 100%;
+    border: 1px solid black;
+}
+
+@media (min-width: 768px) {
+    #sidebar-wrapper {
+        margin-left: 0;
+    }
+}

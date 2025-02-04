@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+        integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+        integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/dischargeSheet.css">
+    <title>Discharge Sheet</title>
+</head>
+
+<body class="container" onload="getDischargeData()">
+    <%if(birthInfo && birthInfo.Gender == 'Male'){%>
+        <div style="display: flex;height: 100%;flex-direction: column; border: 1px solid black;background-color: #93d8f1;">
+    <%}else{%>
+        <div style="display: flex;height: 100%;flex-direction: column; border: 1px solid black;background-color: #e9aca8;">
+    <%}%>
+    
+        <div class="hospital-details" style="height: 6%;text-align:left; display: flex;">
+            <div style="height: 100%; width: 30%;">
+                <img style="width: 110px; height: auto;" src="/images/CJNH_Logo_Black.png" alt="">
+            </div>
+            <label style="padding-top: 5px; font-size: 27px;font-weight: bolder;display: block;">डॉ. चंदा &nbsp;जैन &nbsp;नर्सिंग &nbsp;होम</label>
+            <div style="margin-top: 2%;margin-left: 25px;">
+                <label>Reg No. NH/9255/JUN-2023</label>
+            </div>
+
+        </div>
+        <label style="text-align: center; margin-bottom: 5px;">323, सिविल वार्ड नंबर 7 दमोह (म. प्र.). Mob : 6263169195, Ph. No :
+            07812-222441</label>
+        <label style="font-size: 22px;font-weight: bold;text-align: center;">Discharge Sheet</label>
+        
+        <!-- Patient Information-->
+        <div class="patient-info">
+            <label hidden for="" id="visitId"><%=visit._id%></label>
+            <div class="patient-data" style="width: 8%; ">
+                <span for=""><b>Id</b></span>
+                <label for="" id=""><%=visit.Patient.Id%></label>
+            </div>
+            <div class="patient-data" style="width: 22%;">
+                <span for=""><b>Name</b></span>
+                <label for=""><%=visit.Patient.Name%></label>
+            </div>
+            <div class="patient-data" style="width: 22%; ">
+                <span for=""><b>Husband:</b></span>
+                <label for=""><%=visit.Patient.Husband%></label>
+            </div>
+            <div class="patient-data" style="width: 10%;">
+                <span for=""><b>Age:</b></span>
+                <label for=""><%=visit.Patient.Age%></label>
+            </div>
+            
+            <div class="patient-data" style="width: 28%;">
+                <span for=""><b>Address:</b></span>
+                <label for=""><%=visit.Patient.Address%></label>
+            </div>
+            <div class="patient-data" style="width: 8%;margin-right: 2%;">
+                <span for=""><b>IPD No</b></span>
+                <label for=""><%=visit.Patient.IPDNumber%></label>
+            </div>
+        </div>
+
+        <!-- Admission and Discharge Date Section-->
+         <% let dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',hour: '2-digit', minute: '2-digit',}%>
+        <div class="dischargeItems" style="height: 3%; display: flex;justify-content: space-between;">
+            <div style="width: 50%; padding: 5px; text-align: left;">
+                <%let admDT = visit.AdmissionDate + ' '+visit.AdmissionTime%>
+                <label>Date Of Admission : <%=new Date(admDT).toLocaleString('en-IN', dateOptions)%></label>
+            </div>
+            <div style="width: 50%;text-align: right;  padding: 5px; ">
+                <%let dchDT = visit.DischargeDate + ' '+visit.DischargeTime%>
+                <%if(visit && visit.DischargeDate){%>
+                    <label>Date Of Discharge :<%=new Date(dchDT).toLocaleString('en-IN', dateOptions)%></label>
+                <%}%>
+            </div>
+        </div>  
+        <div style="margin-bottom: 4px;">
+            <input onchange="addChanged('Diagnosis'), updateOP()" style="width: 99.5%;text-align: left;border-bottom: 1px solid black;" type="text" name="" id="Diagnosis" placeholder="Diagnosis" value="Diagnosis :- ">
+        </div>
+        <!-- Conditions Input Text Box-->
+        <div class="condition" style="height: 14%; display: flex;justify-content: space-between;">
+            <div style="text-align: left; width: 49%;">
+                <span style="padding-left: 10px;"><b>Condition on Admission</b></span>
+                <textarea onchange="addChanged('coa')" id="coa" rows="6" cols="44"></textarea>
+            </div>
+            <div style="text-align: left; width: 49%; border-left: .5px dotted black;padding-left: 13px;">
+                <span><b>Condition on Discharge</b></span>
+                <textarea rows="6" cols="44" onchange="addChanged('cod')" id="cod">O/E AFEBRILE
+VITALS STABLE
+P/A UT RETRACTED
+L/E NO ACTIVE BLEEDING</textarea>
+            </div>
+        </div>
+
+        <!-- Investigation Section-->
+        <div class="investigation-tables" style="height: 22%; display: flex; border-top: .5px dashed black;">
+            <div class="ohms" style="width:95%; height: 20%;text-align: center;">
+                <span><b>O/H</b></span>
+                <div style="text-align: left;margin-left: 1px;">
+                    <textarea name="" onchange="addChanged('oh_ms')" id="oh_ms" rows="1" cols="40" placeholder="MS" style="border: 1px solid black;">MS : </textarea>
+                    <textarea name="" id="edd" cols="21" rows="1" onchange="addChanged('edd')" style="border: 1px solid black;">EDD : </textarea>
+                </div>
+                <div>
+                    <table class="table" style="text-align: center;width: 100%;padding: 0;">
+                        <tr class="ohms-inputs">
+                            <td style="width: 25%;"><input onchange="addChanged('oh_g')" id="oh_g" style="width: 90%;" type="text" value="G-"></td>
+                            <td style="width: 25%;"><input onchange="addChanged('oh_p')" id="oh_p" style="width: 90%;" type="text" value="P-"></td>
+                            <td style="width: 25%;"><input onchange="addChanged('oh_l')" id="oh_l" style="width: 90%;" type="text" value="L-"></td>
+                            <td style="width: 25%;"><input onchange="addChanged('oh_a')" id="oh_a" style="width: 90%;" type="text" value="A-"></td>
+                        </tr>
+                    </table>
+                </div>
+                <div style="text-align: left;margin-top: 10px;">
+                    <textarea name="" onchange="addChanged('oh_other')" id="oh_other" rows="2" cols="67" placeholder="Other" style="border: 1px solid black;"></textarea>
+                </div>
+                <span><b>Invst Done:</b></span>
+                <div class="invstdone" style="width:100%;  height: 65%; text-align: center;margin-left: 0 !important;">
+                    <table class="table" style="height: 40%;width: 100%; ">
+                        <tr>
+                            <td>Hb%</td>
+                            <td>Bl gr & Rh</td>
+                            <td>RBS(mg/dl)</td>
+                            <td>HIV</td>
+                            <td>HbsAg</td>
+                            <td>TSH(μIU/mL)</td>
+                        </tr>
+                        <tr>
+                            <td><input onchange="addChanged('hb_per')" id="hb_per" style="width: 96%;border: none;" type="text"></td>
+                            <td style="width: 20%;"><input onchange="addChanged('blgr')" id="blgr" style="width: 96%;font-size: 13px !important;" type="text" list="values"></td>
+                            <td><input onchange="addChanged('rbs')" id="rbs" style="width: 96%;" type="text"></td>
+                            <td><input onchange="addChanged('hiv')" id="hiv" style="width: 96%;" type="text"></td>
+                            <td><input onchange="addChanged('hbsag')" id="hbsag" style="width: 96%;" type="text"></td>
+                            <td><input onchange="addChanged('tsh')" id="tsh" style="width: 96%;" type="text"></td>
+                        </tr>
+                        <datalist id="values">
+                            <option value="A Positive"></option>
+                            <option value="B Positive"></option>
+                            <option value="AB Positive"></option>
+                            <option value="O Positive"></option>
+                            <option value="A Negative"></option>
+                            <option value="B Negative"></option>
+                            <option value="AB Negative"></option>
+                            <option value="O Negative"></option>
+                        </datalist>
+                    </table>
+                </div>
+            </div>
+            
+            
+            
+            
+
+
+            <div class="treatmentgiven" style="width: 70%; align-items:center;">
+                <label><b>Treatment Given:</b></label><br>
+                <table style="width: 100%; height: 70% !important;">
+                    <tbody>
+                        <tr class="b3">
+                            <td style="font-size: small;">I.V Fluids/Symptomatic t/t</th>
+                            <td><input onchange="addChanged('ivfluids')" id="ivfluids" type="text"></td>
+                        </tr>
+                        <tr class="b3">
+                            <td>I.V. Antibiotic XL 1.5 gm(12 hrly)</th>
+                            <td><input onchange="addChanged('ivantibiotic')" id="ivantibiotic" type="text"></td>
+                        </tr>
+                        <tr class="b3">
+                            <td>I.M Aquagesic 75mg(12 hrly) </th>
+                            <td><input onchange="addChanged('imaquagesic')" id="imaquagesic" type="text"></td>
+                        </tr>
+                        <tr class="b3">
+                            <td>Tab. Mahacef XL(BD)</th>
+                            <td><input onchange="addChanged('mahacef')" id="mahacef" type="text"></td>
+                        </tr>
+                        <tr class="b3">
+                            <td>Tab Camrox D(BD)</th>
+                            <td><input onchange="addChanged('camrox')" id="camrox" type="text"></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <textarea name="" id="" rows="4" placeholder="Other Information--" style="border: 1px solid black;"></textarea>
+
+        <!-- Notes-->
+        <%let dt = '' %>
+        <div class="notes" style="height: 14%; display: flex;justify-content: space-between;">
+            <div style="text-align: left; width: 49%;">
+                <span style="padding-left: 10px;"><b>Operative Notes</b></span>
+                <textarea rows="6" cols="44" id="opnotes" onchange="addChanged('opnotes')"></textarea>
+            </div>
+            <div style="text-align: left; width: 49%;border-left: .5px dotted black;padding-left: 13px;">
+
+                <% if(birthInfo){%>
+                <%dt = birthInfo.BirthDate + ' '+birthInfo.BirthTime%>
+                <%}%>
+                <span><b>Baby Notes</b></span>
+                <textarea  rows="6" cols="44" id="babynotes" onchange="addChanged('babynotes')"><%if(birthInfo){%>Attended By:<%}%>
+<%if(birthInfo){%><%=birthInfo.Gender%> Child<%}%>
+On <%=new Date(dt).toLocaleString('en-IN',{day:'2-digit',month:'2-digit',year:'numeric'})%> at <%=new Date(dt).toLocaleString('en-IN',{hour:'2-digit',minute:'2-digit'})%>
+Baby Weight : <%if(birthInfo){%><%=birthInfo.ChildWeight%> Kg <%}%>
+Cried immediately
+                </textarea>
+            </div>
+        </div>
+
+
+        <!-- Discharge Advice-->
+        
+        <div class="dischargePrescription" 
+            style="height: 25%; display: flex; padding-top:5px;border-top: .5px dashed black;">
+            
+            
+            <div style="width: 70%; height: 100%;">
+                <div style="display: block;">
+                    <span style="padding-left: 10px;"><b>Treatment Advice</b></span>
+                </div>
+                <table style="text-align: center; width: 100%; font-size: small;">
+                    <thead>
+                        <tr class="b4">
+                            <th></th>
+                            <th>सुबह</th>
+                            <th>दोपहर</th>
+                            <th>रात</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(let i=0;i<meds.length;i++){%>
+                            <tr class="b4">
+                                <td id="<%=meds[i]._id%>" onchange="addChanged('<%=meds[i]._id%>')"><%=meds[i].Name%></td>
+                                <%let dosage = meds[i].Dosage.split('-')%>
+                                <td><input id="<%=meds[i]._id%>_d0" onchange="addChanged('<%=meds[i]._id%>_d0')" type="text" value="<%=dosage[0]%>"></td>
+                                <td><input id="<%=meds[i]._id%>_d1" onchange="addChanged('<%=meds[i]._id%>_d1')" type="text" value="<%=dosage[1]%>"></td>
+                                <td><input id="<%=meds[i]._id%>_d2" onchange="addChanged('<%=meds[i]._id%>_d2')" type="text" value="<%=dosage[2]%>"></td>
+                                <td><%=meds[i].Duration%></td>
+                            </tr>
+                        <%}%>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div>
+                <div style="margin-left: 5px;">
+                    <textarea style="border-bottom: .5px solid black;" id="otherAdvices" onchange="addChanged('otherAdvices')" rows="5" cols="35" placeholder="Other Advice">Other Advice :- </textarea>
+                </div>
+                <div style=" width: 100%; height: 55%; padding-left:8px ; text-align: center; margin-top: 7%;">
+                    <span>- बच्चे का टीकाकरण नियमित करायें ।</span><br><hr>
+                    <span>- ⁠परिवार नियोजन अपनाए ।</span><br><hr>
+                    <span>- ⁠आवश्यकता पड़ने पर या 1 - 1/2 माह बाद दिखाये ।</span>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+        <span style="text-align: center;"><b> बच्चे का जन्म पंजीयन 15 दिवस के अंदर नगर पालिका या ग्राम पंचायत से करवाये ।<b></span>
+        <div style="display: flex; ">
+            <table style="text-align: center; width: 100%;">
+                <thead>
+                    <tr class="b5">
+                        <td>Dr. Anuj Jain</td>
+                        <td>Dr. Swati jain</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="b5">
+                        <td>(DGO)</td>
+                        <td>(DGO)</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+    <div style="display: flex;justify-content: center; margin-top: 10px;">
+        <button id="saveButton" onclick="saveChanges()"
+            style="width: 50%;background-color: #198754;border: none;color: white;border-radius: 1.3rem;font-size: medium;padding: 10px;"
+            class="btn btn-success"><b>Save draft</b></button>
+
+        <button id="printButton" onclick="printMe()"
+        style="width: 50%;background-color: #198754;border: none;color: white;border-radius: 1.3rem;font-size: medium;padding: 10px;"
+        class="btn btn-success"><b>Save & Print</b></button>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+  integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script>
+        let changes = new Object();
+        function saveChanges(){
+            $.ajax({
+                url:'/patients/save/dischargeData',
+                data:{
+                    changes,
+                    id:document.getElementById('visitId').innerText
+                },
+                type:'POST',
+                success:function(data){
+                    new Noty({
+                        theme: 'relax',
+                        text: 'data saved',
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
+                    return;
+                },
+                error:function(err){
+                    new Noty({
+                        theme: 'relax',
+                        text: 'Unable to save data',
+                        type: 'error',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
+                },
+            })
+        }
+        function getDischargeData(){
+            $.ajax({
+                url:'/patients/get/dischargeData/'+document.getElementById('visitId').innerText,
+                type:'GET',
+                success:function(data){
+                    let keys = Object.keys(data.dd);
+                    for(let i=0;i<keys.length;i++){
+                        document.getElementById(keys[i]).value = data.dd[keys[i]]
+                        document.getElementById(keys[i]).innerText = data.dd[keys[i]]
+                        changes[keys[i]] = data.dd[keys[i]]
+                    }
+                },
+                error:function(err){
+                    console.log(err)
+                }
+            })
+        }
+        async function printMe() {
+            await saveChanges();
+            document.getElementById('saveButton').style.display = 'none'
+            document.getElementById('printButton').style.display = 'none'
+            window.print()
+        }
+
+        function addChanged(id){
+            //console.log(document.getElementById(id))
+            changes[id] = document.getElementById(id).value == '' ? document.getElementById(id).innerText : document.getElementById(id).value
+        }
+
+        function updateOP(){
+            document.getElementById('opnotes').value = document.getElementById('Diagnosis').value.split(':-')[1]
+            changes['opnotes'] = document.getElementById('opnotes').value;
+        }
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admitted Patients</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+    integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+    integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <script src="https://kit.fontawesome.com/f419dc6d9b.js" crossorigin="anonymous"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/showAdmittedPatients.css">
+
+
+
+</head>
+
+<body onload="getIPDDataRange()">
+  <header>
+    <%-include('_header')%>
+  </header>
+  <div id="loader">
+    <%-include('_loader')%>
+  </div>
+  <input type="hidden" id="visitId">
+  <div style="display: flex;margin-top: 5px;margin-bottom: 3px;">
+    <div style="margin-left: 5px;">
+      <b>Entry Date Range</b>
+    </div>
+    <div style="margin-left: 2%;">
+      <label>Start Date : </label>
+      <input id="startdate" type="date" value="<%=new Date(new Date().getTime() - 864000000).getFullYear() + '-' + (Number(new Date(new Date().getTime() - 864000000).getMonth()) + 1).toString().padStart(2,'0') + '-' + new Date(new Date().getTime() - 864000000).getDate().toString().padStart(2,'0');%>">
+    </div>
+    <div style="margin-left: 2%;">
+      <label>End Date : </label>
+      <input id="endDate" type="date" value="<%=new Date().getFullYear() + '-' + (Number(new Date().getMonth()) + 1).toString().padStart(2,'0') + '-' + new Date().getDate().toString().padStart(2,'0')%>">
+    </div>
+    <div style="margin-left: 2%;">
+      <input class="btn btn-success" onclick="getIPDDataRange()" type="button" value="Filter">
+    </div>
+  </div>
+  <table class="table">
+    <caption> List of Admitted Patients</caption>
+    <thead>
+      <tr class="bg">
+        <th scope="col">#</th>
+        <th scope="col">Id</th>
+        <th scope="col"><i class="fas fa-user"></i> Name</th>
+        <th scope="col"><i class="fa-solid fa-people-group"></i> Age</th>
+        <th scope="col"><i class="fas fa-map-marker-alt"></i> Address</th>
+        <th scope="col"><i class="fas fa-phone"></i> Mobile</th>
+        <th scope="col"><i class="fa-solid fa-calendar"></i> Admission on</th>
+        <th scope="col"><i class="fa-solid fa-calendar"></i> Discharge on</th>
+        <th scope="col"><i class="fa-solid fa-bed-pulse"></i> Room Type</th>
+        <th scope="col"><i class="fa-solid fa-bed-pulse"></i> Procedure Type</th>
+        <th scope="col"><i class="fa-solid fa-file-invoice-dollar"></i> Actions</th>  
+        <th><b>₹</b> Payment</th>
+        <th>Cancel</th>
+      </tr>
+    </thead>
+    
+    
+    <tbody id="table-content">
+      
+        </tbody>
+      </table>
+      <div id="addPaymentPopup" style="display: none; text-align: center;">
+        <div  style="text-align: right; height: 30px;">
+          <label id="closeButton" onclick="closePopup()"><b>X</b></label>
+        </div>
+        <div style="font-size: large; font-weight: bold;text-align: center;">
+          <label><i class="fa-regular fa-credit-card"></i> Record Advance Payment</label>
+        </div>
+        <div class="form-floating mb-2">
+          <input disabled type="text" class="form-control" id="pid" placeholder="name@example.com">
+          <label><i class="fa-solid fa-id-card"></i> Id<span>*</span></label>
+        </div>
+        <div class="form-floating mb-2">
+          <input disabled type="text" class="form-control" id="Name" placeholder="name@example.com">
+          <label><i class="fa-solid fa-user"></i> Name<span>*</span></label>
+        </div>
+        <div class="form-floating mb-2">
+          <input type="number" class="form-control" id="amount" placeholder="name@example.com">
+          <label><b>₹</b> Amount<span>*</span></label>
+        </div>
+        <div class="form-floating mb-2">
+          <select class="form-select" id="paymentType" aria-label="Floating label select example">
+              <option selected disabled value="">--Select--</option>
+              <option value="Cash">Cash</option>
+              <option value="Online">Online</option>
+              <option value="NA">NA</option>
+          </select>
+          <label for="Gender"><i class="fa-solid fa-list"></i> Payment Type <span>*</span></label>
+        </div>
+        <div style="display: inline-block;">
+          <button onclick="closePopup()" class="btn btn-danger">Cancel</button>
+          <button onclick="addAdvancePayment()" id="addPayment" class="btn btn-success">Add Payment</button>
+        </div>
+      </div>
+
+      
+      <script src="/js/showAdmittedPatients.js"></script>
+</body>
+</html>

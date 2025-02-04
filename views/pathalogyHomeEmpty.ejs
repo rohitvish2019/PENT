@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Pathalogy Report</title>
+    <link rel="stylesheet" href="/css/PathalogyHome.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+        integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+        integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://kit.fontawesome.com/f419dc6d9b.js" crossorigin="anonymous"></script>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+</head>
+
+<body>
+    <header>
+        <%-include('_header')%>
+    </header>
+    <div class="main-body" style="display: flex; justify-content: space-between; width: 99%;">
+        <div class="left">
+            <div class="patient-container">
+                <div class="patient-data">
+                    <label class="patient-data-heading">Full Name</label>
+                    <input class="patient-data-value" id="patName">
+                </div>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Age</label>
+                    <input class="patient-data-value" id="age">
+                </div>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Gender</label>
+                    <input class="patient-data-value" id="gender" value="Female">
+                </div>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Address</label>
+                    <input class="patient-data-value" id="address">
+                </div>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Mobile</label>
+                    <input class="patient-data-value" id="mobile">
+                </div>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Referred By</label>
+                    <input class="patient-data-value" id="docName">
+                </div>
+
+                <div class="patient-data" style="width: 23%;border-left: 1px solid white;">
+                    <input style="width:70%; margin-bottom: 5%;" type="text" name="" id="patientId"
+                        placeholder="Patient Id"><br>
+                    <button class="btn btn-success" onclick="autoFillPatients()">Autofill</button>
+                </div>
+            </div>
+            <div class="addedTests">
+                <table class="table-striped table-bordered">
+                    <thead>
+                        <tr class="bg">
+                            <th>#</th>
+                            <th>Test Name</th>
+                            <th>Reference Range(Min)</th>
+                            <th>Reference Range(Max)</th>
+                            <th>Reference Range(Unit)</th>
+                            <th>Result</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="testsBody">
+
+                    </tbody>
+                </table>
+
+            </div>
+            <div style="display: flex; justify-content: center; margin: 10px 0px 0px;">
+                <button style="width: 35%;" onclick="saveTests()" class="btn btn-success">Save & Print</button>
+            </div>
+        </div>
+        <div class="right text-center">
+            <h3 style="text-align: center; margin: 5%;">Add New Test</h3>
+            <div class="input-group input-group-sm mb-1">
+                <label class="input-group-text" id="basic-addon1">Test Name <span> *</span></label>
+                <input id="testName" type="text" class="form-control" placeholder="" aria-label="Test Name"
+                    onchange="setRefRange()" aria-describedby="basic-addon1" list="servicesList">
+                <datalist id="servicesList">
+                    <%for(let i=0;i<services.length;i++){%>
+                    <option value="<%=services[i].Name%>"></option>
+                    <%}%>
+                </datalist>
+            </div>
+            <div class="input-group input-group-sm mb-1">
+                <label class="input-group-text" id="basic-addon1">Test Result<span>*</span></label>
+                <input id="testResult" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1" list="values">
+                <datalist id="values">
+                    <option value="Nil"></option>
+                    <option value="Reactive"></option>
+                    <option value="Non-Reactive"></option>
+                    <option value="A Positive"></option>
+                    <option value="B Positive"></option>
+                    <option value="AB Positive"></option>
+                    <option value="O Positive"></option>
+                    <option value="A Negative"></option>
+                    <option value="B Negative"></option>
+                    <option value="AB Negative"></option>
+                    <option value="O Negative"></option>
+                </datalist>
+            </div>
+            <div class="input-group input-group-sm mb-1">
+                <span class="input-group-text" id="basic-addon1">Minimum Range</span>
+                <input id="rrmin" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group input-group-sm mb-1">
+                <span class="input-group-text" id="basic-addon1">Maximum Range</span>
+                <input id="rrmax" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group input-group-sm mb-1">
+                <span class="input-group-text" id="basic-addon1">Measurement Unit</span>
+                <input id="rrunit" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <div class="input-group input-group-sm mb-1">
+                <label class="input-group-text" id="basic-addon1">Category<span>*</span></label>
+                <select class="form-select" id="category" aria-label="Floating label select example">
+
+                    <option selected value="OTHERS">OTHERS</option>
+                    <option value="HAEMATOLOGY">HAEMATOLOGY</option>
+                    <option value="BIOCHEMISTRY">BIOCHEMISTRY</option>
+                    <option value="URINE">URINE</option>
+                    <option value="SEROLOGY">SEROLOGY</option>
+                </select>
+            </div>
+            <div style="text-align: left; font-size: small;">
+            <span>* Mandatory Details</span>     
+            </div>
+            <div class="text-center py-4">
+                <button style="width: 80%;" class="btn btn-success" onclick="addTest()">Add</button>
+            </div>
+        </div>
+        
+    </div>
+</body>
+<script src="/js/pathalogyHome.js"></script>
+</html>

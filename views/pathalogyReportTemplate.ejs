@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report</title>
+    <style>
+        .main-body{
+            height: 1065px;
+            width: 730px;
+            border: 1px solid black;
+            border-collapse: collapse;
+        }
+        .header{
+            height: 11%;
+            text-align: center;
+            border-bottom: 1px dotted rgb(198, 172, 172);
+            padding-left: 20px;
+        }
+        .patient-data{
+            height: 10%;
+        }
+        
+        .notes{
+            height: 6%;
+        }
+        .div3{
+            width: 33%;
+            height: 60%;
+        }
+        .div3 label{
+            display: block;
+            text-align: left;
+            padding-left: 1%;
+        }
+        .large-font{
+            font-size: 22px;
+            font-weight: bold;
+            margin-bottom: 2%;
+        }
+        table{
+            width: 99%;
+            border: 1px solid black;
+            border-collapse: collapse;
+            font-size: large;
+            margin-bottom: 30px;
+            margin-left: .5%;
+        }
+        th, td{
+            text-align: center !important;
+            border: 1px solid black;
+            padding: 3px;
+        }
+        .report-div{
+            margin: 0;
+        }
+        .patient-data{
+            display: flex;
+            margin-top: 5px;
+        }
+        .patient-data div{
+            width: 100%;
+            margin-left: 10px;
+
+        }
+        .patient-heading{
+            display: inline-block;
+            font-weight: bold;
+            width: 130px !important;
+            font-size: large;
+            margin-top: 3px;
+        }
+        .patient-value{
+            font-size: large;
+            margin-top: 3px;
+        }
+        .logo{
+            margin-left:21%;
+        }
+        .heamatology, .urine-exam, .biochemisrty , .others, .serology{
+            display: none;
+        }
+    </style>
+</head>
+<body onload="enableSections()">
+    <div class="main-body">
+        <div style="height: 94%;">
+            <div class="header report-div">
+                <div style="display: flex;justify-content: center;">
+                    <label for="">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
+                    <label style="font-size: 30px; border-bottom: 2px dashed black;"> Dr Chanda Jain Nursing Home </label>
+                    <label style="font-size: 14px;margin-top: 2px;margin-left: 13px;">Reg No. NH/9255/JUN-2023</label>
+                </div>
+                <div style="display: flex;height: 100%;">
+                    <div class="div3">
+                        <label class="large-font">Dr. R.K. Jain</label>
+                        <label class="mid-font">B.Sc. , MBBS, DNT, MCGP</label>
+                        <label class="mid-font">Regd No : 6682</label>
+                    </div>
+                    <div class="div3">
+                        <h2>Pathology Report</h2>
+                    </div>
+                    <div class="div3 logo" style="height: 60%; width: 10%;">
+                        <img src="/images/logo.jfif" height="100%" alt="">
+                    </div>
+                </div>
+            </div>
+            <div class="patient-data report-div">
+                <div>
+                    <div>
+                        <label class="patient-heading">Report No</label>
+                        <span class="patient-value"><%=report.ReportNo%></span>
+                    </div>
+                    <div>
+                        <label class="patient-heading">Name</label>
+                        <span class="patient-value"><%=report.Name%></span>
+                    </div>
+                    <div>
+                        <label class="patient-heading">Age , Gender</label>
+                        <span class="patient-value"><%=report.Age%>, <%=report.Gender%></span>
+                    </div>
+                    <div>
+                        <label class="patient-heading">OPD Id</label>
+                        <span class="patient-value"><%=patient.Id%></span>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <label class="patient-heading">Date</label>
+                        <span class="patient-value"><%=report.Date.split('-')[2]%>-<%=report.Date.split('-')[1]%>-<%=report.Date.split('-')[0]%></span>
+                    </div>
+                    <div>
+                        <label class="patient-heading">Mobile</label>
+                        <span class="patient-value"><%=report.Mobile%></span>
+                    </div>
+                    <div>
+                        <label class="patient-heading">Referred By</label>
+                        <span class="patient-value"><%=report.Doctor%></span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="heamatology" class="heamatology report-div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="3">HAEMATOLOGY REPORT</td>
+                        </tr>
+                        <tr>
+                            <th>Test</th>
+                            <th>Result</th>
+                            <th>Normal Range</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%for(let i=0;i<report.Items.length;i++){%>
+                            <% let item = report.Items[i].split('$') %>
+                            <%if(item[2] == 'HAEMATOLOGY'){%>
+                                <input hidden class="sections" type="text" value="heamatology">
+                                <%if(item[3] != '' && item[4] != ''){%>
+                                    <%if( Number(item[1]) < Number(item[3]) || Number(item[1]) > Number(item[4]) ){%>
+                                        <tr>
+                                            <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                            <td style="width:20%;background-color: #e3093e5c"><%=item[1]%></td>
+                                            <td style="width:45%;"><%=item[3]%> - <%=item[4]%> <%=item[5]%></td>
+                                        </tr>
+                                    <%}else{%>
+                                        <tr>
+                                            <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                            <td style="width:20%;"><%=report.Items[i].split('$')[1]%></td>
+                                            <td style="width:45%;"><%=report.Items[i].split('$')[3]%> - <%=report.Items[i].split('$')[4]%> <%=report.Items[i].split('$')[5]%></td>
+                                        </tr>
+                                    <%}%>
+                                <%}else{%>
+                                    <tr>
+                                        <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                        <td style="width:20%;"><%=report.Items[i].split('$')[1]%></td>
+                                        <td style="width:45%;"><%=report.Items[i].split('$')[3]%> - <%=report.Items[i].split('$')[4]%> <%=report.Items[i].split('$')[5]%></td>
+                                    </tr>
+                                <%}%>
+                            <%}%>
+                            
+                        <%}%>
+                        
+                    </tbody>
+                </table>
+            </div>
+
+            <div id="biochemisrty" class="biochemisrty report-div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="3">BIOCHEMISTRY REPORT</td>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <%for(let i=0;i<report.Items.length;i++){%>
+                            <% let item = report.Items[i].split('$') %>
+                            <%if(report.Items[i].split('$')[2] == 'BIOCHEMISTRY'){%>
+                                <input hidden class="sections" type="text" value="biochemisrty">
+                                <%if(item[3] != '' && item[4] != ''){%>
+                                    <%if( Number(item[1]) < Number(item[3]) || Number(item[1]) > Number(item[4]) ){%>
+                                        <tr>
+                                            <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                            <td style="width:20%;background-color: #e3093e5c"><%=item[1]%></td>
+                                            <td style="width:45%;"><%=item[3]%> - <%=item[4]%> <%=item[5]%></td>
+                                        </tr>
+                                    <%}else{%>
+                                        <tr>
+                                            <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                            <td style="width:20%;"><%=report.Items[i].split('$')[1]%></td>
+                                            <td style="width:45%;"><%=report.Items[i].split('$')[3]%> - <%=report.Items[i].split('$')[4]%> <%=report.Items[i].split('$')[5]%></td>
+                                        </tr>
+                                    <%}%>
+                                <%}else{%>
+                                    <tr>
+                                        <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                        <td style="width:20%;"><%=report.Items[i].split('$')[1]%></td>
+                                        <td style="width:45%;"><%=report.Items[i].split('$')[3]%> - <%=report.Items[i].split('$')[4]%> <%=report.Items[i].split('$')[5]%></td>
+                                    </tr>
+                                <%}%>
+                            <%}%>
+                            
+                        <%}%>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div id="urine-exam" class="urine-exam report-div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="3">URINE EXAMINATION REPORT</td>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <%for(let i=0;i<report.Items.length;i++){%>
+                            <% let item = report.Items[i].split('$') %>
+                            <%if(report.Items[i].split('$')[2] == 'URINE'){%>
+                                <input hidden class="sections" type="text" value="urine-exam">
+                                <%if(item[3] != '' && item[4] != ''){%>
+                                    <%if( Number(item[1]) < Number(item[3]) || Number(item[1]) > Number(item[4]) ){%>
+                                        <tr>
+                                            <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                            <td style="width:20%;background-color: #e3093e5c"><%=item[1]%></td>
+                                            <td style="width:45%;"><%=item[3]%> - <%=item[4]%> <%=item[5]%></td>
+                                        </tr>
+                                    <%}else{%>
+                                        <tr>
+                                            <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                            <td style="width:20%;"><%=report.Items[i].split('$')[1]%></td>
+                                            <td style="width:45%;"><%=report.Items[i].split('$')[3]%> - <%=report.Items[i].split('$')[4]%> <%=report.Items[i].split('$')[5]%></td>
+                                        </tr>
+                                    <%}%>
+                                <%}else{%>
+                                    <tr>
+                                        <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                        <td style="width:20%;"><%=report.Items[i].split('$')[1]%></td>
+                                        <td style="width:45%;"><%=report.Items[i].split('$')[3]%> - <%=report.Items[i].split('$')[4]%> <%=report.Items[i].split('$')[5]%></td>
+                                    </tr>
+                                <%}%>
+                            <%}%>
+                            
+                        <%}%>
+                        
+                    </tbody>
+                </table>
+            </div>
+            <div id="serology" class="serology report-div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="3">SEROLOGY REPORT</td>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <%for(let i=0;i<report.Items.length;i++){%>
+                            <% let item = report.Items[i].split('$') %>
+                            <%if(report.Items[i].split('$')[2] == 'SEROLOGY'){%>
+                                <input hidden class="sections" type="text" value="serology">
+                                <%if(item[3] != '' && item[4] != ''){%>
+                                    <%if( Number(item[1]) < Number(item[3]) || Number(item[1]) > Number(item[4]) ){%>
+                                        <tr>
+                                            <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                            <td style="width:20%;background-color: #e3093e5c"><%=item[1]%></td>
+                                            <td style="width:45%;"><%=item[3]%> - <%=item[4]%> <%=item[5]%></td>
+                                        </tr>
+                                    <%}else{%>
+                                        <tr>
+                                            <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                            <td style="width:20%;"><%=report.Items[i].split('$')[1]%></td>
+                                            <td style="width:45%;"><%=report.Items[i].split('$')[3]%> - <%=report.Items[i].split('$')[4]%> <%=report.Items[i].split('$')[5]%></td>
+                                        </tr>
+                                    <%}%>
+                                <%}else{%>
+                                    <tr>
+                                        <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                        <td style="width:20%;"><%=report.Items[i].split('$')[1]%></td>
+                                        <td style="width:45%;"><%=report.Items[i].split('$')[3]%> - <%=report.Items[i].split('$')[4]%> <%=report.Items[i].split('$')[5]%></td>
+                                    </tr>
+                                <%}%>
+                            <%}%>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
+            <div id="others" class="others report-div">
+                <table>
+                    <thead>
+                        <tr>
+                            <th colspan="3">OTHER REPORT</td>
+                        </tr>
+                        
+                    </thead>
+                    <tbody>
+                        <%for(let i=0;i<report.Items.length;i++){%>
+                            <% let item = report.Items[i].split('$') %>
+                            <%if(report.Items[i].split('$')[2] == 'OTHERS'){%>
+                                <input hidden class="sections" type="text" value="others">
+                                <%if(item[3] != '' && item[4] != ''){%>
+                                    <%if( Number(item[1]) < Number(item[3]) || Number(item[1]) > Number(item[4]) ){%>
+                                        <tr>
+                                            <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                            <td style="width:20%;background-color: #e3093e5c"><%=item[1]%></td>
+                                            <td style="width:45%;"><%=item[3]%> - <%=item[4]%> <%=item[5]%></td>
+                                        </tr>
+                                    <%}else{%>
+                                        <tr>
+                                            <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                            <td style="width:20%;"><%=report.Items[i].split('$')[1]%></td>
+                                            <td style="width:45%;"><%=report.Items[i].split('$')[3]%> - <%=report.Items[i].split('$')[4]%> <%=report.Items[i].split('$')[5]%></td>
+                                        </tr>
+                                    <%}%>
+                                <%}else{%>
+                                    <tr>
+                                        <td style="width:35%;"><%=report.Items[i].split('$')[0]%></td>
+                                        <td style="width:20%;"><%=report.Items[i].split('$')[1]%></td>
+                                        <td style="width:45%;"><%=report.Items[i].split('$')[3]%> - <%=report.Items[i].split('$')[4]%> <%=report.Items[i].split('$')[5]%></td>
+                                    </tr>
+                                <%}%>
+                            <%}%>
+                        <%}%>
+                        
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="notes report-div" style="width: 720px;margin-left: 5px;display: flex; border-top: 1px dashed black;">
+            <div style="width: 80%; height: 71%;font-size: 14px;">
+                <label style="display: block;">1. Pathological tests have technical limitations, for any disparity repeated examinations are required.</label>
+                <label style="display: block;">2. No legal liability is accepted.</label>
+                <label style="display: block;">3. Clinical Correlation is also requested</label>
+            </div>
+            <div style="width: 20%;height: 70%;display: flex;justify-content: flex-end;align-items: end;">
+                <label style="font-size: larger;font-weight: bold;margin-right: 12%;">Signature</label>
+            </div>
+        </div>
+        <div id="printSection" style="display: flex;justify-content: center;padding-bottom: 3% !important;">
+            <button onclick="printReport()" style="background-color: green; width: 50%; color: white;font-size: large;margin-top: 2%;">Print</button>
+        </div>
+    </div>
+    
+</body>
+<script>
+    function enableSections(){
+        let sections = document.getElementsByClassName('sections');
+        for(let i=0;i<sections.length;i++){
+            document.getElementById(sections[i].value).style.display='block'
+        }
+    }
+
+    function printReport(){
+        document.getElementById('printSection').style.display='none'
+        window.print()
+    }
+</script>
+</html>

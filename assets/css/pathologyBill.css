@@ -1,0 +1,66 @@
+
+.patient-data{
+    font-size: small;
+    margin-left: 0.5%;
+    width: 11.76%;
+}
+.patient-data-usg{
+    font-size: small;
+    margin-left: 0.5%;
+    width: 10.80%;
+}
+.patient-data input{
+    font-size: small;
+    text-align: center;
+    width: 98%;
+}
+.patient-data-heading{
+    display: block;
+    font-size: medium;
+}
+.patient-data-value{
+    margin-top: 5%;
+    font-size: medium !important;
+      
+}
+.patient-container{
+    display: flex;
+    border-bottom: 1px dashed black;
+    padding-bottom: 1%;
+}
+thead{
+    position: sticky;
+    top: 0;
+}
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+}
+.bg th{
+    background-color: #025E73 !important;
+    color: white !important;
+    text-align: center;
+}
+.prescription-form{
+    width: 26%;
+    border-left: 1px solid black;
+    padding-left: 1%;
+}
+.input-group-text{
+    width: 120px;
+}
+
+.paymentPoppup{
+    position: fixed;
+    top: 30%;
+    left: 25%;
+    width: 20%;
+    font-size: small;
+    background-color:#d0d0d0;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 2);
+    overflow-y: auto;
+    margin-top: 4%;
+}

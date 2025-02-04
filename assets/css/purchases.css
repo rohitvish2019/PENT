@@ -1,0 +1,78 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+label{
+    color: red;
+    padding-left: 3px;
+    font-size: small;
+}
+
+.bg th{
+    font-size: 15px;
+    align-items: center;
+    background-color: #025E73 !important;
+    border-right: 1px dotted black;
+    color: white !important;
+  }
+  
+thead,th{
+    position: sticky;
+    top: 0;
+    text-align: center;
+}
+th, td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: center;
+    font-size: small;
+}
+th {
+    background-color:#025E73!important;
+    color: white;
+}
+.prescriptions-list{
+    width: 100%;
+    overflow: auto;
+}
+
+i
+.prescription-form{
+    border-left: 2px dotted black;
+    width: 28%;
+    margin-top: 3%;
+}
+.prescription-form{
+    width: 29%;
+    padding: 1%;
+}
+
+.input-group{
+    margin: 2%;
+}
+
+.test-data label, .test-data input{
+    font-size: small;
+}
+
+.form-floating{
+    height: 30px !important;
+}
+
+.input-group-text{
+    width:110px !important;
+    font-weight: bold !important;
+    font-size: small !important;
+}
+ .input-group input{
+    margin: 2px 0px 0px 2px !important;
+ }
+
+.delButton:hover{
+    background-color: rgb(160, 206, 206);
+}

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Appointments</title>
+  <script src="https://kit.fontawesome.com/f419dc6d9b.js" crossorigin="anonymous"></script>
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <link rel="stylesheet" href="/css/showAppointments.css">
+</head>
+
+<body>
+  <header>
+    <%-include('_header')%>
+    <%-include('_loader')%>
+  </header>
+  <div style="display: flex;justify-content: flex-end; padding-right: 4%; padding-top: 1%;">
+    <button class="btn btn-success" style="margin-right: 2%;" onclick="getAppointmentsToday()"><i class="fa-solid fa-rotate-right"></i> Refresh</button>
+    <input type="checkbox" name="" id="ShowHideDisabled" onchange="getAppointmentsToday()">&nbsp;&nbsp; Show Disabled Appointments
+  </div>
+  
+  <table class="table table-striped table-bordered" style="margin: 8px 0px; ">
+    <caption> List of Appointments</caption>
+    <thead>
+      <tr class="bg">
+        <th scope="col">#</th>
+        <th scope="col"><i class="fa-solid fa-id-badge"></i> Id</th>
+        <th scope="col"><i class="fa-solid fa-stethoscope"></i> Dr. Name</th>
+        <th scope="col"><i class="fas fa-user"></i> Name</th>
+        <th scope="col"><i class="fa-solid fa-arrow-up-1-9"></i></i> Age</th>
+        <th scope="col"><i class="fa-solid fa-person-rays"></i> Husband</th>
+        <th scope="col"><i class="fas fa-map-marker-alt"></i> Address</th>
+        <th scope="col">₹ Fees</th>
+        <th> <i class="fa-solid fa-notes-medical"></i> History</th>
+        <th> <i class="fa-regular fa-clipboard"></i> Open</th>
+        <!--
+        <th> <i class="fa-solid fa-syringe"></i> Pathalogy</th>
+        -->
+        <th> <i class="fa-solid fa-eye-slash"></i> Disable</th>
+        <th> <i class="fa-solid fa-calendar-check"></i> Status</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody">
+      <%for(let i=0;i<visits.length;i++){%>
+      <tr id="<%=visits[i]._id%>">
+        <th scope="row"><%=i+1%></th>
+        <td><%=visits[i].Patient.Id%></td>
+        <td><%=visits[i].Doctor%></td>
+        <td><%=visits[i].Patient.Name%></td>
+        <td><%=visits[i].Patient.Age%></td>
+        <td><%=visits[i].Patient.Husband%></td>
+        <td><%=visits[i].Patient.Address%></td>
+        <td><%=visits[i].Fees%></td>
+        <td><a target="_blank" href="/patients/getHistory/<%=visits[i].Patient._id%>">Patient History</a></td>
+        <td><a target="_blank" href="/patients/getPrescription/<%=visits[i]._id%>">Prescription</a></td>
+        <!--
+        <td><a href="/reports/home/<%=visits[i].Patient._id%>">Pathalogy</a></td>
+        -->
+        <td>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" onchange="enableDisableAppointMent('<%=visits[i]._id%>')" role="switch" id="checkbox_<%=visits[i]._id%>" checked>
+          </div>
+        </td>
+        
+          <%if(visits[i].VisitData && visits[i].VisitData.complaint){%>
+            <td style="background-color: green;">
+              <span style="color: white;font-weight: bold;">Completed</span>
+            </td>
+          <%}else{%>
+            <td style="background-color: yellow;">
+              <span style="color: #10132e;font-weight: bold;">In Queue</span>
+            </td>
+            
+          <%}%>
+        
+      </tr>
+      <%}%>
+        </tbody>
+      </table>
+      <script src="/js/showAppointments.js"></script>
+</body>
+</html>

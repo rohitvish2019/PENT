@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Patient Admission</title>
+    <link rel="stylesheet" href="/css/IPDRegistration.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+        integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+        integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.min.js"
+        integrity="sha512-ykZ1QQr0Jy/4ZkvKuqWn4iF3lqPZyij9iRv6sGqLRdTPkY69YX6+7wvVGmsdBbiIfN/8OdsI7HABjvEok6ZopQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="/js/IPDRegistration.js"></script>
+</head>
+
+<body>
+    <header>
+        <%-include('_header')%>
+    </header>
+    <section class="main-content" class="text-center">
+
+        <div id="registrationForm">
+            <section class="text-center align-items-center text-center ">
+                <h3>Patient Admission Form<h3>
+            </section>
+            <section class="patient-form">
+                <div class="left">
+                    <div class="form-floating text-center">
+                        <input type="text" class="form-control" id="Name" placeholder="name@example.com">
+                        <label for="Name"><i class="fas fa-user"></i> Full Name <span>*</span></label>
+                    </div>
+                    <div class="form-floating text-center">
+                        <select class="form-select" id="Gender" aria-label="Floating label select example">
+                            <option value="Male"> ♂️ Male</option>
+                            <option value="Female" selected> ♀️ Female</option>
+                            <option value="Other"> ⚧︎ Other</option>
+                        </select>
+                        <label for="Gender">Gender <span>*</span></label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="Age" placeholder="name@example.com">
+                        <label for="Age"><i class="fa-solid fa-arrow-up-1-9"></i> Age <span>*</span></label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="Address" placeholder="name@example.com">
+                        <label for="Address"><i class="fas fa-map-marker-alt"></i> Address <span>*</span></label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="number" class="form-control" id="Mobile" placeholder="name@example.com">
+                        <label for="Mobile"><i class="fa-solid fa-phone"></i> Mobile No <span>*</span></label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="IdProof" placeholder="name@example.com">
+                        <label for="IdProof"><i class="fa-solid fa-id-card-clip"></i> ID Proof <span>*</span></label>
+                    </div>
+                </div>
+                <div class="right">
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="Husband" placeholder="name@example.com">
+                        <label for="Fees"><i class="fas fa-user"></i> Husband <span>*</span></label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="date" class="form-control" id="AdmissionDate" placeholder="name@example.com">
+                        <label for="Fees"><i class="fa-solid fa-calendar"></i> Admission Date <span>*</span></label>
+                    </div>
+
+
+                    <div class="form-floating">
+                        <select class="form-select" id="Doctor" aria-label="Floating label select example">
+                            <option selected disabled value="">--Select--</option>
+                            <option value="Dr Anuj Jain">Dr Anuj Jain</option>
+                            <option value="Dr Swati Jain">Dr Swati Jain</option>
+                        </select>
+                        <label for="Gender"><i class="fa-solid fa-user-doctor"></i> Doctor <span>*</span></label>
+                    </div>
+
+
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="Reason" placeholder="name@example.com">
+                        <label for="Fees">Complaint/Reason <span>*</span></label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="time" class="form-control" id="AdmissionTime" placeholder="name@example.com">
+                        <label for="Admission Time"><i class="fa-solid fa-clock"></i> Admission Time <span>*</span></label>
+                    </div>
+                </div>
+                <div class="button-container">
+                    <div style="display: flex;">
+                        <input type="text" id="patientID" style="width: 50%;">
+                        <button onclick="searchById()" class="btn btn-success" style="margin-left: 5%;">Autofill</button>
+                    </div>
+                    
+
+                    <button style="margin-top: 40%;" id="register" class="btn btn-success" type="submit" value="" onclick="admitPatient()"><i
+                            class="fas fa-user-plus"></i><br> Register Admission</button>
+                </div>
+
+            </section>
+            <div style="text-align: left; font-size: small; padding-left: 10px;">
+                <span>* Mandatory Details</span>
+            </div>
+        </div>
+    </section>
+</body>
+
+</html>

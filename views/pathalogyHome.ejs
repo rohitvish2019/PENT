@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PathalogyHome</title>
+    <link rel="stylesheet" href="/css/PathalogyHome.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js" integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css" integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+</head>
+<body>
+    <header>
+        <%-include('_header')%>
+    </header>
+    <div class="main-body">
+        <div class="left">
+            <div class="patient-container text-center text-align-center text-white" style=" border:2px solid white; background-color:#343a40;">
+                <input type="text" name="" id="billId" value="<%=billId%>" hidden>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Name</label>
+                    <input class="patient-data-value" id="patName" value="<%=patient.Name%>">
+                </div>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Age</label>
+                    <input class="patient-data-value" id="age" value="<%=patient.Age%>">
+                </div>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Gender</label>
+                    <input class="patient-data-value" id="gender" value="<%=patient.Gender%>">
+                </div>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Address</label>
+                    <input class="patient-data-value" style="width: auto;height: auto;" id="address" value="<%=patient.Address%>">
+                </div>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Mobile</label>
+                    <input class="patient-data-value" id="mobile" value="<%=patient.Mobile%>">
+                </div>
+                <div class="patient-data">
+                    <label class="patient-data-heading">Referred By</label>
+                    <input class="patient-data-value" id="docName" value="<%=patient.Doctor%>">
+                </div>
+
+                <div class="patient-data-autofill">
+                    <input type="text" name="" id="patientId" placeholder="Patient Id" value="<%=patient.Id%>">
+                    <button class="btn btn-success" onclick="autoFillPatients()">Autofill</button>
+                </div>
+            </div>
+            <div class="addedTests">
+                <table>
+                    <thead>
+                        <tr class="bg">
+                            <th>#</th>
+                            <th>Test Name</th>
+                            <th>Reference Range</th>
+                            <th>Result</th>
+                            <th>Category</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody id="testsBody">
+                        
+                    </tbody>
+                </table>
+                
+            </div>
+            <button style="margin:20px; width: 50%;margin-left: 25%;" onclick="saveTests()" class="btn btn-success">Save & Print</button>
+        </div>
+        <div class="right">
+            <h2 style="text-align: center;">Add new test</h2>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Test Name</span>
+                <input id="testName" type="text" class="form-control" placeholder="" aria-label="Test Name" onchange="setRefRange()" aria-describedby="basic-addon1" list="servicesList">
+                <datalist id="servicesList">
+                    <%for(let i=0;i<services.length;i++){%>
+                        <option value="<%=services[i].Name%>"></option>
+                    <%}%>
+                </datalist>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Test Result</span>
+                <input id="testResult" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+                <datalist id="resultSet1">
+                    <option value="Reactive"></option>
+                    <option value="Non-Reactive"></option>
+                </datalist>
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="basic-addon1">Reference Range</span>
+                <input id="refRange" type="text" class="form-control" placeholder="" aria-label="Username" aria-describedby="basic-addon1">
+            </div>
+            <select class="form-select" id="category" aria-label="Floating label select example">
+                <option selected disabled value="OTHERS">OTHERS</option>
+                <option value="HAEMATOLOGY">HAEMATOLOGY</option>
+                <option value="BIOCHEMISTRY">BIOCHEMISTRY</option>
+                <option value="URINE">URINE</option>
+                <option value="SEROLOGY">SEROLOGY</option>
+            </select>
+
+            
+            <div>
+                <button style="width: 98%;margin-left: 1%;" class="btn btn-success" onclick="addTest()">Add</button>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/js/pathalogyHome.js"></script>
+</html>

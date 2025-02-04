@@ -1,0 +1,45 @@
+.inputContent{
+    display: flex;
+    margin: auto;
+}
+
+.card{
+    border-radius: 1rem !important;
+    margin:2%;
+    padding: 10px;
+    width: 30%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 2);
+}
+
+.inputDivs{
+    text-align: center;
+    width: 30%;
+    margin-left: 5%;
+    padding-top: 10px;
+}
+
+.inputDivs input, .inputDivs select {
+    margin-top: 2%;
+    width: 70%;
+
+}
+
+.autoFillDiv{
+    width: 10%;
+    border: 1px solid green;
+    padding-left: 10px;
+    padding-right: 10px !important;
+    margin-top: 1%;
+    display: flex;
+    flex-direction: column;
+}
+
+.autoFillDiv input, .autoFillDiv button{
+    width: 90%;
+    margin-top: 10px;
+}
+.heading{
+    font-size: large;
+    font-weight: bold;
+    text-align: center;
+}
