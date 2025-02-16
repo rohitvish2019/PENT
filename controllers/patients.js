@@ -9,9 +9,12 @@ const SalesData = require('../models/sales');
 const MedsData = require('../models/meds');
 const BirthData = require('../models/birthCertificates');
 const Patient = require('../models/patients');
+const PropertiesReader = require('properties-reader');
+const properties = PropertiesReader('./configs/hospital.properties');
+const HospitalName = properties.get('HospitalName');
 module.exports.patientRegistartionHome = function(req, res){
     try{
-        return res.render('patientRegistration',{user:req.user})
+        return res.render('patientRegistration',{user:req.user, HospitalName})
     }catch(err){
         console.log(err)
         return res.render('Error_500')
@@ -21,7 +24,7 @@ module.exports.patientRegistartionHome = function(req, res){
 module.exports.oldAppointmentsHome = function(req, res){
     try{
         if(req.user.Role == 'Admin'){
-            return res.render('oldAppointments',{user:req.user})
+            return res.render('oldAppointments',{user:req.user,HospitalName})
         }else{
             return res.render('Error_403')
         }
@@ -136,7 +139,7 @@ module.exports.getAppointmentsToday = async function(req, res){
                     visits
                 })
             }else{
-                return res.render('showAppointments',{visits,user:req.user});
+                return res.render('showAppointments',{visits,user:req.user,HospitalName});
             }
         }else{
             return res.render('Error_403')
@@ -327,7 +330,7 @@ module.exports.changeVisitStatus = async function(req, res){
 
 module.exports.IPDpatientRegistration = function(req, res){
     try{
-        return res.render('IPDRegistration',{user:req.user});
+        return res.render('IPDRegistration',{user:req.user,HospitalName});
     }catch(err){
         return res.render('Error_500');
     }
@@ -396,7 +399,7 @@ module.exports.showAdmitted = async function(req, res){
         let visits = await VisitData.find({isCancelled:false,isValid:true,Type:'IPD', createdAt :{$gte : threeYearOld}}).populate('Patient').sort([['createdAt',-1]]);
         let rooms = await ServicesData.find({Type:'RoomCharges'});
         */
-        return res.render('showAdmittedPatients',{user:req.user})
+        return res.render('showAdmittedPatients',{user:req.user,HospitalName})
         
     }catch(err){
         console.log(err)
@@ -407,7 +410,7 @@ module.exports.showAdmitted = async function(req, res){
 module.exports.admittedPatientProfile = function(req, res){
     try{
         if(req.user.Role == 'Admin'){
-            return res.render('admittedPatientProfile',{user:req.user})
+            return res.render('admittedPatientProfile',{user:req.user,HospitalName})
         }else{
             return res.render('Error_403')
         }
@@ -456,7 +459,7 @@ module.exports.AdmissionBill = async function(req, res){
         */
         let visit = await VisitData.findById(req.params.visitId).populate('Patient');
         let bill = visit.Patient
-       return res.render('AdmissionBill', {bill,visit_id:visit._id,user:req.user})
+       return res.render('AdmissionBill', {bill,visit_id:visit._id,user:req.user,HospitalName})
     }catch(err){    
         console.log(err);
         return res.render('Error_500')
@@ -582,7 +585,7 @@ module.exports.showPrescription = async function(req, res){
                 medsList
             })
         }
-        return res.render('prescriptionForm', {visit, user:req.user, medsList, lastVisit})
+        return res.render('prescriptionForm', {visit, user:req.user, medsList, lastVisit,HospitalName})
     }catch(err){
         console.log(err)
         return res.render('Error_500')
@@ -594,7 +597,7 @@ module.exports.dischargeSheet = async function(req, res){
         let visit = await VisitData.findById(req.params.id).populate('Patient');
         let birthCerts = await BirthData.find({Visit:visit._id, isCancelled:false, isValid:true}).sort({createdAt:-1});
         let meds = await MedsData.find({Type:'DischargeMed'});
-        return res.render('dischargeSheetTemplate', {visit, user:req.user, meds, birthInfo:birthCerts[0]})
+        return res.render('dischargeSheetTemplate', {visit, user:req.user,HospitalName, meds, birthInfo:birthCerts[0]})
     }catch(err){
         console.log(err);
         return res.render('Error_500')
@@ -617,7 +620,7 @@ module.exports.saveVisitData = async function(req, res){
 module.exports.patientHistoryHome = async function(req, res){
     try{
         let patient = await PatientData.findById(req.params.patientId);
-        return res.render('patientHistory',{patient, user:req.user})
+        return res.render('patientHistory',{patient, user:req.user,HospitalName})
     }catch(err){
         return res.render('Error_500')
     }
@@ -644,7 +647,7 @@ module.exports.birthCertificateHome = async function(req, res){
     try{
         let patient = await PatientData.findById(req.params.pid);
         let certificate = await BirthData.findOne({OPDId:patient.Id});
-        return res.render('birthCertificateHome', {patient, certificate, user:req.user});
+        return res.render('birthCertificateHome', {patient, certificate, user:req.user,HospitalName});
     }catch(err){
         console.log(err);
         return res.render('Error_500')
@@ -698,7 +701,7 @@ module.exports.saveBirthDetails = async function(req, res){
 module.exports.viewBirthCertificate = async function(req, res){
     try{
         let cert = await BirthData.findById(req.params.certId);
-        return res.render('birthCertificateTemplate',{cert})
+        return res.render('birthCertificateTemplate',{cert,HospitalName})
     }catch(err){
         console.log(err)
         return res.render('Error_500')
@@ -824,7 +827,7 @@ module.exports.dischargeReceipt = async function(req, res){
     try{
         let visit = await VisitData.findById(req.params.id,'Patient DischargeBillNumber FinalBillAmount AdmissionDate DischargeDate').populate('Patient');
         let RecieptNo = await Tracker.findOne({});
-        return res.render('paymentReceiptTemplate', {visit, user:req.user,RecieptNo:RecieptNo.RecieptNo})
+        return res.render('paymentReceiptTemplate', {visit, user:req.user,RecieptNo:RecieptNo.RecieptNo,HospitalName})
     }catch(err){
         console.log(err);
         return res.render('Error_500')

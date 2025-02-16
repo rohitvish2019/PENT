@@ -42,8 +42,9 @@
                     </div>
                     <div class="form-floating text-center">
                         <select class="form-select" id="Gender" aria-label="Floating label select example">
+                            <option disabled selected ="">--Select Gender--</option>
                             <option value="Male"> ♂️ Male</option>
-                            <option value="Female" selected> ♀️ Female</option>
+                            <option value="Female"> ♀️ Female</option>
                             <option value="Other"> ⚧︎ Other</option>
                         </select>
                         <label for="Gender">Gender <span>*</span></label>
@@ -60,39 +61,32 @@
                         <input type="number" class="form-control" id="Mobile" placeholder="name@example.com">
                         <label for="Mobile"><i class="fa-solid fa-phone"></i> Mobile No <span>*</span></label>
                     </div>
-                    <div class="form-floating">
-                        <input type="text" class="form-control" id="IdProof" placeholder="name@example.com">
-                        <label for="IdProof"><i class="fa-solid fa-id-card-clip"></i> ID Proof <span>*</span></label>
-                    </div>
+                    
                 </div>
                 <div class="right">
                     <div class="form-floating">
-                        <input type="text" class="form-control" id="Husband" placeholder="name@example.com">
-                        <label for="Fees"><i class="fas fa-user"></i> Husband <span>*</span></label>
-                    </div>
-                    <div class="form-floating">
-                        <input type="date" class="form-control" id="AdmissionDate" placeholder="name@example.com">
-                        <label for="Fees"><i class="fa-solid fa-calendar"></i> Admission Date <span>*</span></label>
-                    </div>
-
-
-                    <div class="form-floating">
                         <select class="form-select" id="Doctor" aria-label="Floating label select example">
-                            <option selected disabled value="">--Select--</option>
-                            <option value="Dr Anuj Jain">Dr Anuj Jain</option>
-                            <option value="Dr Swati Jain">Dr Swati Jain</option>
+                            <option disabled value="">--Select--</option>
+                            <option selectedvalue="Dr Vinod Kukreja">Dr Vinod Kukreja</option>
                         </select>
                         <label for="Gender"><i class="fa-solid fa-user-doctor"></i> Doctor <span>*</span></label>
                     </div>
-
-
                     <div class="form-floating">
                         <input type="text" class="form-control" id="Reason" placeholder="name@example.com">
                         <label for="Fees">Complaint/Reason <span>*</span></label>
                     </div>
                     <div class="form-floating">
+                        <input type="date" class="form-control" id="AdmissionDate" placeholder="name@example.com">
+                        <label for="Fees"><i class="fa-solid fa-calendar"></i> Admission Date <span>*</span></label>
+                    </div>
+                    
+                    <div class="form-floating">
                         <input type="time" class="form-control" id="AdmissionTime" placeholder="name@example.com">
                         <label for="Admission Time"><i class="fa-solid fa-clock"></i> Admission Time <span>*</span></label>
+                    </div>
+                    <div class="form-floating">
+                        <input type="text" class="form-control" id="IdProof" placeholder="name@example.com">
+                        <label for="IdProof"><i class="fa-solid fa-id-card-clip"></i> ID Proof <span>*</span></label>
                     </div>
                 </div>
                 <div class="button-container">

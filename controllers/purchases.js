@@ -1,5 +1,8 @@
 const InventoriesData = require('../models/inventories');
 const PurchaseData = require('../models/purchases');
+const PropertiesReader = require('properties-reader')
+const properties = PropertiesReader('./configs/hospital.properties');
+const HospitalName = properties.get('HospitalName');
 module.exports.home = async function(req, res){
     let inventory;
     try{
@@ -7,43 +10,40 @@ module.exports.home = async function(req, res){
     }catch(err){
         console.log(err + 'unable to find Inventories')
     }
-    return res.render('purchases', {inventory, user:req.user});
+    return res.render('purchases', {HospitalName,inventory, user:req.user});
 }
 
 module.exports.purchaseHistoryHome = async function(req, res){
     let inventory = await InventoriesData.find({},'Name').distinct('Name')
     let sellers = await PurchaseData.find({},'Seller').distinct('Seller');
     console.log(sellers);
-    return res.render('purchaseHistory',{user:req.user, inventory, sellers});
+    return res.render('purchaseHistory',{user:req.user, inventory, sellers,HospitalName});
 }
 
 module.exports.savePurchase = async function(req, res){
     try{
         let purchases = req.body.purchases;
         for(let i=0;i<purchases.length;i++){
+            let item = purchases[i].split('$');
             if(purchases[i].length > 0){
-                let item = purchases[i].split('$');
-                let inventoryEntry = await InventoriesData.findOne({Name:item[0]});
-                console.log(inventoryEntry);
-                let day = new Date().getDate().toString().padStart(2,'0')
-                let month = +new Date().getMonth().toString().padStart(2,'0')
-                let year = new Date().getFullYear()
-                let date = year +'-'+ (month+1) +'-'+ day; 
-                if(!inventoryEntry || inventoryEntry == null){
-                    console.log('Inside if block')
-                    await InventoriesData.create({
-                        Name:item[0],
-                    });
+                let obj = {
+                    Name : item[0],
+                    PurchasePrice:item[2],
+                    Price : item[2],
+                    Quantity: item[3],
+                    Bought_Date :item[6],
+                    ExpiryDate : item[8],
+                    Batch : item[1],
+                    Seller : item[4],
+                    Category : item[5],
+                    AlertQty : item[7]
                 }
-                await PurchaseData.create({
-                    Name:item[0],
-                    Batch:item[1],
-                    Price:item[2],
-                    Quantity:item[3],
-                    Seller:item[4],
-                    Category:item[5],
-                    Bought_Date: item[6]
-                })
+                
+                if (obj.Name != null && obj.Name.length > 0) {
+                    await PurchaseData.create(obj)
+                    await InventoriesData.create(obj)
+                }
+                
             }else{
                 continue;
             }
@@ -59,26 +59,7 @@ module.exports.savePurchase = async function(req, res){
     }
      
 }
-/*
-function addOneDay(date) {
-    if (!(date instanceof Date) || isNaN(date.getTime())) {
-        throw new Error("Input must be a valid Date object.");
-    }
 
-    // Create a new Date object to avoid modifying the original
-    const newDate = new Date(date);
-    
-    // Add one day
-    newDate.setDate(newDate.getDate() + 1);
-
-    // Check if the date is still within JavaScript's supported range
-    if (Math.abs(newDate.getTime()) > 8.64e15) {
-        throw new Error("Resulting date is out of range for JavaScript Date object.");
-    }
-
-    return newDate;
-}
-    */
 module.exports.getPurchaseHistory = async function(req, res){
     try{
         let purchases;
@@ -190,5 +171,13 @@ module.exports.cancelPurchases = async function(req, res){
         return res.status(500).json({
             message:'Unable to cancel purchase'
         })
+    }
+}
+
+module.exports.InventoryManager = function (req, res) {
+    try {
+        return res.render('inventoryManager')
+    } catch (err) {
+        return res.render('Error_500')
     }
 }

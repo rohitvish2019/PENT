@@ -41,9 +41,11 @@
                             <th>#</th>
                             <th>Item Name</th>
                             <th>Batch No.</th>
-                            <th>Date</th>
+                            <th>Pur. Date</th>
+                            <th>Exp. Date</th>
                             <th>Price</th>
                             <th>Quantity</th>
+                            <th>AlertQty</th>
                             <th>Total Price</th>
                             <th>Seller Name</th>
                             <th>Category</th>
@@ -88,9 +90,15 @@
             </div>
             <div class="input-group">
                 <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                <span class="input-group-text" id="inputGroup-sizing-sm">Date</span>
+                <span class="input-group-text" id="inputGroup-sizing-sm">Purchase Date</span>
                 </div>
-                <input type="date" id="Date" class="form-control">
+                <input type="date" id="pDate" class="form-control">
+            </div>
+            <div class="input-group">
+                <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                <span class="input-group-text" id="inputGroup-sizing-sm">Expiry Date</span>
+                </div>
+                <input type="date" id="eDate" class="form-control">
             </div>
             <div class="input-group">
                 <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
@@ -98,7 +106,6 @@
                 </div>
                 <input type="number" id="Price" class="form-control">
             </div>
-        
             
             <div class="input-group">
                 <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
@@ -107,6 +114,12 @@
                 <input type="number" id="Quantity" class="form-control" >
             </div>
 
+            <div class="input-group">
+                <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">AlertQty</span>
+                </div>
+                <input type="number" id="AlertQty" class="form-control" value="50">
+            </div>
             <div class="input-group">
                 <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Seller Name </span>

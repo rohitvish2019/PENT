@@ -10,7 +10,9 @@ function addMedications(){
     let Quantity = document.getElementById('Quantity').value
     let SellerName = document.getElementById('SellerName').value
     let Category = document.getElementById('Category').value
-    let date = document.getElementById('Date').value
+    let purchaseDate = document.getElementById('pDate').value
+    let expiryDate = document.getElementById('eDate').value
+    let AlertQty = document.getElementById('AlertQty').value
     if(Item == '' || Quantity == ''){
         new Noty({
             theme: 'relax',
@@ -21,16 +23,18 @@ function addMedications(){
         }).show();
         return
     }
-    purchases.push(Item+'$'+Batch+'$'+Price+'$'+Quantity+'$'+SellerName+'$'+Category+'$'+date);
+    purchases.push(Item+'$'+Batch+'$'+Price+'$'+Quantity+'$'+SellerName+'$'+Category+'$'+purchaseDate+"$"+AlertQty+"$"+expiryDate);
     rowItem.id = countTracker + '_items'
     rowItem.innerHTML=
     `
         <td>${countTracker}</td>
         <td>${Item}</td>
         <td>${Batch}</td>
-        <td>${date}</td>
+        <td>${purchaseDate}</td>
+        <td>${expiryDate}</td>
         <td>${Price}</td>
         <td>${Quantity}</td>
+        <td>${AlertQty}</td>
         <td>${Price * Quantity}</td>
         <td>${SellerName}</td>
         <td>${Category}</td>

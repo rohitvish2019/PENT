@@ -2,42 +2,24 @@ const ServicesData = require('../models/servicesAndCharges');
 const SalesData = require('../models/sales')
 const PatientData = require('../models/patients');
 const Tracker = require('../models/tracker');
-const Visits = require('../models/visits')
+const Visits = require('../models/visits');
+const Inventories = require('../models/inventories')
+const PropertiesReader = require('properties-reader');
+const properties = PropertiesReader('./configs/hospital.properties');
+const HospitalName = properties.get('HospitalName');
 module.exports.salesHistoryHome = function(req, res){
     try{
-        return res.render('salesHistory',{user:req.user});
+        return res.render('salesHistory',{user:req.user,HospitalName});
     }catch(err){
         return res.render('Error_500')
     }
     
 }
-/*
-function convertIstToUtc(istDate) {
-    // Parse the IST date string into a Date object
-    const [year, month, day] = istDate.split('-').map(Number);
 
-    // Check if the date is valid
-    if (!year || !month || !day) {
-        throw new Error("Invalid IST date format. Use 'YYYY-MM-DD'.");
-    }
-
-    // Create IST date object
-    const istDateObj = new Date(year, month - 1, day, 0, 0, 0); // Month is 0-indexed
-
-    // Convert to UTC by subtracting 5 hours and 30 minutes (330 minutes)
-    const utcOffsetMinutes = 330;
-    const utcDate = new Date(istDateObj.getTime() - utcOffsetMinutes * 60 * 1000);
-
-    // Format the UTC date into a readable string
-    //const utcDateString = utcDate.toISOString().split('T')[0]; // Extract only the date part
-
-    return utcDate;
-}
-*/
 module.exports.newPathologyBill = async function(req, res){
     try{
         let services = await ServicesData.find({}, 'Name');
-        return res.render('pathologyBill', {services, user:req.user})
+        return res.render('pathologyBill', {services, user:req.user,HospitalName})
     }catch(err){
         return res.render('Error_500')
     }
@@ -46,7 +28,7 @@ module.exports.newPathologyBill = async function(req, res){
 module.exports.newUltrasoundBill = async function(req, res){
     try{
         let services = await ServicesData.find({Type:'Ultrasound'}, 'Name');
-        return res.render('ultrasoundBilling', {services, user:req.user})
+        return res.render('ultrasoundBilling', {services, user:req.user,HospitalName})
     }catch(err){
         return res.render('Error_500')
     }
@@ -55,7 +37,16 @@ module.exports.newUltrasoundBill = async function(req, res){
 module.exports.newOtherBill = async function(req, res){
     try{
         let services = await ServicesData.find({}, 'Name');
-        return res.render('otherBills', {services, user:req.user})
+        return res.render('otherBills', {services, user:req.user,HospitalName})
+    }catch(err){
+        return res.render('Error_500')
+    }
+}
+
+module.exports.newMedicalBill = async function(req, res){
+    try{
+        let stock = await Inventories.find({}, 'Name').distinct('Name');
+        return res.render('medicalBill', {stock, user:req.user,HospitalName})
     }catch(err){
         return res.render('Error_500')
     }
@@ -164,7 +155,7 @@ module.exports.getBillById = async function(req, res){
                 bill
             })
         }else if(bill && !req.xhr){
-            return res.render('billTemplate',{bill, user:req.user})
+            return res.render('billTemplate',{bill, user:req.user,HospitalName})
         }
         else if(req.xhr && (!bill || bill == null)){
             return res.status(404).json({

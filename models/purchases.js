@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 const Purchases = new mongoose.Schema({
+    
     Name:String,
+    PurchasePrice:Number,
     Price:Number,
     Quantity:Number,
     Bought_Date:String,

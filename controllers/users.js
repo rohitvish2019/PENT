@@ -1,5 +1,8 @@
 const { emit } = require("../models/patients")
 const Users = require("../models/users")
+const PropertisReader = require('properties-reader');
+const properties = PropertisReader('./configs/hospital.properties');
+const HospitalName = properties.get('HospitalName');
 module.exports.loginHome = function(req, res){
     if(req.isAuthenticated()){
         if(req.user.Role == 'Admin'){
@@ -11,7 +14,12 @@ module.exports.loginHome = function(req, res){
     }
     else{
         console.log('Unable to authenticate')
-        return res.render('login');
+        try{
+            return res.render('login',{HospitalName});
+        }catch(err){
+            return res.render('Error_500')
+        }
+
     }
     
 }
@@ -85,7 +93,7 @@ module.exports.addUser = async function(req, res){
 module.exports.adminHome = async function(req, res){
     try{
         if(req.user.Role == 'Admin'){
-            return res.render('Admin',{user:req.user});
+            return res.render('Admin',{user:req.user,HospitalName});
         }else{
             return res.render('Error_403')
         }
@@ -187,7 +195,7 @@ module.exports.updateProfile = async function(req, res){
 
 module.exports.changePasswordHome = function(req, res){
     try{
-        return res.render('changePassword',{user:req.user})
+        return res.render('changePassword',{user:req.user,HospitalName})
     }catch(err){    
         return res.render('Error_500')
     }

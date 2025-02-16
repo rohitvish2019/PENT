@@ -1,6 +1,14 @@
 const mongoose = require('mongoose');
 const Inventories = new mongoose.Schema({
     Name:String,
+    ExpiryDate:Date,
+    Category:String,
+    BatchNo:String,
+    Quantity : Number,
+    AlertQty : Number,
+    ActiveBatch: Boolean,
+    Price : Number,
+    
 },
 {
     timestamps:true

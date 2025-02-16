@@ -5,12 +5,15 @@ const ServicesData = require('../models/servicesAndCharges');
 const SalesData = require('../models/sales')
 const VisitData = require('../models/visits')
 const BirthData = require('../models/birthCertificates')
+const PropertiesReader = require('properties-reader')
+const properties = PropertiesReader('./configs/hospital.properties');
+const HospitalName = properties.get('HospitalName');
 
 module.exports.PathalogyHome = async function(req, res){
     try{
         let patient = await PatientData.findById(req.params.id);
         let services = await ServicesData.find({});
-        return res.render('pathalogyHome', {patient, services, billId:req.query.bill, user:req.user});
+        return res.render('pathalogyHome', {patient, services, billId:req.query.bill, user:req.user,HospitalName});
     }catch(err){
         console.log(err);
         return res.render('Error_500')
@@ -20,7 +23,7 @@ module.exports.PathalogyHome = async function(req, res){
 module.exports.PathalogyHomeEmpty = async function(req, res){
     try{
         let services = await ServicesData.find({});
-        return res.render('pathalogyHomeEmpty', {services, user:req.user})
+        return res.render('pathalogyHomeEmpty', {services, user:req.user,HospitalName})
     }catch(err){
         console.log(err);
         return res.render('Error_500')
@@ -220,7 +223,7 @@ module.exports.viewReport = async function(req, res){
     try{
         let report = await ReportsData.findById(req.params.pid);
         let patient = await PatientData.findOne(report.Patient);
-        return res.render('pathalogyReportTemplate', {report, user:req.user, patient});
+        return res.render('pathalogyReportTemplate', {report, user:req.user, patient,HospitalName});
     }catch(err){
         console.log(err);
         return res.render('Error_500')
@@ -268,7 +271,7 @@ module.exports.getDefaultTests = async function(req, res){
 }
 module.exports.pathologyHistoryHome = function(req, res){
     try{
-        return res.render('pathReportsHistory',{user:req.user})
+        return res.render('pathReportsHistory',{user:req.user,HospitalName})
     }catch(err){
         return res.render('Error_500')
     }
@@ -505,7 +508,7 @@ module.exports.dashboard = async function(req, res){
 
 module.exports.birthCertificateHistory = async function(req, res){
     try{
-        return res.render('birthCertificateHistory', {user:req.user});
+        return res.render('birthCertificateHistory', {user:req.user,HospitalName});
     }catch(err){
         console.log(err);
         return res.render('Error_500')

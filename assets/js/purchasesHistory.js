@@ -36,6 +36,10 @@ function showPurchaseHistory(purchases){
         rowItem.id=purchases[i]._id
         let price = purchases[i].Price == null ? 0 : parseInt(purchases[i].Price);
         let quantity = purchases[i].Quantity == null ? 0 : parseInt(purchases[i].Quantity)
+        let expiryDate = "";
+        if(purchases[i].Expiry_Date != null) {
+            expiryDate =  purchases[i].Expiry_Date.split('-')[2]+"-"+purchases[i].Expiry_Date.split('-')[1]+"-"+purchases[i].Expiry_Date.split('-')[0]
+        }
         rowItem.innerHTML=
         `
             <td>${i+1}</td>
@@ -45,6 +49,7 @@ function showPurchaseHistory(purchases){
             <td>${quantity}</td>
             <td>${price*quantity}</td>
             <td>${purchases[i].Bought_Date.split('-')[2]}-${purchases[i].Bought_Date.split('-')[1]}-${purchases[i].Bought_Date.split('-')[0]}</td>
+            <td>${expiryDate}</td>
             <td>${purchases[i].Seller}</td>
             <td>${purchases[i].Category}</td>
             <td><button class="btn btn-danger" onclick="cancelPurchase('${purchases[i]._id}')"><i class="fa-solid fa-ban"></i></button></td>
