@@ -32,37 +32,139 @@
     </div>
 
     <div>
-        <div style="overflow-y: auto; height: 500px; border-top:2px dotted white;">
-            <h4 class="text-white text-center" style="padding: 10px; background-color: #343a40; text-align : center;">
-                Purchase Entry</h4>
-            <div style="text-align: end; margin-right:2% ; padding-bottom: 8px;">
-                <button id="addNewInventoryBTN" class="btn btn-primary" onclick="popupaddNewInventory()">Add New
-                    Inventory</button>
+        <div style="display: flex;">
+            <div style="width: 100%;">
+                <h4 class="text-white text-center" style="padding: 10px; background-color: #343a40; text-align : center;">Purchase Entry</h4>
+                <table class="table table-striped table-bordered">
+                    <thead>
+                        <tr class="bg">
+                            <th>#</th>
+                            <th>Item Name</th>
+                            <th>Batch No.</th>
+                            <th>Purchase Date</th>
+                            <th>Expiry Date</th>
+                            <th>Purchase Price</th>
+                            <th>Quantity</th>
+                            <th>AlertQty</th>
+                            <th>Total Price</th>
+                            <th>Seller Name</th>
+                            <th>Category</th>
+                            <th>Remove</th>
+                            <!--
+                                <th>Del.</th>
+                                -->
+                        </tr>
+                    </thead>
+                    <tbody id="prescriptionTableBody">
+    
+                    </tbody>
+                </table>
             </div>
-            <table class="table table-striped table-bordered">
-                <thead>
-                    <tr class="bg">
-                        <th>#</th>
-                        <th>Item Name</th>
-                        <th>Batch No.</th>
-                        <th>Purchase Date</th>
-                        <th>Expiry Date</th>
-                        <th>Purchase Price</th>
-                        <th>Quantity</th>
-                        <th>AlertQty</th>
-                        <th>Total Price</th>
-                        <th>Seller Name</th>
-                        <th>Category</th>
-                        <th>Remove</th>
-                        <!--
-                            <th>Del.</th>
-                            -->
-                    </tr>
-                </thead>
-                <tbody id="prescriptionTableBody">
+            <div id="addItemPopup" style="width: 30%;display: none;">
+                <div id="addNewInventory" class="card text-center">
+                    <div style="display: flex;justify-content: space-between;">
+                        <label for=""></label>
+                        <label style="text-align: center; font-weight: bold;color: black;font-size: 18px">Add New Inventory</label>
+                        <i onclick="closepopup()" style="align-items: end;" class="fa-regular fa-circle-xmark fa-2x"></i>
+                    </div>
+                    
+                    <div style="text-align: center !important;">
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Item Name <label>*</label></span>
+                            </div>
+                            <input style="text-transform: uppercase;" type="text" id="Item" class="form-control"
+                                list="medicineList">
+        
+                            <datalist id="medicineList">
+                                <%for(let i=0;i<inventory.length;i++){%>
+                                    <option value="<%=inventory[i]%>"></option>
+                                    <%}%>
+                            </datalist>
+                        </div>
+        
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Batch No</span>
+                            </div>
+                            <input type="text" id="Batch" class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Purchase Date</span>
+                            </div>
+                            <input type="date" id="pDate" class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Expiry Date</span>
+                            </div>
+                            <input type="date" id="eDate" class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Seller Name </span>
+                            </div>
+                            <input type="text" id="SellerName" class="form-control">
+                        </div>
+                    
+                    
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Quantity <label>*</label></span>
+                            </div>
+                            <input type="number" id="Quantity" class="form-control">
+                        </div>
+        
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">AlertQty</span>
+                            </div>
+                            <input type="number" id="AlertQty" class="form-control" value="50">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Purchase Price</span>
+                            </div>
+                            <input type="number" id="Price" class="form-control">
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Selling Price</span>
+                            </div>
+                            <input type="number" id="SellPrice" class="form-control">
+                        </div>
+                        
+                        <div class="input-group">
+                            <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
+                                <span class="input-group-text" id="inputGroup-sizing-sm">Category</span>
+                            </div>
+                            <div style="width: 63%; margin-left:3px;">
+                            <select name="" id="Category" class="form-control">
+                                <option value="Medicine">Medicine</option>
+                                <option value="Hospital Exp.">Hospital Exp.</option>
+                                <option value="Machinery">Machinery</option>
+                                <option value="Other">Other</option>
+                            </select>
+                        </div>
+                        </div>           
+                    </div>
+                    <div style="padding-left: 20px; text-align: left; font-weight: bold;">
+                        <label>* Mandatory Details</label>
+                    </div>
+                    <div style="margin: 5px;">
+                        <button style="width: 60%;" class="btn btn-success" onclick="addMedications()">Add</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="display: flex;justify-content: flex-end;">
+            <button id="addNewInventoryBTN" class="btn btn-primary" onclick="popupaddNewInventory()">Add New Inventory</button>
+        </div>
 
-                </tbody>
-            </table>
+        <div style="overflow-y: auto; height: 500px; border-top:2px dotted white;">
+            <div style="text-align: end; margin-right:2% ; padding-bottom: 8px;">
+            </div>
         </div>
         <div style="display: flex; justify-content: center;margin: 12px 12px;">
             <button onclick="savePurchases()" style="width: 30%;" class="btn btn-success">Save</button>
@@ -71,114 +173,7 @@
     </div>
 
     <!--Add New Inventory-->
-    <div id="addNewInventory" class="card text-center">
-        <div style="margin: 1%; text-align: right;">
-            <i onclick="closepopup()" style="align-items: end;" class="fa-regular fa-circle-xmark fa-2x"></i>
-        </div>
-        <h4 style="text-align: center; font-weight: bold;">Add New Inventory</h4>
-        <div class="" style="display: flex; text-align: center !important;">
-            <div id="left" style="width: 45%; margin: 15px;">
-                <div class="input-group">
-                    <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Item Name <label>*</label></span>
-                    </div>
-                    <input style="text-transform: uppercase;" type="text" id="Item" class="form-control"
-                        list="medicineList">
-
-                    <datalist id="medicineList">
-                        <%for(let i=0;i<inventory.length;i++){%>
-                            <option value="<%=inventory[i]%>"></option>
-                            <%}%>
-                    </datalist>
-                </div>
-
-                <div class="input-group">
-                    <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Batch No</span>
-                    </div>
-                    <input type="text" id="Batch" class="form-control">
-                </div>
-                <div class="input-group">
-                    <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Purchase Date</span>
-                    </div>
-                    <input type="date" id="pDate" class="form-control">
-                </div>
-                <div class="input-group">
-                    <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Expiry Date</span>
-                    </div>
-                    <input type="date" id="eDate" class="form-control">
-                </div>
-                <div class="input-group">
-                    <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Seller Name </span>
-                    </div>
-                    <input type="text" id="SellerName" class="form-control">
-                </div>
-            </div>
-            <div id="right" style="width: 45%; margin: 15px;">
-                <div class="input-group">
-                    <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Quantity <label>*</label></span>
-                    </div>
-                    <input type="number" id="Quantity" class="form-control">
-                </div>
-
-                <div class="input-group">
-                    <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">AlertQty</span>
-                    </div>
-                    <input type="number" id="AlertQty" class="form-control" value="50">
-                </div>
-                <div class="input-group">
-                    <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Purchase Price</span>
-                    </div>
-                    <input type="number" id="Price" class="form-control">
-                </div>
-                <div class="input-group">
-                    <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Selling Price</span>
-                    </div>
-                    <input type="number" id="SellPrice" class="form-control">
-                </div>
-                
-                <div class="input-group">
-                    <div class="input-group-prepend" style="margin-top: 2px;height: 38px;">
-                        <span class="input-group-text" id="inputGroup-sizing-sm">Category</span>
-                    </div>
-                    <div style="width: 64%; margin-left:3px;">
-                    <select name="" id="Category" class="form-control">
-                        <option value="Medicine">Medicine</option>
-                        <option value="Hospital Exp.">Hospital Exp.</option>
-                        <option value="Machinery">Machinery</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                </div>
-            </div>
-           
-
-            <!--
-            <div class="input-group input-group-sm mb-1">
-                <div class="input-group-prepend">
-                    <span class="input-group-text" id="inputGroup-sizing-sm">Alert Quantity</span>
-                </div>
-                <input type="number" id="AlertQty" class="form-control">
-            </div>
-            -->
-
-            
-        </div>
-        <div style="padding-left: 20px; text-align: left; font-weight: bold;">
-            <label>* Mandatory Details</label>
-        </div>
-        <div style="margin: 25px;">
-            <button style="width: 60%;" class="btn btn-success"
-                onclick="addMedications()">Add</button>
-        </div>
-    </div>
+    
 
     <script src="/js/purchases.js"></script>
 </body>
