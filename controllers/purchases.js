@@ -176,7 +176,7 @@ module.exports.cancelPurchases = async function(req, res){
 
 module.exports.InventoryManager = function (req, res) {
     try {
-        return res.render('inventoryManager')
+        return res.render('inventoryManager',{user:req.user,HospitalName})
     } catch (err) {
         return res.render('Error_500')
     }
