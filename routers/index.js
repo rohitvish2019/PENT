@@ -8,5 +8,6 @@ Router.use('/reports', require('./reports'));
 Router.use('/user', require('./users'))
 Router.use('/',passport.checkAuthentication, require('./users'));
 Router.use('/uploads', require('./uploads'));
-Router.use('/meds', require('./meds'))
+Router.use('/meds', require('./meds'));
+Router.use('/inventory', passport.checkAuthentication, require('./inventory'));
 module.exports = Router;

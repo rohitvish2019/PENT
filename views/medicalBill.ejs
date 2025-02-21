@@ -20,7 +20,7 @@
         <%-include('_loader')%>
     </div>
     <div style="height: 100px;width: 100%;border: 1px solid white;">
-        <input type="hidden" value="Other" id="billType">
+        <input type="hidden" value="Medical" id="billType">
         <div class="patient-container text-center" style="padding: 1%; color: white; background-color:#343a40 ;">
             <div class="patient-data">
                 <label class="patient-data-heading">Name</label>
@@ -92,7 +92,7 @@
                 <input style="text-transform: uppercase;" type="text" id="Item" class="form-control" list="medicineList" onchange="setPriceAndNotes()">
                 <datalist id="medicineList">
                     <%for(let i=0;i<stock.length;i++){%>
-                        <option value="<%=stock[i].Name%>"><%=stock[i].Name%></option>
+                        <option value="<%=stock[i]%>"><%=stock[i].Name%></option>
                     <%}%>
                 </datalist>
             </div>
@@ -100,7 +100,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Price</span>
                 </div>
-                <input type="number" id="Price" class="form-control">
+                <input type="number" id="Price" class="form-control" >
             </div>
             <div class="input-group input-group-sm mb-1">
                 <div class="input-group-prepend">
@@ -112,7 +112,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Notes</span>
                 </div>
-                <input type="text" id="Notes" class="form-control" >
+                <input type="text" id="Notes" class="form-control">
             </div>
             <div style="width: 100%; margin-top: 10%;">
                 <button style="width: 60%; margin-left: 21%; margin-right: 19%;" class="btn btn-success" onclick="addItems()">Add</button>
@@ -136,6 +136,6 @@
             </div>
         </div>
     </div>
-    <script src="/js/pathalogyBill.js"></script>
+    <script src="/js/medicalBill.js"></script>
 </body>
 </html>

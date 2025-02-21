@@ -46,6 +46,7 @@ module.exports.newOtherBill = async function(req, res){
 module.exports.newMedicalBill = async function(req, res){
     try{
         let stock = await Inventories.find({}, 'Name').distinct('Name');
+        console.log(stock)
         return res.render('medicalBill', {stock, user:req.user,HospitalName})
     }catch(err){
         return res.render('Error_500')
