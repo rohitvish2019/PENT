@@ -69,11 +69,13 @@ function removeItem(counter){
 
 
 function popupaddNewInventory() {
-    document.getElementById('addNewInventory').style.display = 'block'
+    document.getElementById('addItemPopup').style.display = 'block'
+    document.getElementById('addNewInventoryBTN').style.display='none'
 }
 
 function closepopup() {
-    document.getElementById('addNewInventory').style.display = 'none'
+    document.getElementById('addItemPopup').style.display = 'none'
+    document.getElementById('addNewInventoryBTN').style.display='block'
 }
 
 function savePurchases(){
