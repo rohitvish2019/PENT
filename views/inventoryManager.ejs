@@ -4,10 +4,75 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" type="text/css" href="/css/inventoryManager.css">
 </head>
 <body>
     <header>
         <%-include('_header')%>
     </header>
+    <h4 class="heading" style="padding: 1%; background-color: #343a40; color: white;">Inventory Management</h4>
+    <div class="box">
+        
+        <h5 class="mb-2 ml-5">Your sales overview in this Month</h5>
+
+        <div style="display: flex; justify-content: space-between;">
+            
+            <div id="card" style="width:30% ;">
+                <h5>Sales Targets</h5>
+                <span>Number from DB</span> <br>
+                <span style="font-style: italic; font-size: small; cursor: pointer;" onclick="setSalesTarget()">Set a sales Target</span>
+            </div>
+
+            
+            <div id="card" style="width:30% ;">
+                <h5>Sales Achieved</h4>
+                <span>Number from DB</span><br>
+
+            </div>
+
+            
+            <div id="card" style="width:30% ;">
+                <h5>Average Items per Sale</h4>
+                <span>Number from DB</span><br>
+            </div>
+
+        </div>
+
+        <div class="row search-bar mt-3">
+            <div class="col-md-6">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchMedicine" placeholder="Search Medicine">
+                    <button class="btn btn-primary" id="searchBtn">Search</button>
+                </div>
+            </div>
+            <div class="col-md-6 text-end">
+                <button class="btn btn-danger" id="clearInventoryBtn">Clear Empty Inventory</button>
+            </div>
+        </div>
+    
+        <div class="table-container">
+            <table class="table table-striped table-bordered">
+                <caption>End of List</caption>
+                <thead>
+                    <tr class="bg">
+                        <th>Medicine Name</th>
+                        <th>Available Quantity</th>
+                        <th>Add More Quantity</th>
+                        <th>Minimum Alert Quantity</th>
+                        <th>Expiry Date</th>
+                        <th>Batch No.</th>
+                        <th>Price</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody id="inventoryTableBody">
+                </tbody>
+            </table>
+        </div>
+    
+    
+    </div>
+        
+    
 </body>
 </html>
