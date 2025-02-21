@@ -47,7 +47,9 @@ function addMedications(){
     countTracker++
     document.getElementById('Item').value=''
     document.getElementById('Batch').value=''
+    document.getElementById('AlertQty').value='50'
     document.getElementById('Price').value=''
+    document.getElementById('SellPrice').value=''
     document.getElementById('Quantity').value=''
     document.getElementById('SellerName').value=''
 }
@@ -63,6 +65,15 @@ function highlight(x) {
 function removeItem(counter){
     purchases[counter-1] = '';
     document.getElementById(counter+'_items').remove();
+}
+
+
+function popupaddNewInventory() {
+    document.getElementById('addNewInventory').style.display = 'block'
+}
+
+function closepopup() {
+    document.getElementById('addNewInventory').style.display = 'none'
 }
 
 function savePurchases(){

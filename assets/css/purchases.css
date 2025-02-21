@@ -3,6 +3,23 @@ body {
     margin: 20px;
 }
 
+#addNewInventoryBtn{
+    padding: 8px;
+}
+
+#addNewInventory{
+    background-color: #d0d0d0;
+    border-radius: 20px;
+    display:none; 
+    position:absolute;
+    top: 28%;
+    left: 27%;
+    height: fit-content; 
+    width: fit-content;
+    
+}
+
+
 table {
     border-collapse: collapse;
     width: 100%;
@@ -36,20 +53,11 @@ th {
     background-color:#025E73!important;
     color: white;
 }
+
+
 .prescriptions-list{
     width: 100%;
     overflow: auto;
-}
-
-i
-.prescription-form{
-    border-left: 2px dotted black;
-    width: 28%;
-    margin-top: 3%;
-}
-.prescription-form{
-    width: 29%;
-    padding: 1%;
 }
 
 .input-group{
