@@ -23,31 +23,31 @@
         <input type="hidden" value="Other" id="billType">
         <div class="patient-container text-center" style="padding: 1%; color: white; background-color:#343a40 ;">
             <div class="patient-data">
-                <label class="patient-data-heading">Name</label>
+                <label class="patient-data-heading"> Name</label>
                 <input class="patient-data-value" id="patName">
             </div>
             <div class="patient-data">
-                <label class="patient-data-heading">Age</label>
+                <label class="patient-data-heading"> Age</label>
                 <input class="patient-data-value" id="age">
             </div>
             <div class="patient-data">
-                <label class="patient-data-heading">ID Proof</label>
+                <label class="patient-data-heading"> ID Proof</label>
                 <input class="patient-data-value" id="IdProof">
             </div>
             <div class="patient-data">
-                <label class="patient-data-heading">Gender</label>
-                <input class="patient-data-value" id="gender" value="Female">
+                <label class="patient-data-heading"> Gender</label>
+                <input class="patient-data-value" id="gender" >
             </div>
             <div class="patient-data">
-                <label class="patient-data-heading">Address</label>
+                <label class="patient-data-heading"> Address</label>
                 <input class="patient-data-value" id="address">
             </div>
             <div class="patient-data">
-                <label class="patient-data-heading">Mobile</label>
+                <label class="patient-data-heading"> Mobile</label>
                 <input class="patient-data-value" id="mobile">
             </div>
             <div class="patient-data" style="padding-right: 1.5%;">
-                <label class="patient-data-heading">Referred By</label>
+                <label class="patient-data-heading"> Referred By</label>
                 <input class="patient-data-value" id="docName">
             </div>
 
@@ -65,11 +65,13 @@
                     <thead>
                         <tr class="bg">
                             <th>#</th>
-                            <th>Item Name</th>
-                            <th>Price</th>
-                            <th>Quantity</th>
-                            <th>Notes</th>
-                            <th>Delete</th>
+                            <th><i class="fa-solid fa-check-to-slot"></i> Item Name</th>
+                            <th><b>₹</b> Price</th>
+                            <th><i class="fa-solid fa-list-ol"></i> Quantity</th>
+                            <th><i class="fa-solid fa-barcode"></i> Batch No.</th>
+                            <th><i class="fa-regular fa-calendar"></i> Expiry Date</th>
+                            <th><i class="fa-regular fa-note-sticky"></i> Notes</th>
+                            <th> Delete <i class="fa-solid fa-delete-left"></i></th>
                         </tr>
                     </thead>
                     <tbody id="itemsTableBody">
@@ -87,7 +89,7 @@
             <h4 style="text-align: center; font-weight: bold;">Add New Item</h4>
             <div class="input-group input-group-sm mb-1">
                 <div class="input-group-prepend">
-                <span class="input-group-text" id="inputGroup-sizing-sm" >Item Name</span>
+                <span class="input-group-text" id="inputGroup-sizing-sm" >Item Name <span id="mdetails"> *</span></span>
                 </div>
                 <input style="text-transform: uppercase;" type="text" id="Item" class="form-control" list="medicineList" onchange="setPriceAndNotes()">
                 <datalist id="medicineList">
@@ -98,7 +100,7 @@
             </div>
             <div class="input-group input-group-sm mb-1">
                 <div class="input-group-prepend">
-                  <span class="input-group-text" id="inputGroup-sizing-sm">Price</span>
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Price <span id="mdetails"> *</span></span>
                 </div>
                 <input type="number" id="Price" class="form-control">
             </div>
@@ -110,10 +112,23 @@
             </div>
             <div class="input-group input-group-sm mb-1">
                 <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Batch No.</span>
+                </div>
+                <input id="batchNo" class="form-control" value="">
+            </div>
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend">
+                  <span class="input-group-text" id="inputGroup-sizing-sm">Expiry Date</span>
+                </div>
+                <input type="date" id="expiryDate" class="form-control" value="">
+            </div>
+            <div class="input-group input-group-sm mb-1">
+                <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Notes</span>
                 </div>
                 <input type="text" id="Notes" class="form-control" >
             </div>
+            <span id="mdetails" style="font-size: small; font-style: italic;">* Mandatory Details</span>
             <div style="width: 100%; margin-top: 10%;">
                 <button style="width: 60%; margin-left: 21%; margin-right: 19%;" class="btn btn-success" onclick="addItems()">Add</button>
             </div>
