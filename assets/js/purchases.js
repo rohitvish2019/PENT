@@ -69,11 +69,13 @@ function removeItem(counter){
 
 
 function popupaddNewInventory() {
+    document.getElementById('inventoryTable').classList.add("slide-out");
     document.getElementById('addItemPopup').style.display = 'block'
     document.getElementById('addNewInventoryBTN').style.display='none'
 }
 
 function closepopup() {
+    document.getElementById('inventoryTable').classList.remove("slide-out");
     document.getElementById('addItemPopup').style.display = 'none'
     document.getElementById('addNewInventoryBTN').style.display='block'
 }

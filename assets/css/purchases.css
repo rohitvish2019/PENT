@@ -92,3 +92,46 @@ th {
     display: flex;
     transition: width 0.3s ease-in-out;
 }
+
+@keyframes slideInFromLeft {
+
+    from {
+  
+      transform: translateX(100%);
+  
+    }
+  
+    to {
+  
+      transform: translateX(0);
+  
+    }
+  
+  }
+  
+  @keyframes slideInFromRight {
+
+    from {
+  
+      transform: translateX(-100%);
+  
+    }
+  
+    to {
+  
+      transform: translateX(0);
+  
+    }
+  
+  }
+  
+  .slide-out{
+    animation: slideInFromRight 1s ease-in-out;
+  }
+
+  .slide-in {
+  
+    animation: slideInFromLeft 1s ease-in-out;
+  
+  }
+  

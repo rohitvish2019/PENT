@@ -32,9 +32,13 @@
     </div>
 
     <div>
+        <h4 class="text-white text-center" style="padding: 10px; background-color: #343a40; text-align : center;">Purchase Entry</h4>
+        <div class="mb-2 mr-2" style="display: flex;justify-content: flex-end;">
+            <button id="addNewInventoryBTN" class="btn btn-primary" onclick="popupaddNewInventory()">Add New Inventory</button>
+        </div>
         <div style="display: flex;">
-            <div style="width: 100%;">
-                <h4 class="text-white text-center" style="padding: 10px; background-color: #343a40; text-align : center;">Purchase Entry</h4>
+            
+            <div id="inventoryTable" style="width: 100%;">
                 <table class="table table-striped table-bordered">
                     <thead>
                         <tr class="bg">
@@ -60,7 +64,7 @@
                     </tbody>
                 </table>
             </div>
-            <div id="addItemPopup" style="width: 30%;display: none;">
+            <div id="addItemPopup" class="slide-in" style="width: 30%;display: none;">
                 <div id="addNewInventory" class="card text-center">
                     <div style="display: flex;justify-content: space-between;">
                         <label for=""></label>
@@ -157,9 +161,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div style="display: flex;justify-content: flex-end;">
-            <button id="addNewInventoryBTN" class="btn btn-primary" onclick="popupaddNewInventory()">Add New Inventory</button>
         </div>
 
         <div style="overflow-y: auto; height: 500px; border-top:2px dotted white;">
