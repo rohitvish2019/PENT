@@ -6,7 +6,7 @@ const Purchases = new mongoose.Schema({
     Price:Number,
     Quantity:Number,
     Bought_Date:String,
-    ExpiryDate:Date,
+    ExpiryDate:String,
     Batch:String,
     Seller:String,
     Category:String,

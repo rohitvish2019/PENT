@@ -37,8 +37,8 @@ function showPurchaseHistory(purchases){
         let price = purchases[i].Price == null ? 0 : parseInt(purchases[i].Price);
         let quantity = purchases[i].Quantity == null ? 0 : parseInt(purchases[i].Quantity)
         let expiryDate = "";
-        if(purchases[i].Expiry_Date != null) {
-            expiryDate =  purchases[i].Expiry_Date.split('-')[2]+"-"+purchases[i].Expiry_Date.split('-')[1]+"-"+purchases[i].Expiry_Date.split('-')[0]
+        if(purchases[i].ExpiryDate != null) {
+            expiryDate =  purchases[i].ExpiryDate.split('-')[2]+"-"+purchases[i].ExpiryDate.split('-')[1]+"-"+purchases[i].ExpiryDate.split('-')[0]
         }
         rowItem.innerHTML=
         `
