@@ -13,6 +13,7 @@ const Trackers = new mongoose.Schema({
     RecieptNo:Number,
     YearlyIPDCounter:Number,
     MonthlyIPDCounter:Number,
+    MedBillNumber:Number,
 },
 {
     timestamps:true

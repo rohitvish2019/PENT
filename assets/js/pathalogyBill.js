@@ -23,8 +23,6 @@ function addItems() {
     let itemName = document.getElementById('Item').value
     let itemPrice = document.getElementById('Price').value
     let quantity = document.getElementById('Quantity').value
-    let batchNo = document.getElementById('batchNo').value
-    let expiryDate = document.getElementById('expiryDate').value
     let Notes = document.getElementById('Notes').value == 'undefined' ? '' : document.getElementById('Notes').value
     if(!itemName || itemName == '' || !itemPrice || itemPrice == ''){
         new Noty({
@@ -45,8 +43,7 @@ function addItems() {
             <td>${itemName} <br><label style=" font-size: small;">Stock Available:</label></td>
             <td id='price_${counter}'>${itemPrice}</td>
             <td id='qty_${counter}'>${quantity}</td>
-            <td id='bno_${counter}'>${quantity}</td>
-            <td id='expdate_${counter}'>${quantity}</td>
+            <td id='bno_${counter}'>${quantity * itemPrice}</td>
             <td>${Notes}</td>
             <td>
                 <span id="dustbinDark${counter}" onmouseover = "highlight(${counter})" onmouseout = "unhighlight(${counter})" style="display:inline-block; margin: 1%;" onclick="deleteItem(${counter})"><i class="fa-solid fa-trash-can"></i> </span>
@@ -55,12 +52,10 @@ function addItems() {
         </tr>
     `
     container.appendChild(rowItem)
-    Items.push(itemName + '$' + quantity + '$' + itemPrice + '$' + batchNo + '$' + expiryDate + '$' + Notes);
+    Items.push(itemName + '$' + quantity + '$' + itemPrice + '$' + Notes);
     total = total + +itemPrice*quantity
     document.getElementById('Item').value = ''
     document.getElementById('Price').value = ''
-    document.getElementById('batchNo').value = ''
-    document.getElementById('expiryDate').value = ''
     document.getElementById('total').innerText = total
 }
 

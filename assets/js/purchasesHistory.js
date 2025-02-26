@@ -34,7 +34,7 @@ function showPurchaseHistory(purchases){
     for(let i=0;i<purchases.length;i++){
         let rowItem = document.createElement('tr');
         rowItem.id=purchases[i]._id
-        let price = purchases[i].Price == null ? 0 : parseInt(purchases[i].Price);
+        let price = purchases[i].Price == null ? 0 : purchases[i].Price;
         let quantity = purchases[i].Quantity == null ? 0 : parseInt(purchases[i].Quantity)
         let expiryDate = "";
         if(purchases[i].ExpiryDate != null) {

@@ -1,50 +1,63 @@
-function setPriceAndNotes() {
-    console.log("Calling add items")
-    let name = document.getElementById('Item').value;
-    $.ajax({
-        url: '/inventory/getItemByName/',
-        type: 'Get',
-        data: {
-            name
-        },
-        success: function (data) {
-            document.getElementById('Price').value = data.service.Price == undefined ? '' : data.service.Price
-            document.getElementById('Notes').value = data.service.Notes == undefined ? '' : data.service.Notes
-            //document.getElementById('Type').value = data.service.Type == undefined ? '' : data.service.Type
-        },
-        error: function (err) {}
-    })
-}
+
 let Items = new Array();
 let counter = 0
 let total = 0
 let patient
 function addItems() {
-    console.log("Calling add items")
-    let container = document.getElementById('itemsTableBody');
     let itemName = document.getElementById('Item').value
-    let itemPrice = document.getElementById('Price').value
     let quantity = document.getElementById('Quantity').value
-    let Notes = document.getElementById('Notes').value == 'undefined' ? '' : document.getElementById('Notes').value
-    if(!itemName || itemName == '' || !itemPrice || itemPrice == ''){
+    if(!itemName || itemName == '' || !quantity || quantity == ''){
         new Noty({
             theme: 'relax',
-            text: 'Name and price is mandatory',
+            text: 'Name & quantity is mandatory',
             type: 'error',
             layout: 'topRight',
             timeout: 1500
         }).show();
         return 
     }
+
     $.ajax({
-        url:'/inventory/getItemByName',
-        data : itemName,
-        type:'GET',
-        success: function(data) {
-            console.log(data);
+        url: '/inventory/getItemByName/',
+        type: 'Get',
+        data: {
+            name:itemName,
+            quantity
         },
-        error : function (err) {}
+        success: function (data) {
+            console.log(data)
+            if(data.totalQty >= quantity) {
+                addItemToUI(itemName, data.price, quantity, data.batch, data.expiry, data.notes, data.totalQty, data.avgAlertQty)
+            } else {
+                new Noty({
+                    theme: 'relax',
+                    text: 'Insufficient stock',
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
+                return 
+            }
+        },
+        error: function (err) {}
     })
+}
+
+function addItemToUI(itemName, itemPrice, quantity, batch, expiry, notes, totalQnty, alertQty) {
+    console.log("Data received at function")
+    let bgColor
+    if(totalQnty - quantity <= alertQty) {
+        bgColor = "#f5031d9c"
+    } else {
+        bgColor = "transparent"
+    }
+     
+    console.log(itemName)
+    console.log(itemPrice)
+    console.log(quantity)
+    console.log(batch)
+    console.log(expiry)
+    let container = document.getElementById('itemsTableBody');
     let rowItem = document.createElement('tr');
     rowItem.id='rowItem_'+ (counter+1)
     rowItem.innerHTML =
@@ -54,18 +67,20 @@ function addItems() {
             <td>${itemName}</td>
             <td id='price_${counter}'>${itemPrice}</td>
             <td id='qty_${counter}'>${quantity}</td>
-            <td>${Notes}</td>
+            <td>${batch}</td>
+            <td>${expiry}</td>
             <td>
                 <span id="dustbinDark${counter}" onmouseover = "highlight(${counter})" onmouseout = "unhighlight(${counter})" style="display:inline-block; margin: 1%;" onclick="deleteItem(${counter})"><i class="fa-solid fa-trash-can"></i> </span>
                 <span id="dustbinLight${counter}" onmouseover = "highlight(${counter})" onmouseout = "unhighlight(${counter})" style="display:none; margin: 1%;" onclick="deleteItem(${counter})"><i class="fa-regular fa-trash-can"></i> </span>
             </td>
+            <td style="background-color: ${bgColor};">${totalQnty-quantity}</td>
         </tr>
     `
     container.appendChild(rowItem)
-    Items.push(itemName + '$' + quantity + '$' + itemPrice + '$' + Notes);
+    Items.push(itemName + '$' + quantity + '$' + itemPrice + '$' + notes);
     total = total + +itemPrice*quantity
     document.getElementById('Item').value = ''
-    document.getElementById('Price').value = ''
+    document.getElementById('Quantity').value = ''
     document.getElementById('total').innerText = total
 }
 

@@ -3,23 +3,73 @@ const InventoriesData = require('../models/inventories');
 
 module.exports.getItemByName = async function(req, res) {
     try {
-        console.log(req.query)
-        let items = await InventoriesData.find({Name:req.query.name});
-        console.log(items)
-        let med = new Object();
-        let count = 0;
-        let alertQty = 0
+        let qtyArray = new Array();
+        let totalQty = 0
+        let avgAlertQty = 0;
+        let price = 0;
+        let batch = "";
+        let item = ""
+        let expiry = ""
+        let batchToConsider = 0;
+        let quantity = req.query.quantity
+        let items = await InventoriesData.find({Name:req.query.name, Quantity: {$gt : 0}}).sort({ExpiryDate:1});
+        console.log("See items here")
+        console.log(items);
+        console.log("****************************");
         for(let i=0;i<items.length;i++) {
-            count = count + items[i].Quantity;
-            alertQty = alertQty + items[i].AlertQty
+            totalQty = totalQty + items[i].Quantity
+            avgAlertQty = avgAlertQty + items[i].AlertQty
         }
-        alertQty = parseInt(alertQty/items.length)
+        if(items.length == 1) {
+            item = items[0].Name
+            expiry = items[0].ExpiryDate
+            price = items[0].Price
+            batch = items[0].Batch
+        } else if (items.length > 1) {
+            
+            if(items[0].Quantity >= req.query.quantity) {
+                console.log("Enough quantity in first batch")
+                item = items[0].Name
+                expiry = items[0].ExpiryDate
+                price = items[0].Price
+                batch = items[0].Batch
+            } else {
+                console.log("calculating quantity in each batch")
+                let k = 0
+                while(quantity > 0 && k < items.length) {
+                    console.log("Quantity is "+quantity);
+                    if(quantity >= items[k].Quantity) {
+                        qtyArray.push(items[k].Quantity);
+                    } else {
+                        qtyArray.push(quantity);
+                    }
+                    console.log("now deducting "+ items[k].Quantity)
+                    quantity = quantity - items[k].Quantity
+                    k++;
+                }
+                console.log(qtyArray);
+                batchToConsider = items[getMaxIndex(qtyArray)];
+                console.log("Batch is "+ batchToConsider);
+                expiry = batchToConsider.ExpiryDate
+                price = batchToConsider.Price
+                batch = batchToConsider.Batch
+
+            }
+            item = items[0].Name
+        } else { //length 0, no items found
+            //no action needed
+        }
+        avgAlertQty = parseInt(avgAlertQty/items.length);
         return res.status(200).json({
-            med,
-            qty:count,
-            alertQty
+            item,
+            expiry,
+            totalQty,
+            avgAlertQty,
+            price,
+            batch
         })
     } catch (err) {
+        console.log(err);
         return res.status(500).json({
             message : "Unable to find item"
         })
@@ -67,4 +117,19 @@ module.exports.getAllItems = async function (req, res) {
             message :'Error fetching inventories'
         })
     }
+}
+
+
+function getMaxIndex(arr) {
+    if (!Array.isArray(arr) || arr.length === 0) {
+        throw new Error("Input must be a non-empty array of integers");
+    }
+    
+    let maxIndex = 0;
+    for (let i = 1; i < arr.length; i++) {
+        if (arr[i] > arr[maxIndex]) {
+            maxIndex = i;
+        }
+    }
+    return maxIndex;
 }
