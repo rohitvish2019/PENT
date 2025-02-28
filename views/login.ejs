@@ -4,46 +4,38 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/css/login.css">
     <title>Login</title>
 </head>
-<style>
-    body{
-        height: 100vh;
-        width: 100%;
-    }
-    .main-body{
-        margin-left: 25%;
-        width: 50%;
-        margin-right: 25%;
-        margin-top: 4%;
-        -webkit-box-shadow: 0 0 10px gray;
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-        height: 400px;
-        padding-left: 4%;
-        padding-right: 4%;
-        padding-top: 2%;
-    }
-    
-</style>
+
 <body>
-    <div style="font-size: 35px; text-align: center; font-weight: bold;margin-top: 3%;">Welcome to Hospital Management</div>
-    <div class="main-body">
-        <h3 style="font-weight: bolder !important;text-align: center;color: rgb(194, 9, 9); "><%=HospitalName%></h3>
-        <h5 style="text-align: center;">Please Login to continue</h5>
-        <form action="/user/authenticate" method="POST">
-            <div class="form-floating mb-5">
-                <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com">
-                <label for="Name">Mobile / Username<span>*</span></label>
-            </div>
-            <div class="form-floating mb-5">
-                <input type="password" class="form-control" id="password" name="password" placeholder="name@example.com">
-                <label for="Name">Password<span>*</span></label>
-            </div>
-            <div style="width: 100%; display: flex; justify-content: center;">
-                <button type="submit" style="width: 70%;" class="btn btn-success">Login</button>
-            </div>
-        </form>
+    <div>
+        <div class="text-center my-5">
+            <h1 class="font-weight-bold" style="font-size: 35px;">Welcome to Hospital Management</h1>
+        </div>
+
+        <div class="login-box">
+            <h3><%=HospitalName%></h3>
+            <h5>Please login to continue</h5>
+            
+            <form action="/user/authenticate" method="POST">
+                <div class="form-floating mb-3">
+                    <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com" required>
+                    <label for="email">Mobile / Username <span>*</span></label>
+                </div>
+
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="password" name="password" placeholder="password" required>
+                    <label for="password">Password <span>*</span></label>
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-success">Login</button>
+                </div>
+            </form>
+        </div>
     </div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js" integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 </body>
 </html>

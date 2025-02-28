@@ -2,7 +2,15 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+.detail-display{
+    display: block;
+    position: fixed;
+    top: 23%; left: 80%;
+}
 
+.form{
+    display: flex;
+}
 .main-content{
     height: 85vh;
     text-align: center;
@@ -21,7 +29,7 @@ span{
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 2);
     overflow-y: auto;
-    margin-top: 4%;
+    margin-top: 1%;
 }
 .left, .right{
     width: 50%; 
@@ -53,19 +61,46 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-/* Responsive design */
-@media (max-width: 600px) {
-    #registrationForm {
-        padding: 2px;
+
+@media (max-width: 768px) {
+    .detail-display{
+        position: static;
+        margin: 2%;
     }
+    #registrationForm {
+        padding: 5px;
+        width: 60vh;
+    }
+    .left, .right{
+        width: 100%; 
+    }
+
     input[type="text"], select, input[type="number"], textarea {
-        width: calc(100% - 20px);
-        padding: 8px;
+        width: 100%;
         font-size: 14px;
     }
     input[type="submit"] {
-        padding: 5px 9px;
+        width: 100%;
         font-size: 14px;
+    }
+}
+
+@media (max-width: 480px){
+    #registrationForm {
+        padding: 5px;
+        width: 80vh;
+    }
+    .left, .right{
+        width: 100%; 
+    }
+
+    input[type="text"], select, input[type="number"], textarea {
+        width: 100%;
+        font-size: 12px;
+    }
+    input[type="submit"] {
+        width: 100%;
+        font-size: 12px;
     }
 }
 
