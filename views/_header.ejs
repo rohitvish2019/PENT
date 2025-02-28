@@ -13,97 +13,105 @@
   <link rel="stylesheet" href="/css/header.css">
 </head>
 <header>
-  <div class="text-center text-white d-flex justify-content-between align-items-center"
-    style="padding-right:2%; padding-left: 2%;">
-
-    <div class="logo">
-      <a href="/patients/new"><img src="/images/PENT_Logo.png" alt="" srcset="" height="100%" width="100%"></a>
-
-    </div>
-
-    <div style="text-align: center; width: 35%;">
-      <h3 style="font-weight: bolder !important;"><%=HospitalName%></h3>
-      <div class="menu-items" style="display: inline-flex;">
-        <div class="dropdown">
-          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Patients</button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/patients/new">OPD Registration</a></li>
-            <li><a class="dropdown-item" href="/patients/getAppointments/today">Appointments Today</a></li>
-            <%if(user.Role == 'Admin'){%>
-            <li><a class="dropdown-item" href="/patients/getAppointments/old">Appointments By Date</a></li>
-            <%}%>
-            <li disabled><a class="dropdown-item" href="/patients/IPD/new">IPD Admission</a></li>
-            <li><a class="dropdown-item" href="/patients/showAdmitted">Show Admitted</a></li>
-          </ul>
+  <div class="container-fluid text-center text-white">
+    <div class="d-flex justify-content-between align-items-center">
+      <!-- Logo Section -->
+      <div class="logo-container" style="display: flex; align-items: center;">
+        <div class="logo">
+          <a href="/patients/new"><img src="/images/PENT_Logo.png" alt="Pooja ENT Clinic, Logo" height="70px"
+              width=auto></a>
         </div>
 
 
-        <div class="dropdown">
-          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Purchases
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/purchases/home">New Purchase</a></li>
-            <li><a class="dropdown-item" href="/purchases/history">Purchase History</a></li>
-            <li><a class="dropdown-item" href="/purchases/inventoryManager">Inventory  Manager</a></li>
-            <li></li>
-          </ul>
+        <!-- Hospital Name -->
+        <div class="hospital-name ml-2" style="text-align: center; ">
+          <h3 style="font-weight: bolder !important;">
+            <%=HospitalName%>
+          </h3>
         </div>
-
-
-        <div class="dropdown">
-          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Reports
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/reports/new/home">New Pathology Report</a></li>
-            <li><a class="dropdown-item" href="/reports/history/home">Find Pathology Reports</a></li>
-          </ul>
-        </div>
-        <!--
-        <div class="dropdown">
-          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Inventories
-          </button>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="/purchases/invetoryManager">Inventory Manager</a></li>
-            
-          </ul>
-        </div>
-        -->
-        <div class="dropdown">
-          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Services
-          </button>
-          <ul class="dropdown-menu">
-            <!--
-            <li><a class="dropdown-item" href="/sales/bill/pathology">New Pathology Bill</a></li>
-            <li><a class="dropdown-item" href="/sales/bill/ultrasound">New Ultrasound Bill</a></li>
-            -->
-            <li><a class="dropdown-item" href="/sales/bill/medical">New Medical Bill</a></li>
-            <li><a class="dropdown-item" href="/sales/bill/others">Other Bill</a></li>
-            <li><a class="dropdown-item" href="/sales/History/home">Sales History</a></li>
-            <li><a class="dropdown-item" href="/reports/birthCertificates">Find Birth Certificates</a></li>
-          </ul>
-        </div>
-
-        <div class="dropdown">
-          <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Profile
-          </button>
-          <ul class="dropdown-menu">
-            <%if(user.Role == 'Admin'){%>
-            <li><a id="AdminDash" class="dropdown-item" href="/user/Admin">Admin Dashboard</a></li>
-            <%}%>
-            <li><a class="dropdown-item" href="/user/changePasswordHome">Change Password</a></li>
-          </ul>
-        </div>
-
       </div>
-    </div>
-    <div class="logout-btn">
-      <a href="/user/logout" class="btn btn-danger d-flex">Logout</a>
+
+      <div class="d-flex align-items-center">
+        <!-- Navbar for Menu Items -->
+        <div class="menu-items d-flex justify-content-center">
+          <nav class="navbar navbar-expand-lg navbar-dark">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+              aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav align-items-center">
+                <!-- Patients Dropdown -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">Patients</a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                    <li><a class="dropdown-item" href="/patients/new">OPD Registration</a></li>
+                    <li><a class="dropdown-item" href="/patients/getAppointments/today">Appointments Today</a></li>
+                    <%if(user.Role=='Admin' ){%>
+                      <li><a class="dropdown-item" href="/patients/getAppointments/old">Appointments By Date</a></li>
+                      <%}%>
+                        <li disabled><a class="dropdown-item" href="/patients/IPD/new">IPD Admission</a></li>
+                        <li><a class="dropdown-item" href="/patients/showAdmitted">Show Admitted</a></li>
+                  </ul>
+                </li>
+
+                <!-- Purchases Dropdown -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">Purchases</a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown2">
+                    <li><a class="dropdown-item" href="/purchases/home">New Purchase</a></li>
+                    <li><a class="dropdown-item" href="/purchases/history">Purchase History</a></li>
+                    <li><a class="dropdown-item" href="/purchases/inventoryManager">Inventory Manager</a></li>
+                  </ul>
+                </li>
+
+                <!-- Reports Dropdown -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown3" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">Reports</a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown3">
+                    <li><a class="dropdown-item" href="/reports/new/home">New Pathology Report</a></li>
+                    <li><a class="dropdown-item" href="/reports/history/home">Find Pathology Reports</a></li>
+                  </ul>
+                </li>
+
+                <!-- Services Dropdown -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown4" role="button"
+                    data-bs-toggle="dropdown" aria-expanded="false">Services</a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown4">
+                    <li><a class="dropdown-item" href="/sales/bill/medical">New Medical Bill</a></li>
+                    <li><a class="dropdown-item" href="/sales/bill/others">Other Bill</a></li>
+                    <li><a class="dropdown-item" href="/sales/History/home">Sales History</a></li>
+                    <li><a class="dropdown-item" href="/reports/birthCertificates">Find Birth Certificates</a></li>
+                  </ul>
+                </li>
+
+                <!-- Profile Dropdown -->
+                <li class="nav-item dropdown">
+                  <a class="nav-link " title="Profile" style="font-size: 2rem;" href="#" id="navbarDropdown5"
+                    role="button" data-bs-toggle="dropdown" aria-expanded="false"><i
+                      class="fa-regular fa-circle-user"></i></a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdown5">
+                    <%if(user.Role=='Admin' ){%>
+                      <li><a id="AdminDash" class="dropdown-item" href="/user/Admin">Admin Dashboard</a></li>
+                      <%}%>
+                        <li><a class="dropdown-item" href="/user/changePasswordHome">Change Password</a></li>
+                  </ul>
+                </li>
+
+                <li class="nav-item dropdown">
+                  <a id="navbarDropdown6" title="Logout" href="/user/logout" class="d-flex"><i
+                      class="fa-solid fa-right-from-bracket"></i></a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
     </div>
   </div>
 </header>
@@ -111,6 +119,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
   integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
   crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
-    integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+  integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+  crossorigin="anonymous" referrerpolicy="no-referrer"></script>
