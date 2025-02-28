@@ -39,7 +39,7 @@ function getSalesHistoryDate(){
                 document.getElementById("historyBody").innerHTML=
                 `
                 <tr>
-                    <td rowspan="3" colspan="9" style="text-align: center;">No Data found</td>
+                    <td rowspan="3" colspan="10" style="text-align: center;">No Data found</td>
                 </tr>
                 `
                 document.getElementById('tvalue').innerText='Total Amount : 0'
@@ -126,7 +126,7 @@ function getSalesHistoryRange(){
                 document.getElementById("historyBody").innerHTML=
                 `
                 <tr>
-                    <td rowspan="3" colspan="9" style="text-align: center;">No Data found</td>
+                    <td rowspan="3" colspan="10" style="text-align: center;">No Data found</td>
                 </tr>
                 `
                 return

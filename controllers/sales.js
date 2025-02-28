@@ -113,7 +113,7 @@ module.exports.addSales = async function(req, res){
             BillNo = tracker.PathologyBillNo + 1
             await tracker.updateOne({PathologyBillNo:BillNo});
         }else if(req.body.Type == 'Other'){
-            rptType = 'DC'
+            rptType = 'PENT'
             BillNo = tracker.OtherBillNumber + 1
             await tracker.updateOne({OtherBillNumber:BillNo});
         }
