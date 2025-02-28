@@ -7,6 +7,10 @@ const Inventories = require('../models/inventories')
 const PropertiesReader = require('properties-reader');
 const properties = PropertiesReader('./configs/hospital.properties');
 const HospitalName = properties.get('HospitalName');
+const HospitalAdddress = properties.get('HospitalAddress');
+const logo = properties.get('logoPath');
+const regNo = properties.get('HospitalRegNo')
+const InventoriesController = require('../controllers/Inventories');
 module.exports.salesHistoryHome = function(req, res){
     try{
         return res.render('salesHistory',{user:req.user,HospitalName});
@@ -95,7 +99,12 @@ module.exports.addSales = async function(req, res){
         let date = year +'-'+ (month+1).toString().padStart(2,'0') +'-'+ day; 
         let rptType = 'NA'
         let BillNo
-        if(req.body.Type == 'Ultrasound'){
+        if(req.body.Type == 'Medical') {
+            rptType = 'MED'
+            BillNo = tracker.MedBillNumber + 1
+            await tracker.updateOne({MedBillNumber:BillNo});
+        }
+        else if(req.body.Type == 'Ultrasound'){
             rptType = 'USG'
             BillNo = tracker.USGBillNumber + 1
             await tracker.updateOne({USGBillNumber:BillNo});
@@ -107,6 +116,49 @@ module.exports.addSales = async function(req, res){
             rptType = 'DC'
             BillNo = tracker.OtherBillNumber + 1
             await tracker.updateOne({OtherBillNumber:BillNo});
+        }
+        try{
+            let Items = req.body.Items;
+            for(let i=0;i<Items.length;i++) {
+                let itemSplitted = Items[i].split("$");
+                let itemName = itemSplitted[0];
+                let itemQty = parseInt(itemSplitted[1]);
+                let itemsFromDB = await Inventories.find({Name:itemName, Quantity:{$gt : 0}}).sort({ExpiryDate : 1});
+                if(itemsFromDB.length == 1) {
+                    if(itemsFromDB[0].Quantity < parseInt(itemQty)) {
+                        //return error
+                        return res.status(400).json({
+                            message :'Inavlid quantity sent from user'
+                        })
+                    } else {
+                        let qtyAfterDeduction = avlQty - parseInt(itemQty);
+                        await Inventories.findOneAndUpdate({Name:itemName, Quantity : {$gt : 0}}, {$set : {Quantity : qtyAfterDeduction}})
+                    }
+                } else if (itemsFromDB.length > 1) {
+                    let len = 0
+                    let qty = itemQty
+                    while(len < itemsFromDB.length && qty > 0) {
+                        console.log("Now qty is "+ qty)
+                        if(qty <= itemsFromDB[len].Quantity) {
+                            console.log("Enough for batch "+ itemsFromDB[len].Batch + " :: " +itemsFromDB[len].Quantity)
+                            itemsFromDB[len].Quantity = itemsFromDB[len].Quantity - qty;
+                            qty = 0
+                        } else {
+                            console.log("not enough for batch "+ itemsFromDB[len].Batch +" :: " +itemsFromDB[len].Quantity)
+                            qty = qty - parseInt(itemsFromDB[len].Quantity);
+                            itemsFromDB[len].Quantity = 0;
+                            console.log("Deducting required qty "+itemsFromDB[len].Quantity)
+                            console.log("Setting new qty "+ qty)
+                        }
+                        await itemsFromDB[len].save();
+                        len++;
+                    }
+                }
+            }
+        }catch(err){
+            return res.status(500).json({
+                message:'Error deducting stock'
+            })
         }
         let sale = await SalesData.create({
             Patient:Id,
@@ -156,7 +208,7 @@ module.exports.getBillById = async function(req, res){
                 bill
             })
         }else if(bill && !req.xhr){
-            return res.render('billTemplate',{bill, user:req.user,HospitalName})
+            return res.render('billTemplate',{bill, user:req.user,HospitalName,HospitalAdddress,regNo,logo})
         }
         else if(req.xhr && (!bill || bill == null)){
             return res.status(404).json({

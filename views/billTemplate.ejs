@@ -21,12 +21,12 @@
                 </div>
                 <div style="display: flex; justify-content: space-between;">
                     <div style="justify-content: left;">
-                        <img style="height: 60px;" src="/images/CJNH_Logo_Black.png" alt="CJNH Logo">
+                        <img style="height: 100px;" src="<%=logo%>" alt="CJNH Logo">
                     </div>
-                    <span style="margin-top: 1.5%;" class="heading">Dr. Chanda Jain Nursing Home</span>
+                    <span style="margin-top: 1.5%;" class="heading"><%=HospitalName%></span>
                     <img style="height: 50px; padding: 5px;" src="/images/doctorLogo.jpg" alt="Doctor-Logo">
                 </div>
-                <label class="sub-heading">323, Civil Ward No. 7, Damoh. (MP) Pin - 470661</label>
+                <label class="sub-heading"><%=HospitalAdddress%></label>
                 <div style="display: flex;justify-content: space-between;margin-bottom: 10px;">
                     <label for="">Date :
                         <%=bill.createdAt.toLocaleString()%></label>
@@ -53,10 +53,6 @@
                                 <tr>
                                     <th>Name</th>
                                     <td><%=bill.Name%></td>
-                                </tr>
-                                <tr>
-                                    <th>W/O</th>
-                                    <td><%=bill.Husband%></td>
                                 </tr>
                                 <tr>
                                     <th>Age</th>
@@ -127,6 +123,7 @@
                     </tbody>
                 </table>
             </div>
+            <!--
             <div style="display: flex; justify-content: space-between;">
                 <div style="font-size: small; margin-top:10px; text-align: left;">
                     <span><b>Bank Details:</b></span><br>
@@ -139,6 +136,7 @@
                     <span><i>Signature</i></span>
                 </div>
             </div>
+            -->
         </div>
 
         <script src="bill.js"></script>

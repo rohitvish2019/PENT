@@ -70,8 +70,8 @@
                             <th><i class="fa-solid fa-list-ol"></i> Quantity</th>
                             <th><i class="fa-solid fa-barcode"></i> Batch No.</th>
                             <th><i class="fa-regular fa-calendar"></i> Expiry Date</th>
-                            <th><i class="fa-regular fa-note-sticky"></i> Notes</th>
                             <th> Delete <i class="fa-solid fa-delete-left"></i></th>
+                            <th>Remaining Stock</th>
                         </tr>
                     </thead>
                     <tbody id="itemsTableBody">
@@ -91,25 +91,28 @@
                 <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm" >Item Name <span id="mdetails"> *</span></span>
                 </div>
-                <input style="text-transform: uppercase;" type="text" id="Item" class="form-control" list="medicineList" onchange="setPriceAndNotes()">
+                <input style="text-transform: uppercase;" type="text" id="Item" class="form-control" list="medicineList">
                 <datalist id="medicineList">
                     <%for(let i=0;i<stock.length;i++){%>
                         <option value="<%=stock[i]%>"><%=stock[i].Name%></option>
                     <%}%>
                 </datalist>
             </div>
+            <!--
             <div class="input-group input-group-sm mb-1">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Price <span id="mdetails"> *</span></span>
                 </div>
                 <input type="number" id="Price" class="form-control" >
             </div>
+            -->
             <div class="input-group input-group-sm mb-1">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Quantity</span>
                 </div>
-                <input type="number" id="Quantity" class="form-control" value="1">
+                <input type="number" id="Quantity" class="form-control" value="">
             </div>
+            <!--
             <div class="input-group input-group-sm mb-1">
                 <div class="input-group-prepend">
                   <span class="input-group-text" id="inputGroup-sizing-sm">Batch No.</span>
@@ -128,6 +131,7 @@
                 </div>
                 <input type="text" id="Notes" class="form-control">
             </div>
+            -->
             <span id="mdetails" style="font-size: small; font-style: italic;">* Mandatory Details</span>
             <div style="width: 100%; margin-top: 10%;">
                 <button style="width: 60%; margin-left: 21%; margin-right: 19%;" class="btn btn-success" onclick="addItems()">Add</button>
