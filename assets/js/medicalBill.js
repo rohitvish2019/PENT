@@ -44,6 +44,9 @@ function addItems() {
 }
 
 function addItemToUI(itemName, itemPrice, quantity, batch, expiry, notes, totalQnty, alertQty) {
+    if(notes == undefined) {
+        notes = ""
+    }
     console.log("Data received at function")
     let bgColor
     if(totalQnty - quantity <= alertQty) {

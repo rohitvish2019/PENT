@@ -131,7 +131,7 @@ module.exports.addSales = async function(req, res){
                             message :'Inavlid quantity sent from user'
                         })
                     } else {
-                        let qtyAfterDeduction = avlQty - parseInt(itemQty);
+                        let qtyAfterDeduction = itemsFromDB[0].Quantity - parseInt(itemQty);
                         await Inventories.findOneAndUpdate({Name:itemName, Quantity : {$gt : 0}}, {$set : {Quantity : qtyAfterDeduction}})
                     }
                 } else if (itemsFromDB.length > 1) {
@@ -156,6 +156,7 @@ module.exports.addSales = async function(req, res){
                 }
             }
         }catch(err){
+            console.log(err)
             return res.status(500).json({
                 message:'Error deducting stock'
             })
