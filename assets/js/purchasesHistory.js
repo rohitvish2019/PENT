@@ -26,8 +26,9 @@ function showPurchaseHistory(purchases){
     container.innerHTML = ``;
     if(purchases.length < 1){
         let rowItem = document.createElement('tr');
-        rowItem.innerHTML=`<td colspan = 9 >No data found</td>`
+        rowItem.innerHTML=`<td colspan = 11 >No data found</td>`
         container.appendChild(rowItem);
+        document.getElementById('total').innerText='Total : 0'
         return;
     }
     let total = 0;

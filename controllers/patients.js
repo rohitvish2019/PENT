@@ -78,7 +78,8 @@ module.exports.addVisitAndPatient = async function(req, res){
             Doctor:req.body.Doctor,
             Visit_date:req.body.AppointmentDate,
             Outside_docs:req.body.Outside_docs,
-            PaymentType:req.body.paymentType
+            PaymentType:req.body.paymentType,
+            weight:req.body.weight
         });
         let updatedReportNo = +tracker.AppointmentNumber + 1
         await patient.updateOne({$push:{Visits:visit._id}});
@@ -265,7 +266,8 @@ module.exports.bookVisitToday = async function(req, res){
             Doctor:req.body.Doctor,
             Visit_date:req.body.date,
             Outside_docs:req.body.Outside_docs,
-            PaymentType:req.body.paymentType
+            PaymentType:req.body.paymentType,
+            weight:req.body.patient.weight
         });
         patient.Visits.push(visit._id);
         await patient.save();

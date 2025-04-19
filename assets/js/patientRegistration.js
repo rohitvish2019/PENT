@@ -1,4 +1,4 @@
-let inputData = ['Name', 'Gender', 'Age', 'Address', 'Mobile', 'Fees', 'Doctor','AppointmentDate','IdProof','paymentType'];
+let inputData = ['Name', 'Gender', 'Age', 'Address', 'Mobile', 'Fees', 'Doctor','AppointmentDate','weight','paymentType'];
 
 function registerPatient() {
     document.getElementById('register').setAttribute('disabled','true');
@@ -114,7 +114,8 @@ function bookAppointmentWithId() {
     let AppointmentDate = document.getElementById('AppointmentDate').value;
     let paymentType = document.getElementById('paymentType').value;
     let Doctor = document.getElementById('Doctor').value
-    IdProof = document.getElementById('IdProof').value
+    let weight = document.getElementById('weight').value
+    //IdProof = document.getElementById('IdProof').value
     let patient = new Object();
     if (!fees || fees == '') {
         new Noty({
@@ -169,7 +170,7 @@ function bookAppointmentWithId() {
             patient,
             Doctor,
             paymentType,
-            IdProof,
+            
         },
         success: function (data) {
             new Noty({
