@@ -14,25 +14,22 @@
         
         <div id="header">
             <div style="margin-bottom: 1%; border-bottom: 1px dotted black; text-align: end;">
-                <span style="font-size: small;">Reg No. NH/9255/JUN-2023</span>
+                <span style="font-size: small;">Reg No : <%=HospitalRegNo%></span>
             </div>
             <label id="Reciept" style="font-size: larger;"><b>· Reciept ·</b></label>
 
             <div style="display: flex; justify-content: space-between;">
-                <img style="height: 70px;" src="/images/CJNH_Logo_Black.png" alt="CJNH Logo">
-                <h1>Dr. Chanda Jain Nursing Home</h1>
-                <!--
-                <img style="height: 60px; " src="/images/doctorLogo.jpg" alt="Doctor-Logo">
-                -->
+                <img style="height: 100px;" src="/images/PENT_logo.png" alt="PENT Logo">
+                <h1><%=HospitalName%></h1>
                 <%=visit.DischargeBillNumber%>
             </div>
             <div style="padding: 2px;margin-top: 0;">
-                <label class="sub-heading">323, Civil Ward No. 7, Damoh (MP). Ph. 222441 (NH), Mob: 6263169195</label>
+                <label class="sub-heading"><%=HospitalAddress%> <%=HospitalAddress2%></label>
             </div>
         </div>
     </div>
     <div class=" content">
-        Received with Thanks from <%=visit.Patient.Name%> W/O <%=visit.Patient.Husband%> Rs. <label id="rs"></label>. In words <label id="result"></label>.
+        Rs. <label id="rs"></label>. In words (<label id="result"></label>) received with Thanks from <%=visit.Patient.Name%>.
     </div>
     <div class="content">
         <span>Course by Cash / QR Code in Part / Full

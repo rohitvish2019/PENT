@@ -20,7 +20,7 @@
   .bg td{
     text-align: left;
     vertical-align: middle !important;
-    font-size: small;
+    font-size: medium;
     font-weight: 500;
     border-bottom:1px solid black;
   }
@@ -72,3 +72,8 @@
   left: 47%;
   z-index: 10;
 }
+
+td, input, select{
+  font-size: 15px !important;
+}
+

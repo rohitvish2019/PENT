@@ -46,7 +46,7 @@ function openMedicine() {
     document.getElementById('profile').style.display = 'none'
     document.getElementById('dashboard').style.display = 'none'
     document.getElementById('Medicine').style.display = 'block'
-    getMedicineData()
+    getOperationsData()
 }
 
 function getDashboardData() {
@@ -126,6 +126,27 @@ function getUsers() {
 
 function getServices() {
     $.ajax({
+        url: '/operation/getAll',
+        type:'Get',
+        success: function(data){
+            let container = document.getElementById('serviceType');
+            container.innerHTML=
+            `
+                <option selected value="">--Select Type--</option>
+                <option value="RoomCharges">Room Charges</option>
+            `
+            for(let i=0;i<data.operationsList.length;i++){
+                let item = document.createElement('option');
+                item.innerText=data.operationsList[i].Name
+                item.value=data.operationsList[i].Name
+                container.appendChild(item)
+            }
+        },
+        error: function(err){
+
+        }
+    })
+    $.ajax({
         url: '/reports/getAllServices',
         type: 'GET',
         success: function (data) {
@@ -138,20 +159,16 @@ function getServices() {
                 rowItem.innerHTML =
                     `
                     <td style="text-align:center">${i+1}</td>
-                        <th>${service.Name}</th>
-                        <td style="width:6.5%"><b></b><input id="${service._id}price" type="text" onchange="saveSettings('${service._id}')" value="₹${service.Price}"></td>
-                        <td style="text-align:center">${service.Category == undefined ? '' : service.Category}</td>
                         <td style="text-align:center">${service.Type == undefined ? '' : service.Type}</td>
-                        <td style="text-align:center">${service.Notes == undefined ? '' : service.Notes}</td>
-                        <td style="text-align:center">${service.RefRangeMin == undefined ? '' : service.RefRangeMin}</td>
-                        <td style="text-align:center">${service.RefRangeMax == undefined ? '' : service.RefRangeMax}</td>
-                        <td style="text-align:center">${service.RefRangeUnit == undefined ? '' : service.RefRangeUnit}</td>
+                        <td>${service.Name}</td>
+                        <td style="width:6.5%"><b></b><input id="${service._id}price" type="text" onchange="saveSettings('${service._id}')" value="₹${service.Price}"></td>
+                        
                         <td style="text-align:center">
 							<div onclick = "deleteService('${service._id}')" >
 								<label id="dustbinLight${service._id}" onmouseover = "highlight('${service._id}')" onmouseout = "unhighlight('${service._id}')" ><i class="fa-solid fa-trash-can"></i></label>
 								<label style="display:none;" id="dustbinDark${service._id}" onmouseover = "highlight('${service._id}')" onmouseout = "unhighlight('${service._id}')" ><i class="fa-regular fa-trash-can"></i></label>
                             </div>
-					</td>
+					    </td>
                     `
                 container.appendChild(rowItem)
             }
@@ -257,23 +274,18 @@ function saveSettings(id) {
 
 function AddNewService() {
     let Name = document.getElementById('serviceName').value
-    let Category = document.getElementById('serviceCategory').value
+    //let Category = document.getElementById('serviceCategory').value
     let Price = document.getElementById('servicePrice').value
-    let Notes = document.getElementById('serviceNotes').value
-    let RefRangeMin = document.getElementById('rrmin').value
-    let RefRangeMax = document.getElementById('rrmax').value
-    let RefRangeUnit = document.getElementById('rrunit').value
+    //let Notes = document.getElementById('serviceNotes').value
+    //let RefRangeMin = document.getElementById('rrmin').value
+    //let RefRangeMax = document.getElementById('rrmax').value
+    //let RefRangeUnit = document.getElementById('rrunit').value
     let Type = document.getElementById('serviceType').value
     $.ajax({
         url: '/reports/saveService',
         data: {
             Name,
-            Category,
             Price,
-            RefRangeMin,
-            RefRangeMax,
-            RefRangeUnit,
-            Notes,
             Type
         },
         type: 'POST',
@@ -287,12 +299,12 @@ function AddNewService() {
             }).show();
 
             document.getElementById('serviceName').value = ''
-            document.getElementById('serviceCategory').value = ''
+            //document.getElementById('serviceCategory').value = ''
             document.getElementById('servicePrice').value = ''
-            document.getElementById('serviceNotes').value = ''
-            document.getElementById('rrmin').value = ''
-            document.getElementById('rrmax').value = ''
-            document.getElementById('rrunit').value = ''
+            //document.getElementById('serviceNotes').value = ''
+            //document.getElementById('rrmin').value = ''
+            //document.getElementById('rrmax').value = ''
+            //document.getElementById('rrunit').value = ''
             document.getElementById('serviceType').value = ''
 
             closepopup()
@@ -365,30 +377,25 @@ function getMyProfile() {
     })
 }
 
-function getMedicineData() {
+function getOperationsData() {
     $.ajax({
-        url: '/meds/getAll',
+        url: '/operation/getAll',
         type: 'GET',
         success: function (data) {
-            console.log(data.medsList);
-            let container = document.getElementById('MedicineListTable');
+            console.log(data.operationsList);
+            let container = document.getElementById('OperationsListTable');
             container.innerHTML = ``;
-            for (let i = 0; i < data.medsList.length; i++) {
+            for (let i = 0; i < data.operationsList.length; i++) {
                 let item = document.createElement('tr');
                 item.innerHTML =
                     `
-                    <tr id="data.medsList[i]._id">
-                        <td style="text-align:center; ">${i+1}</td>         
-                        <td style="padding-left:10px; font-weight:bold;">${data.medsList[i].Name}</td>
-                        <td style="padding-left:10px; ">${data.medsList[i].Composition}</td>
-                        <td style="text-align:center">${data.medsList[i].Dosage}</td>
-                        <td style="text-align:center">${data.medsList[i].Category}</td>
-                        <td style="text-align:center">${data.medsList[i].Duration}</td>
-                        <td style="text-align:center">${data.medsList[i].Type == 'DischargeMed' ? "Yes":"No"}</td>
+                    <tr id="data.operationsList[i]._id" >
+                        <td style="text-align:center">${i+1}</td>       
+                        <td style="padding-left:10px; font-weight:bold;text-align:center">${data.operationsList[i].Name}</td>
                         <td style="text-align:center">
-                            <div onclick = "deleteMedicine('${data.medsList[i]._id}')">
-                            <label id="dustbinLight${data.medsList[i]._id}" onmouseover = "highlight('${data.medsList[i]._id}')" onmouseout = "unhighlight('${data.medsList[i]._id}')" ><i class="fa-solid fa-trash-can"></i></label>
-							<label style="display:none;" id="dustbinDark${data.medsList[i]._id}" onmouseover = "highlight('${data.medsList[i]._id}')" onmouseout = "unhighlight('${data.medsList[i]._id}')" ><i class="fa-regular fa-trash-can"></i></label>
+                            <div onclick = "deleteMedicine('${data.operationsList[i]._id}')">
+                            <label id="dustbinLight${data.operationsList[i]._id}" onmouseover = "highlight('${data.operationsList[i]._id}')" onmouseout = "unhighlight('${data.operationsList[i]._id}')" ><i class="fa-solid fa-trash-can"></i></label>
+							<label style="display:none;" id="dustbinDark${data.operationsList[i]._id}" onmouseover = "highlight('${data.operationsList[i]._id}')" onmouseout = "unhighlight('${data.operationsList[i]._id}')" ><i class="fa-regular fa-trash-can"></i></label>
                             </div>
                         </td>
                     </tr>
@@ -401,29 +408,12 @@ function getMedicineData() {
 }
 
 
-function AddNewMedicine() {
-    console.log('Adding meds')
-    let Name = document.getElementById('MedicineName').value;
-    let Composition = document.getElementById('Composition').value;
-    let Dosage = document.getElementById('Dosage').value;
-    let Duration = document.getElementById('Duration').value;
-    let Type = document.getElementById('medType').value
-    let Category = document.getElementById('Category').value
-    
+function AddNewOperation() {
+    let Name = document.getElementById('operationName').value;
     if (!Name || Name == '') {
         new Noty({
             theme: 'relax',
-            text: 'Medicine Name is mandatory',
-            type: 'error',
-            layout: 'topRight',
-            timeout: 1500
-        }).show();
-        return
-    }
-    if (!Dosage || Dosage == '') {
-        new Noty({
-            theme: 'relax',
-            text: 'Medicine Dosage is mandatory',
+            text: 'Operation Name is mandatory',
             type: 'error',
             layout: 'topRight',
             timeout: 1500
@@ -432,37 +422,28 @@ function AddNewMedicine() {
     }
 
     $.ajax({
-        url: '/meds/addNew',
+        url: '/operation/addNew',
         data: {
             Name,
-            Composition,
-            Dosage,
-            Duration,
-            Type,
-            Category
         },
         type: 'POST',
         success: function (data) {
             closepopup()
-            getMedicineData()
+            getOperationsData()
             new Noty({
                 theme: 'relax',
-                text: 'New Medicine record saved successfully',
+                text: 'New Operation Added',
                 type: 'success',
                 layout: 'topRight',
                 timeout: 1500
             }).show();
-            document.getElementById('MedicineName').value = ''
-            document.getElementById('Composition').value = ''
-            document.getElementById('Dosage').value = ''
-            document.getElementById('Duration').value = ''
-            document.getElementById('Category').value = ''
+            document.getElementById('operationName').value = ''
             return
         },
         error: function (data) {
             new Noty({
                 theme: 'relax',
-                text: 'Unable to add Medicine',
+                text: 'Unable to add operation',
                 type: 'error',
                 layout: 'topRight',
                 timeout: 1500
@@ -474,26 +455,26 @@ function AddNewMedicine() {
 }
 
 function deleteMedicine(id){
-    let confirmation = window.confirm("Medicine will be deleted permanently, Please Confirm !")
+    let confirmation = window.confirm("Operation will be deleted permanently, Please Confirm !")
     if (confirmation) {
         $.ajax({
-            url: '/meds/deleteMedicine/' + id,
+            url: '/operation/delete/' + id,
             type: 'Delete',
             success: function (data) {
                 new Noty({
                     theme: 'relax',
-                    text: 'Medicine deleted successfully',
+                    text: 'Operation deleted successfully',
                     type: 'success',
                     layout: 'topRight',
                     timeout: 1500
                 }).show();
-                getMedicineData();
+                getOperationsData();
                 return
             },
             error: function (err) {
                 new Noty({
                     theme: 'relax',
-                    text: 'Unable to Delete Medicine',
+                    text: 'Unable to Delete Operation',
                     type: 'error',
                     layout: 'topRight',
                     timeout: 1500

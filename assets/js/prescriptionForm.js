@@ -22,7 +22,7 @@ function printPrescription() {
                 items[i].style.borderLeft = 'none'
                 items[i].style.borderBottom = '1px solid black'
             }
-            document.getElementById('OtherAdvice').style.border='none'
+            //document.getElementById('OtherAdvice').style.border='none'
             document.getElementById('searchBox').style.display = 'none'
             document.getElementById('AddMed').style.display = 'none'
             document.getElementById('fileInputs').style.display='none'
@@ -51,7 +51,9 @@ function getVisitdata() {
                 let keys = Object.keys(data.visitData)
                 changes = data.visitData
                 for (let i = 0; i < keys.length; i++) {
-                    document.getElementById(keys[i]).value = data.visitData[keys[i]]
+                    if(document.getElementById(keys[i]) != null){
+                        document.getElementById(keys[i]).value = data.visitData[keys[i]]
+                    }
                 }
                 let container = document.getElementById('prescribedMeds');
                 for (let i = 0; i < data.Prescriptions.length; i++) {
@@ -75,7 +77,7 @@ function getVisitdata() {
                     container.appendChild(item);
                     prescribedMeds.push(data.Prescriptions[i])
                 }
-                calculateFullGAA()
+                //calculateFullGAA()
             }
         },
         error: function (err) {
@@ -85,7 +87,10 @@ function getVisitdata() {
 }
 
 function addChanges(id) {
-    changes[id] = document.getElementById(id).value
+    if(document.getElementById(id) != null){
+        changes[id] = document.getElementById(id).value
+    }
+    
 }
 
 function addMed() {
@@ -321,7 +326,7 @@ function countWeeksAndDays() {
 }
 
 */
-
+/*
 function calculateFullGAA() {
     let EDD = document.getElementById('cedddate').value
     // Validate EDD format (YYYY-MM-DD)
@@ -373,10 +378,10 @@ function calculateFullGAA() {
 function updateEdd(){
     document.getElementById('edddate').value = addDaysToDate(document.getElementById('lmpdate').value, 280);
 }
-
+*/
 function initilizeApp(){
     getVisitdata()
-    setTimeout(calculateFullGAA, 1000);
+    //setTimeout(calculateFullGAA, 1000);
     addChanges('cedddate')
     addChanges('edddate')
     addChanges('lmpdate')

@@ -580,3 +580,11 @@ module.exports.getBirthHistoryById = async function(req, res){
         })
     }
 }
+
+module.exports.consentForm = function(req, res) {
+    try {
+        return res.render('consentForm')
+    } catch(err) {
+        return res.render('Error_404')
+    }
+}

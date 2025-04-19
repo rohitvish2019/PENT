@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admission Card</title>
+    <link rel="stylesheet" href="/css/admissioncard.css">
+</head>
+<body>
+    <div class="container">
+        <div style="display: flex;justify-content: space-between;padding: 10px;">
+            <div class="logo">
+                <img src="/images/PENT_Logo.png" alt="Pooja ENT Clinic, Logo" height="100%" width="100%">
+            </div>
+            <div style="text-align: center;">
+                <h1><%=HospitalName%></h1>
+                <div><%=HospitalAddress%></div>
+                <div><%=HospitalAddress2%></div>
+            </div>
+            <div>
+                <h4>Reg : <%=HospitalRegNo%></h4>
+            </div>
+        </div>
+        <h2 style="text-align: center;background-color: #e4e1e1;">ADMISSION CARD</h2>
+        <div style="display: flex;justify-content: space-between;">
+            <div class="left patient-data">
+                 <div class="patient-item">
+                    <label>Name : </label>
+                    <span><%=visit.Patient.Name%></span>
+                 </div>
+                 <div class="patient-item">
+                    <label>Age : </label>
+                    <span><%=visit.Patient.Age%></span>
+                 </div>
+                 <div class="patient-item">
+                    <label>Sex : </label>
+                    <span><%=visit.Patient.Gender%></span>
+                 </div>
+                 
+                 <div class="patient-item">
+                    <label>Address : </label>
+                    <span><%=visit.Patient.Address%></span>
+                 </div>
+            </div>
+            <div class="right patient-data">
+                <div class="patient-item">
+                    <label>Patient Id : </label>
+                    <span><%=visit.Patient.Id%></span>
+                </div>
+                <div class="patient-item">
+                    <label>IPD Number : </label>
+                    <span><%=visit.IPDNumber%></span>
+                </div>
+                <div class="patient-item">
+                    <label>Brought By : </label>
+                    <span><%=visit.BroughtBy%></span>
+                </div>
+                <div class="patient-item">
+                    <label>Admission Date : </label>
+                    <span><%=new Date(visit.AdmissionDate).toLocaleDateString("en-IN",{month:'2-digit',day:'2-digit', year:'numeric'})%></span>
+                 </div>
+                <div class="patient-item">
+                    <label>Admission Time : </label>
+                    <% let dateTime = visit.AdmissionDate + " "+visit.AdmissionTime%>
+                    <span><%= new Date(dateTime).toLocaleString("en-IN", {hour:'2-digit',minute:'2-digit'})%></span>
+                 </div>
+                
+            </div>
+        </div>
+        <div>
+            <label style="font-size: 18px;font-weight: bold;">Complaint : -</label>
+            <textarea cols="93" rows="6" name="" id=""></textarea>
+        </div>
+        <div>
+            <label style="font-size: 18px;font-weight: bold;margin-top: 10px;">History : -</label>
+            <textarea cols="93" rows="6" name="" id=""></textarea>
+        </div>
+        <div class="consent">
+            <p >
+                मैं अपने रोगी <b style="font-size: 20px;">&nbsp;&nbsp;<%=visit.Patient.Name%>&nbsp;&nbsp;</b> को अपनी मर्जी से इस अस्पताल में भर्ती करवाना चाहता हूँ। इलाज के दौरान मेरे मरीज को दवायें अथवा इंजेक्शन दिये जायेंगे एवं कई जांच या आवश्यक उपचार की विधियाँ की जायेगी। कभी-कभी उपरोक्त विधियों का अप्रत्याशित कुप्रभाव हो सकता है, जिससे मरीज की जान को भी खतरा हो सकता है, जिसकी जिम्मेदारी मेरी होगी। अस्पताल में उपलब्ध सुबिधाओं के बारे में मुझे बता दिय गया है। <br>मुझे अस्पताल के नियमों से अवगत करा दिया गया है जिसका मैं पालन करूंगा ।
+            </p>
+        </div>
+        <div style="font-size: 20px;display: flex;justify-content: space-between;">
+            <div class="consent-items">
+                <label  for="">Witness 1</label>
+                <label for="">Name :</label>
+                <label for="">Signature</label>
+            </div>
+            <div class="consent-items">
+                <label for="">Witness 2</label>
+                <label for="">Name :</label>
+                <label for="">Signature</label>
+            </div>
+            
+            <div class="consent-items">
+                <label for="">Witness 3</label>
+                <label for="">Name : </label>
+                <label for="">Signature</label>
+            </div>
+        </div>
+    </div>
+</body>
+<div style="display: flex;justify-content: center;width: 730px;">
+    <button id="printButton" onclick="printMe()" style="width: 30%;background-color: #17af1e;font-size: 20px;margin-top: 10px;color: white;">Print</button>
+</div>
+<script>
+    function printMe (){
+        document.getElementById('printButton').style.display='none'
+        window.print()
+    }
+</script>
+</html>

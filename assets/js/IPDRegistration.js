@@ -1,17 +1,22 @@
-let inputData = ['Name','Gender','Age','Address','AdmissionDate','Doctor','Husband','Mobile','Reason','AdmissionTime', 'IdProof'];
+let inputData = ['Name','Gender','Age','Address','AdmissionDate','Doctor','Mobile','Reason','AdmissionTime', 'IdProof','BroughtBy'];
 function admitPatient(){
     let data = {}
     for(let i=0;i<inputData.length;i++){
         data[inputData[i]] = document.getElementById(inputData[i]).value;
         if((document.getElementById(inputData[i]).value == null || document.getElementById(inputData[i]).value == '' )){
-            new Noty({
-                theme: 'relax',
-                text: inputData[i] + ' is mandatory',
-                type: 'error',
-                layout: 'topRight',
-                timeout: 1500
-            }).show();
-            return;
+            if(inputData[i] == 'IdProof'){
+                //
+            } else {
+                new Noty({
+                    theme: 'relax',
+                    text: inputData[i] + ' is mandatory',
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
+                return;
+            }
+            
         }
     }
     let id = document.getElementById('patientID').value;

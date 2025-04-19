@@ -1,6 +1,7 @@
 const mongoose = require('mongoose');
 const Patient = require('./patients');
 const Visits = new mongoose.Schema({
+    IPDNumber:String,
     Patient:{
         type:mongoose.Schema.Types.ObjectId,
         ref:'Patient'

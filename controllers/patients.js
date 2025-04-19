@@ -12,6 +12,9 @@ const Patient = require('../models/patients');
 const PropertiesReader = require('properties-reader');
 const properties = PropertiesReader('./configs/hospital.properties');
 const HospitalName = properties.get('HospitalName');
+const HospitalAddress2 = properties.get('HospitalAddress2')
+const HospitalAddress = properties.get('HospitalAddress');
+const HospitalRegNo = properties.get('HospitalRegNo');
 module.exports.patientRegistartionHome = function(req, res){
     try{
         return res.render('patientRegistration',{user:req.user, HospitalName})
@@ -365,7 +368,7 @@ module.exports.admitPatient = async function(req, res){
             patient = await PatientData.create(req.body.data);
             newId = Number(id.patientId) + 1
             newIPDNumber = Number(id.IPDNumber) + 1;
-            await patient.updateOne({IPDNumber:newIPDNumber})
+            //await patient.updateOne({IPDNumber:newIPDNumber})
             await id.updateOne({patientId:newId, IPDNumber: newIPDNumber})
         }
         let visit = await VisitData.create({
@@ -377,7 +380,8 @@ module.exports.admitPatient = async function(req, res){
                 AdmissionDate:req.body.data.AdmissionDate,
                 AdmissionTime:req.body.data.AdmissionTime,
                 Reason:req.body.data.Reason,
-                BroughtBy:req.body.data.BroughtBy
+                BroughtBy:req.body.data.BroughtBy,
+                IPDNumber:"IPD"+newIPDNumber
             })
         await patient.updateOne({$push:{Visits:visit._id}, Id:newId});
         patient.Visits.push(visit._id);
@@ -450,13 +454,7 @@ module.exports.saveRoomType = async function(req, res){
     
 module.exports.AdmissionBill = async function(req, res){
     try{
-        /*
-        
-        let Items = await ServicesData.find({Type:'AdmissionBill'});
-        let daysCount = get24HourTimeframes(visit.AdmissionDate, visit.AdmissionTime, visit.DischargeDate, visit.DischargeTime);
-        let room = await ServicesData.findOne({Name:visit.RoomType, Type:'RoomCharges'});
-        return res.render('AdmissionBill',{bill, Items, roomCharges:room.Price,daysCount, visit_id:visit._id, isDischarged:visit.isDischarged, user:req.user});
-        */
+
         let visit = await VisitData.findById(req.params.visitId).populate('Patient');
         let bill = visit.Patient
        return res.render('AdmissionBill', {bill,visit_id:visit._id,user:req.user,HospitalName})
@@ -469,7 +467,7 @@ module.exports.AdmissionBill = async function(req, res){
 module.exports.getAdmissionBillItems = async function(req, res){
     try{
         let visit = await VisitData.findById(req.query.visitid).populate('Patient');
-        let Items = await ServicesData.find({Category:visit.DeliveryType, Type:'AdmissionBill'},'Name Price').sort('createdAt');
+        let Items = await ServicesData.find({Type:visit.DeliveryType},'Name Price').sort('createdAt');
         let daysCount = get24HourTimeframes(visit.AdmissionDate, visit.AdmissionTime, visit.DischargeDate, visit.DischargeTime);
         let room = await ServicesData.findOne({Name:visit.RoomType, Type:'RoomCharges'});
         let advancedPayments = visit.advancedPayments;
@@ -827,13 +825,22 @@ module.exports.dischargeReceipt = async function(req, res){
     try{
         let visit = await VisitData.findById(req.params.id,'Patient DischargeBillNumber FinalBillAmount AdmissionDate DischargeDate').populate('Patient');
         let RecieptNo = await Tracker.findOne({});
-        return res.render('paymentReceiptTemplate', {visit, user:req.user,RecieptNo:RecieptNo.RecieptNo,HospitalName})
+        return res.render('paymentReceiptTemplate', {visit, user:req.user,RecieptNo:RecieptNo.RecieptNo,HospitalName,HospitalAddress,HospitalRegNo, HospitalAddress2})
     }catch(err){
         console.log(err);
         return res.render('Error_500')
     }
 }
 
+module.exports.getAdmissionCard = async function(req, res){
+    try{
+        let visit = await VisitData.findById(req.params.id).populate('Patient');
+        console.log(visit);
+        return res.render('AdmissionCard',{HospitalName, HospitalAddress, HospitalAddress2, HospitalRegNo, visit})
+    }catch(err){
+        return res.render('Error_500')
+    }
+}
 module.exports.saveDeliveryType = async function(req, res){
     try{
         await VisitData.findByIdAndUpdate(req.body.visitId,{DeliveryType:req.body.DeliveryType});

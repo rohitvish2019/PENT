@@ -26,8 +26,9 @@
                     <span style="margin-top: 1.5%;" class="heading"><%=HospitalName%></span>
                     <img style="height: 50px; padding: 5px;" src="/images/doctorLogo.jpg" alt="Doctor-Logo">
                 </div>
-                <label class="sub-heading"><%=HospitalAdddress%></label>
-                <div style="display: flex;justify-content: space-between;margin-bottom: 10px;">
+                <label class="sub-heading"><%=HospitalAddress%></label><br><br>
+                <label class="sub-heading"><%=HospitalAddress2%></label>
+                <div style="display: flex;justify-content: space-between;margin-bottom: 10px;margin-top: 20px;">
                     <label for="">Date :
                         <%=bill.createdAt.toLocaleString()%></label>
                        
@@ -93,7 +94,7 @@
                             <th>Price</th>
                             <th>Quantity</th>
                             <th>Total</th>
-                            <th>Notes</th>
+                            
                         </tr>
                     </thead>
                     <tbody id="billingDetails">
@@ -109,16 +110,16 @@
                             <td>₹<%=item[2]%></td>
                             <td><%=item[1]%></td>
                             <td><%=parseInt(item[1]) * parseInt(item[2])%></td>
-                            <td><%=item[3]%></td>
+                            
                         </tr>
                         <%}%>
                             
                         <%}%>
                         <tr>
+                            <td style="text-align: left;"  colspan="3">Cash : ₹<%=bill.CashPaid%>, Online : ₹ <%=bill.OnlinePaid%></td>
+                            <td ><b>Grand Total</b></td>
+                            <td><b>₹ <%=total%></b></td>
                             
-                            <td style="text-align: right;" colspan="4"><b>Grand Total</b></td>
-                            <td><b>₹<%=total%></b></td>
-                            <td>Cash : ₹<%=bill.CashPaid%>, Online : ₹<%=bill.OnlinePaid%></td>
                         </tr>
                     </tbody>
                 </table>

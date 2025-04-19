@@ -28,5 +28,6 @@ Router.post('/cancel', passport.checkAuthentication, reportsController.cancelRep
 Router.post('/birthCertificate/cancel/', passport.checkAuthentication, reportsController.cancelBirthReport);
 Router.get('/birthCertificates', passport.checkAuthentication, reportsController.birthCertificateHistory)
 
+Router.get('/consent', passport.checkAuthentication, reportsController.consentForm)
 
 module.exports = Router;

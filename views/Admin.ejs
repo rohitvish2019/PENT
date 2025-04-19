@@ -1,52 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
-        integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
-        integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
-        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://kit.fontawesome.com/f419dc6d9b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    <link rel="stylesheet" href="/css/admin.css">
-</head>
-
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Admin Dashboard</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.css"
+            integrity="sha512-0p3K0H3S6Q4bEWZ/WmC94Tgit2ular2/n0ESdfEX8l172YyQj8re1Wu9s/HT9T/T2osUw5Gx/6pAZNk3UKbESw=="
+            crossorigin="anonymous" referrerpolicy="no-referrer" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/noty/3.1.4/noty.min.js"
+            integrity="sha512-lOrm9FgT1LKOJRUXF3tp6QaMorJftUjowOWiDcG5GFZ/q7ukof19V0HKx/GWzXCdt9zYju3/KhBNdCLzK8b90Q=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://kit.fontawesome.com/f419dc6d9b.js" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+        <link rel="stylesheet" href="/css/admin.css">
+    </head>
 <body>
     <header>
         <%-include('_header')%>
     </header>
     <div class="d-flex" id="wrapper">
-        <!-- Sidebar -->
         <div class="bg-dark border-right sidebar" id="sidebar-wrapper">
             <div class="list-group list-group-flush">
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white"
-                    onclick="openDashboard()"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openUsers()"><i
-                        class="fa-solid fa-hospital-user"></i> Users</a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white"
-                    onclick="openSettings()"><i class="fas fa-cogs"></i> Service & Charges</a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white"
-                    onclick="openMedicine()"><i class="fa-solid fa-prescription-bottle-medical"></i> Medicines</a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openProfile()"><i
-                        class="fas fa-sign-out-alt"></i> My Profile</a>
-
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openDashboard()"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openUsers()"><i class="fa-solid fa-hospital-user"></i> Users</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openSettings()"><i class="fas fa-cogs"></i> Service & Charges</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openMedicine()"><i class="fa-solid fa-prescription-bottle-medical"></i> Operations</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openProfile()"><i class="fas fa-sign-out-alt"></i> My Profile</a>
             </div>
         </div>
 
-        <!-- Page Content -->
-
-        <!-- Dashboard Tab-->
+        
         <div id="page-content-wrapper">
+            <!-- Dashboard Tab-->
             <div id="dashboard" class="dashboard container-fluid">
                 <div class="mb-3">
-                <Label style="font-size: larger;">Welcome,</label>
-                <label id="proName" style="font-size: large; font-weight: bold;"></label>
+                    <label style="font-size: larger;">Welcome,</label>
+                    <label id="proName" style="font-size: large; font-weight: bold;"></label>
                 </div>
                 <div class="row">
                     <div class="col-lg-3 col-md-6 mb-4">
@@ -57,6 +47,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card bg-success text-white shadow">
                             <div class="card-body">
@@ -65,6 +56,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card bg-danger text-white shadow">
                             <div class="card-body">
@@ -73,6 +65,7 @@
                             </div>
                         </div>
                     </div>
+
                     <div class="col-lg-3 col-md-6 mb-4">
                         <div class="card bg-info text-white shadow">
                             <div class="card-body">
@@ -81,88 +74,79 @@
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
-
-            <!-- Dashboard END-->
-
-            <!-- USER TAB-->
+             <!-- Dashboard END-->
+             <!-- User tab -->
             <div id="users" class="users" style="text-align: center; padding: 10px; height: 75vh;">
-                <div style="position: absolute; margin-left: 73%">
-                <div style="text-align: end;">
-                    <button style="padding: 8px;" class="btn btn-primary" onclick="popupuserwindow()">Add New
-                        User</button>
-                </div>
-                <div id="addnewuser" class="card text-center">
-
-                    <div style="margin: 1%; text-align: right;">
-                        <i onclick="closepopup()" style="align-items: end;"
-                            class="fa-regular fa-circle-xmark fa-2x"></i>
+                <div style="position: absolute; margin-left: 15px;width: 75%;">
+                    <div style="text-align: end;">
+                        <button style="padding: 8px;" class="btn btn-primary" onclick="popupuserwindow()">Add New User</button>
                     </div>
-                    <h4>Add New User</h4>
-                    <div class="container">
-
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="FullName" placeholder="name@example.com">
-                            <label for="Name"> Name <span>*</span></label>
+                    <div id="addnewuser" class="card text-center">
+                        <div style="margin: 1%; text-align: right;">
+                            <i onclick="closepopup()" style="align-items: end;" class="fa-regular fa-circle-xmark fa-2x"></i>
+                        </div>
+                        <h4>Add New User</h4>
+                        <div class="container">
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="FullName" placeholder="name@example.com">
+                                <label for="Name"> Name <span>*</span></label>
+                            </div>
+    
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="Mobile" placeholder="name@example.com">
+                                <label for="Name">Mobile <span>*</span></label>
+                            </div>
+    
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="email" placeholder="name@example.com">
+                                <label for="Name"> Username <span>*</span> <i>Only english characters and number are
+                                        allowed</i> </label>
+                            </div>
+    
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="Password" placeholder="name@example.com">
+                                <label for="Name"> Password <span>*</span></label>
+                            </div>
+                            <div class="form-floating">
+                                <select class="form-control" name="" id="Role">
+                                    <option selected value="">--Select Role--</option>
+                                    <option value="Admin">Admin</option>
+                                    <option value="Staff">Staff</option>
+                                </select>
+                                <label for="Name"> Role <span>*</span></label>
+                            </div>
+                            <button class="btn" style="margin: 2%; padding: 5px; width: 40% !important; background-color: #025E73 ;" onclick="AddNewUser()"><i class="fa-solid fa-file-circle-plus"></i> Add User</button>
                         </div>
 
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="Mobile" placeholder="name@example.com">
-                            <label for="Name">Mobile <span>*</span></label>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="email" placeholder="name@example.com">
-                            <label for="Name"> Username <span>*</span> <i>Only english characters and number are
-                                    allowed</i> </label>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="Password" placeholder="name@example.com">
-                            <label for="Name"> Password <span>*</span></label>
-                        </div>
-                        <div class="form-floating">
-
-
-                            <select class="form-control" name="" id="Role">
-                                <option selected value="">--Select Role--</option>
-                                <option value="Admin">Admin</option>
-                                <option value="Staff">Staff</option>
-                            </select>
-                            <label for="Name"> Role <span>*</span></label>
+                        <div class="table-body" style="margin-top: 5%; width: 100%; overflow-y: scroll; ">
+                            <table class="table-bordered table-striped">
+                                <thead>
+                                    <tr class="bgusertable">
+                                        <th>Username</th>
+                                        <th>Name</th>
+                                        <th>Role</th>
+                                        <th>Status</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="usersListTable">
+        
+                                </tbody>
+                            </table>
                         </div>
                     </div>
-
-                    <button class="btn"
-                        style="margin: 2%; padding: 5px; width: 40% !important; background-color: #025E73 ;"
-                        onclick="AddNewUser()"><i class="fa-solid fa-file-circle-plus"></i> Add User</button>
-
-                </div>
-                <div class="table-body" style="margin-top: 5%; width: 100%; overflow-y: scroll; ">
-                    <table class="table-bordered table-striped">
-                        <thead>
-                            <tr class="bgusertable">
-                                <th>Username</th>
-                                <th>Name</th>
-                                <th>Role</th>
-                                <th>Status</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody id="usersListTable">
-
-                        </tbody>
-                    </table>
                 </div>
             </div>
+
             <!-- USER TAB END-->
             
             <!-- SETTINGS TAB-->
             <div id="settings" style="text-align: center; padding: 10px; height: 75vh;" class="settings">
-
                 <div style="position: absolute; margin-left: 71%">
-                    <button class="btn btn-primary" onclick="popupservicewindow()">Add New Service</button>
+                    <button class="btn btn-primary" onclick="popupservicewindow()">Add Service</button>
                 </div>
                 <!-- Existing Services Display-->
                 <div class="table-body" style="margin-top: 5%; width: 100%; overflow-y: scroll;">
@@ -171,15 +155,18 @@
                         <thead>
                             <tr class="bg" style="text-align: center;">
                                 <th>#</th>
+                                <th><i class="fa-solid fa-list"></i> Type</th>
                                 <th><i class="fas fa-cogs"></i> Service Name</th>
                                 <th><b>₹</b> Price</th>
+                                <!--
                                 <th><i class="fa-solid fa-list"></i> Category</th>
-                                <th><i class="fa-solid fa-list"></i> Type</th>
+                                
                                 <th><i class="fa-solid fa-note-sticky"></i> Notes</th>
 
                                 <th><i class="fa-solid fa-arrow-down-9-1"></i> Minimum Range</th>
                                 <th><i class="fa-solid fa-arrow-up-9-1"></i> Maximum Range</th>
                                 <th><i class="fa-solid fa-hashtag"></i> Measurement Unit</th>
+                                -->
                                 <th><i class="fa-regular fa-hand-pointer"></i> Action</th>
                             </tr>
                         </thead>
@@ -189,81 +176,50 @@
                         </tbody>
                     </table>
                 </div>
-
-                <!--
-                <div class="card text-center" style="width: 80%; margin-left: 5%;">
-                    <h3 class="mb-3" style="margin: 5%;">Services & Charges</h3>
-                    <div id="services-list">
-                    </div>
-                    <div>
-                        <button class="btn btn-success"
-                            style="width: 70%; padding: 2%; background-color:  #025E73; margin: 5%;"
-                            onclick="saveSettings()"><i class="fa-solid fa-floppy-disk"></i> Save</button>
-                    </div>
-                </div>
-                -->
-
-
-
-                <!-- Add new Services-->
+                
+                 <!-- Add new Services-->
                 <div id="addnewservice" class="card text-center">
-
-                    <div style="margin: 1%; text-align: right;">
-                        <i onclick="closepopup()" style="align-items: end;"
-                            class="fa-regular fa-circle-xmark fa-2x"></i>
-                    </div>
-                    <h4>Add New Service</h4>
+                    <div style="margin: 1%; text-align: right;"> <i onclick="closepopup()" style="align-items: end;" class="fa-regular fa-circle-xmark fa-2x"></i></div>
+                    <h4>Add   Service</h4>
                     <div class="container" style="display: flex;">
                         <div class="left">
                             <div class="form-floating">
-                                <input type="text" class="form-control" id="serviceName" placeholder="name@example.com">
-                                <label for="Name"><i class="fas fa-cogs"></i> Service Name <span>*</span></label>
+                                <select class="form-control" name="" id="serviceType">
+                                    <option selected value="">--Select Type--</option>
+                                    <option value="RoomCharges">Room Charges</option>
+                                    <option value="Operation-Delivery Charges">Operation Charges</option>
+                                </select>
+                                <label for="Name"> Type <span>*</span></label>
                             </div>
-
+                            <div class="form-floating">
+                                <input type="text" class="form-control" id="serviceName" placeholder="name@example.com">
+                                <label for="Name"><i class="fas fa-cogs"></i> Name <span>*</span></label>
+                            </div>
+                            <!--
+                            <div class="form-floating">
+                                <select class="form-control" name="" id="serviceCategory">
+                                    <option selected value="">--Select Category--</option>
+                                </select>
+                                <label for="Name"> Category <span>*</span></label>
+                            </div>
+                            -->
                             <div class="form-floating">
                                 <input type="number" class="form-control" id="servicePrice"
                                     placeholder="name@example.com">
                                 <label for="Name"><b>₹ </b> Price <span>*</span></label>
                             </div>
-
+                            <!--
                             <div class="form-floating">
-                                <select class="form-control" name="" id="serviceCategory">
-                                    <option selected value="">--Select Category--</option>
-                                    <option value="HAEMATOLOGY">HAEMATOLOGY</option>
-                                    <option value="BIOCHEMISTRY">BIOCHEMISTRY</option>
-                                    <option value="URINE">URINE</option>
-                                    <option value="SEROLOGY">SEROLOGY</option>
-                                    <option value="HAEMATOLOGY">APPOINTMENT</option>
-                                    <option value="BIOCHEMISTRY">BIOCHEMISTRY</option>
-                                    <option value=''>--Select--</option>
-                                    <option value="VAGINAL DELIVERY(Day)">VAGINAL DELIVERY(Day)</option>
-                                    <option value="VAGINAL INSTRUMENTAL DELIVERY(Day)">VAGINAL INSTRUMENTAL DELIVERY(Day)</option>
-                                    <option value="HYSTERECTOMY(Day)">HYSTERECTOMY(Day)</option>
-                                    <option value="LSCS(Day)">LSCS(Day)</option>
-                                    <option value="LSCS WITH T/L(Day)">LSCS WITH T/L(Day)</option>
-                                    <option value="LAPROSCOPY OP(Day)">LAPROSCOPY OP(Day)</option>
-                                    <option value="LAPROTOMY(Day)">LAPROTOMY(Day)</option>
-                                    <option value="VAGINAL DELIVERY(Night)">VAGINAL DELIVERY(Night)</option>
-                                    <option value="VAGINAL INSTRUMENTAL DELIVERY(Night)">VAGINAL INSTRUMENTAL DELIVERY(Night)</option>
-                                    <option value="HYSTERECTOMY(Night)">HYSTERECTOMY(Night)</option>
-                                    <option value="LSCS(Night)">LSCS(Night)</option>
-                                    <option value="LSCS WITH T/L(Night)">LSCS WITH T/L(Night)</option>
-                                    <option value="LAPROSCOPY OP(Night)">LAPROSCOPY OP(Night)</option>
-                                    <option value="LAPROTOMY(Night)">LAPROTOMY(Night)</option>
-                                </select>
-                                <label for="Name"> Category <span>*</span></label>
+                                <input type="text" class="form-control" id="serviceNotes" placeholder="name@example.com">
+                                <label for="Name"><i class="fa-solid fa-note-sticky"></i> Default Notes <span>*</span></label>
                             </div>
-                            <div class="form-floating">
-                                <input type="text" class="form-control" id="serviceNotes"
-                                    placeholder="name@example.com">
-                                <label for="Name"><i class="fa-solid fa-note-sticky"></i> Default
-                                    Notes <span>*</span></label>
-                            </div>
+                            -->
+                            <div style="text-align: left; padding-left: 5%;font-size: small;"><span><i>* Mandatory Fields</i></span><br></div>
+                            <button class="btn" style="margin: 2%; padding: 5px; width: 40% !important; background-color: #025E73 ;" onclick="AddNewService()"><i class="fa-solid fa-file-circle-plus"></i> Add</button>
 
                         </div>
+                        <!--
                         <div class="right">
-
-
                             <div class="form-floating">
                                 <input type="text" class="form-control" id="rrunit" placeholder="name@example.com">
                                 <label for="Name"><i class="fa-solid fa-hashtag"></i> Measurement
@@ -281,29 +237,14 @@
                                 <label for="Name"><i class="fa-solid fa-arrow-up-9-1"></i> Maximum
                                     Range <span>*</span></label>
                             </div>
-                            <div class="form-floating">
-                                <select class="form-control" name="" id="serviceType">
-                                    <option selected value="">--Select Type--</option>
-                                    <option value="AdmissionBill">Admission Billing</option>
-                                    <option value="DischargeItem">Discharge Item</option>
-                                    <option value="RoomCharges">Room Charges</option>
-                                    <option value="Ultrasound">Ultrasound</option>
-                                    <option value="Operation-Delivery Charges">Operation-Delivery Charges</option>
-                                </select>
-                                <label for="Name"> Type <span>*</span></label>
-                            </div>
+                            
+                            
                         </div>
+                        -->
                     </div>
-                    <div style="text-align: left; padding-left: 5%;font-size: small;"><span><i>* Mandatory
-                                Fields</i></span><br></div>
-
-                    <button class="btn"
-                        style="margin: 2%; padding: 5px; width: 40% !important; background-color: #025E73 ;"
-                        onclick="AddNewService()"><i class="fa-solid fa-file-circle-plus"></i> Add</button>
-
                 </div>
-
             </div>
+
             <!-- SETTINGS TAB END-->
 
             <!-- MY PROFILE TAB-->
@@ -330,98 +271,45 @@
                 </div>
             </div>
             <!-- MY PROFILE TAB END-->
-
-            <!--MEDICINE TAB-->
+            <!--Operation TAB-->
             <div id="Medicine" class="Medicine">
                 <div style="text-align: end;">
-                    <button style="padding: 8px; display: inline-block;" class="btn btn-primary"
-                        onclick="popupmedicinewindow()">Add New
-                        Medicine</button>
+                    <button style="padding: 8px; display: inline-block;" class="btn btn-primary" onclick="popupmedicinewindow()">Add Operation</button>
                 </div>
-
                 <div id="addnewmedicine" class="card text-center">
-
                     <div style="margin: 1%; text-align: right;">
-                        <i onclick="closepopup()" style="align-items: end;"
-                            class="fa-regular fa-circle-xmark fa-2x"></i>
+                        <i onclick="closepopup()" style="align-items: end;" class="fa-regular fa-circle-xmark fa-2x"></i>
                     </div>
-                    <h4>Add New Medicine</h4>
+                    <h4>Add Operation</h4>
                     <div class="container">
-
                         <div class="form-floating">
-                            <input type="text" class="form-control" id="MedicineName" placeholder="name@example.com">
-                            <label for="Name"><i class="fa-solid fa-prescription-bottle"></i> Medicine Name
-                                <span>*</span></label>
+                            <input type="text" class="form-control" id="operationName" placeholder="name@example.com">
+                            <label for="Name"><i class="fa-solid fa-prescription-bottle"></i> Operation Name <span>*</span></label>
                         </div>
-
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="Composition" placeholder="name@example.com">
-                            <label for="Name"><i class="fa-solid fa-flask"></i> Composition</label>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="Dosage" placeholder="name@example.com">
-                            <label for="Dosage"><i class="fa-solid fa-pills"></i> Dosage <span>*</span></label>
-                        </div>
-
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="Duration" placeholder="name@example.com">
-                            <label for="Duration"><i class="fa-solid fa-clock-rotate-left"></i> Timing - Freq. - Duration
-                                <span>*</span></label>
-                        </div>
-                        <div class="form-floating">
-                            <input type="text" class="form-control" id="Category" placeholder="name@example.com">
-                            <label for="Category"><i class="fa-solid fa-clock-rotate-left"></i>Category
-                                <span>*</span></label>
-                        </div>
-                        <div class="form-floating">
-                            <select class="form-control" name="" id="medType">
-                                <option value="">None</option>
-                                <option value="DischargeMed">Discharge Medicine</option>
-                            </select>
-                            <label for="Name"> Type <span>*</span></label>
-                        </div>
-
                     </div>
-
-                    <div style="text-align: left; padding-left: 8%;font-size: small;"><span><i>* Mandatory
-                                Fields</i></span><br></div>
-                    <button class="btn"
-                        style="margin: 2%; padding: 10px; width: 40% !important; background-color: #025E73 ;"
-                        onclick="AddNewMedicine()"><i class="fa-solid fa-file-circle-plus"></i> Add Medicine</button>
-
+                    <div style="text-align: left; padding-left: 8%;font-size: small;"><span><i>* Mandatory Fields</i></span><br></div>
+                    <button class="btn" style="margin: 2%; padding: 10px; width: 40% !important; background-color: #025E73 ;" onclick="AddNewOperation()"><i class="fa-solid fa-file-circle-plus"></i> Add Medicine</button>
                 </div>
+
                 <div class="table-body" style="margin-top: 2%; width: 100%; overflow-y: scroll; height: 68vh;">
                     <table class="table-bordered table-striped">
                         <caption>End of List</caption>
                         <thead>
                             <tr class="bgmedicinetable">
                                 <th>#</th>
-                                <th><i class="fa-solid fa-prescription-bottle"></i> Medicine Name</th>
-                                <th><i class="fa-solid fa-flask"></i> Composition</th>
-                                <th><i class="fa-solid fa-pills"></i> Dosage</th>
-                                <th><i class="fa-solid fa-pills"></i> Category</th>
-                                <th><i class="fa-solid fa-clock-rotate-left"></i> Duration</th>
-                                <th><i class="fa-solid fa-clock-rotate-left"></i> Discharge Med</th>
+                                <th><i class="fa-solid fa-prescription-bottle"></i> Name</th>
                                 <th><i class="fa-regular fa-hand-pointer"></i> Action</th>
 
                             </tr>
                         </thead>
-                        <tbody id="MedicineListTable">
+                        <tbody id="OperationsListTable">
                             
                         </tbody>
                     </table>
                 </div>
             </div>
-            <!--MEDICINE TAB ENDS HERE-->
         </div>
-
-        <!-- /#page-content-wrapper -->
     </div>
-    <!-- /#wrapper -->
-
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-    <script src="/js/admin.js"></script>
 </body>
-
+<script src="/js/admin.js"></script>
 </html>

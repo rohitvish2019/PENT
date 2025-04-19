@@ -1,4 +1,16 @@
 document.getElementById('loader').style.display='none'
+let allProcedures = "";
+function getAllProcedures(){
+    allProcedures = "";
+    $.ajax({
+        url:'/operation/getAll',
+        success: function(data){
+            for(let i=0;i<data.operationsList.length;i++){
+                allProcedures = allProcedures + "<option>"+data.operationsList[i].Name+"</option>"
+            }
+        }
+    })
+}
 function changeDischargeDate(visitId){
     console.log(visitId);
     let dischargeDate = document.getElementById('dischargeDate_'+visitId).value;
@@ -187,37 +199,22 @@ function setIPDData(visits, rooms){
         </td>
         <td>
             <select style='font-size:smaller' id="DeliveryType_${visits[i]._id}" value="${visits[i].DeliveryType}" onchange="changeDeliveryType('${visits[i]._id}')">
-                <option value=''>--Select--</option>
-                <option value="VAGINAL DELIVERY(Day)">VAGINAL DELIVERY(Day)</option>
-                <option value="VAGINAL INSTRUMENTAL DELIVERY(Day)">VAGINAL INSTRUMENTAL DELIVERY(Day)</option>
-                <option value="HYSTERECTOMY(Day)">HYSTERECTOMY(Day)</option>
-                <option value="LSCS(Day)">LSCS(Day)</option>
-                <option value="LSCS WITH T/L(Day)">LSCS WITH T/L(Day)</option>
-                <option value="LAPROSCOPY OP(Day)">LAPROSCOPY OP(Day)</option>
-                <option value="LAPROTOMY(Day)">LAPROTOMY(Day)</option>
-                <option value="VAGINAL DELIVERY(Night)">VAGINAL DELIVERY(Night)</option>
-                <option value="VAGINAL INSTRUMENTAL DELIVERY(Night)">VAGINAL INSTRUMENTAL DELIVERY(Night)</option>
-                <option value="HYSTERECTOMY(Night)">HYSTERECTOMY(Night)</option>
-                <option value="LSCS(Night)">LSCS(Night)</option>
-                <option value="LSCS WITH T/L(Night)">LSCS WITH T/L(Night)</option>
-                <option value="LAPROSCOPY OP(Night)">LAPROSCOPY OP(Night)</option>
-                <option value="LAPROTOMY(Night)">LAPROTOMY(Night)</option>
+               ${allProcedures}
             </select>
         </td>
         <td>
             <div class=" dropdown">
-                <button style="color: white;font-size:smaller !important;" class="btn btn-info dropdown-toggle" type="button" id="actions" data-bs-toggle="dropdown" aria-expanded="false">Generate</button>
+                <button style="color: white;font-size:smaller !important;" class="btn btn-info dropdown-toggle" type="button" id="actions" data-bs-toggle="dropdown" aria-expanded="false">Action</button>
                 <ul class="dropdown-menu">
-                <li><a target='_blank' class="dropdown-item" href="/patients/birthCertificate/${visits[i].Patient._id}">Birth Certificate</a></li>
-                <li><a target='_blank' class="dropdown-item" href="/patients/dischargeSheet/${visits[i]._id}">Discharge Sheet</a></li>
-                <li><a target='_blank' class="dropdown-item" href="/patients/AdmissionBill/${visits[i]._id}">Discharge Bill</a></li>
-                <li><a target='_blank' class="dropdown-item" href="/patients/DischargeReceipt/${visits[i]._id}">Final Receipt</a></li>
+                    <li><a target='_blank' class="dropdown-item" href="/patients/AdmissionCard/${visits[i]._id}">Get Admission Card</a></li>
+                    <li><a target='_blank' class="dropdown-item" href="/patients/dischargeSheet/${visits[i]._id}">Generate Discharge Sheet</a></li>
+                    <li><a target='_blank' class="dropdown-item" href="/patients/AdmissionBill/${visits[i]._id}">Generate Discharge Bill</a></li>
+                    <li><a target='_blank' class="dropdown-item" href="/patients/DischargeReceipt/${visits[i]._id}">Generate Final Receipt</a></li>
+                    <li><a class="dropdown-item" onclick="openAdvancePayment('${visits[i].Patient.Id}','${visits[i].Patient.Name}','${visits[i]._id}')">Advance Payment</a></li>
                 </ul>
             </div>
         </td>
-        <td style="text-align: center !important;font-size:smaller">
-            <button style='font-size:smaller' class="btn btn-info" onclick="openAdvancePayment('${visits[i].Patient.Id}','${visits[i].Patient.Name}','${visits[i]._id}')">Payment</button>
-        </td>
+
         <td style="text-align: center !important;">
             <button class="btn-danger btn" onclick="CancelIPD('${visits[i]._id}','${visits[i].Patient._id}')"><i class="fa-solid fa-ban"></i></button>
         </td>
@@ -239,4 +236,5 @@ function setIPDData(visits, rooms){
 
 let startDate = document.getElementById('startdate').value
 let endDate = document.getElementById('endDate').value
-getIPDDataRange(startDate, endDate)
+getIPDDataRange(startDate, endDate);
+getAllProcedures()

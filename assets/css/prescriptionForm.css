@@ -12,6 +12,7 @@ body{
     width: 730px;
     height: 1040px;
     overflow-x: hidden;
+    padding: 4px;
 }
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
@@ -44,7 +45,7 @@ input::-webkit-inner-spin-button {
 
 
 .doc-info-left{
-    width: 40%;
+    width: 50%;
     text-align: left;
     margin-left: 1%;
 }
@@ -91,6 +92,7 @@ input::-webkit-inner-spin-button {
 
 .name{
     width: 100%;
+    margin-left: 50px;
 }
 
 
@@ -140,13 +142,15 @@ input::-webkit-inner-spin-button {
     display: flex;
 }
 .left-side{
-    width: 69%;
+    width: 30%;
     height: 100%;
 }
 
 .right-side{
-    width: 31%;
+    width: 70%;
     height: 100%;
+    border-left: 1px solid black;
+    padding-left: 10px;
 }
 
 
@@ -197,4 +201,13 @@ button:disabled {
     padding: 20px;
     border-radius: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 2);
+}
+.left-side label{
+    font-size: 15px;
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+svg{
+    
 }
