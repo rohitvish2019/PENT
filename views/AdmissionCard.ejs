@@ -24,23 +24,23 @@
         <h2 style="text-align: center;background-color: #e4e1e1;">ADMISSION CARD</h2>
         <div style="display: flex;justify-content: space-between;">
             <div class="left patient-data">
-                 <div class="patient-item">
-                    <label>Name : </label>
-                    <span><%=visit.Patient.Name%></span>
-                 </div>
-                 <div class="patient-item">
-                    <label>Age : </label>
-                    <span><%=visit.Patient.Age%></span>
-                 </div>
-                 <div class="patient-item">
-                    <label>Sex : </label>
-                    <span><%=visit.Patient.Gender%></span>
-                 </div>
-                 
-                 <div class="patient-item">
-                    <label>Address : </label>
-                    <span><%=visit.Patient.Address%></span>
-                 </div>
+                    <div class="patient-item">
+                        <label>Name : </label>
+                        <span><%=visit.Patient.Name%></span>
+                    </div>
+                    <div class="patient-item">
+                        <label>Mobile : </label>
+                        <span><%=visit.Patient.Mobile%></span>
+                    </div>
+                    <div class="patient-item">
+                        <label>Age/Sex : </label>
+                        <span><%=visit.Patient.Age%> / <%=visit.Patient.Gender%></span>
+                    </div>
+                    
+                    <div class="patient-item">
+                        <label>Address : </label>
+                        <span><%=visit.Patient.Address%></span>
+                    </div>
             </div>
             <div class="right patient-data">
                 <div class="patient-item">
@@ -72,7 +72,7 @@
             <textarea cols="93" rows="6" name="" id=""></textarea>
         </div>
         <div>
-            <label style="font-size: 18px;font-weight: bold;margin-top: 10px;">History : -</label>
+            <label style="font-size: 18px;font-weight: bold;margin-top: 10px;">Advice : -</label>
             <textarea cols="93" rows="6" name="" id=""></textarea>
         </div>
         <div class="consent">
