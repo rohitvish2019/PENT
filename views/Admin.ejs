@@ -25,7 +25,8 @@
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openDashboard()"><i class="fas fa-tachometer-alt"></i> Admin Dashboard</a>
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openUsers()"><i class="fa-solid fa-hospital-user"></i> Users</a>
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openSettings()"><i class="fas fa-cogs"></i> Service & Charges</a>
-                <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openMedicine()"><i class="fa-solid fa-prescription-bottle-medical"></i> Operations</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openMedicine()"><i class="fa-solid fa-prescription-bottle-medical"></i> Medicine</a>
+                <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openOperation()"><i class="fa-solid fa-prescription-bottle-medical"></i> Operation</a>
                 <a href="#" class="list-group-item list-group-item-action bg-dark text-white" onclick="openProfile()"><i class="fas fa-sign-out-alt"></i> My Profile</a>
             </div>
         </div>
@@ -270,12 +271,96 @@
                 </div>
             </div>
             <!-- MY PROFILE TAB END-->
-            <!--Operation TAB-->
+            <!--MEDICINE TAB-->
             <div id="Medicine" class="Medicine">
                 <div style="text-align: end;">
-                    <button style="padding: 8px; display: inline-block;" class="btn btn-primary" onclick="popupmedicinewindow()">Add Operation</button>
+                    <button style="padding: 8px; display: inline-block;" class="btn btn-primary"
+                        onclick="popupmedicinewindow()">Add New
+                        Medicine</button>
                 </div>
+
                 <div id="addnewmedicine" class="card text-center">
+
+                    <div style="margin: 1%; text-align: right;">
+                        <i onclick="closepopup()" style="align-items: end;"
+                            class="fa-regular fa-circle-xmark fa-2x"></i>
+                    </div>
+                    <h4>Add New Medicine</h4>
+                    <div class="container">
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="MedicineName" placeholder="name@example.com">
+                            <label for="Name"><i class="fa-solid fa-prescription-bottle"></i> Medicine Name
+                                <span>*</span></label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="Composition" placeholder="name@example.com">
+                            <label for="Name"><i class="fa-solid fa-flask"></i> Composition</label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="Dosage" placeholder="name@example.com">
+                            <label for="Dosage"><i class="fa-solid fa-pills"></i> Dosage <span>*</span></label>
+                        </div>
+
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="Duration" placeholder="name@example.com">
+                            <label for="Duration"><i class="fa-solid fa-clock-rotate-left"></i> Timing - Freq. - Duration
+                                <span>*</span></label>
+                        </div>
+                        <div class="form-floating">
+                            <input type="text" class="form-control" id="Category" placeholder="name@example.com">
+                            <label for="Category"><i class="fa-solid fa-clock-rotate-left"></i>Category
+                                <span>*</span></label>
+                        </div>
+                        <div class="form-floating">
+                            <select class="form-control" name="" id="medType">
+                                <option value="">None</option>
+                                <option value="DischargeMed">Discharge Medicine</option>
+                            </select>
+                            <label for="Name"> Type <span>*</span></label>
+                        </div>
+
+                    </div>
+
+                    <div style="text-align: left; padding-left: 8%;font-size: small;"><span><i>* Mandatory
+                                Fields</i></span><br></div>
+                    <button class="btn"
+                        style="margin: 2%; padding: 10px; width: 40% !important; background-color: #025E73 ;"
+                        onclick="AddNewMedicine()"><i class="fa-solid fa-file-circle-plus"></i> Add Medicine</button>
+
+                </div>
+                <div class="table-body" style="margin-top: 2%; width: 100%; overflow-y: scroll; height: 68vh;">
+                    <table class="table-bordered table-striped">
+                        <caption>End of List</caption>
+                        <thead>
+                            <tr class="bgmedicinetable">
+                                <th>#</th>
+                                <th><i class="fa-solid fa-prescription-bottle"></i> Medicine Name</th>
+                                <th><i class="fa-solid fa-flask"></i> Composition</th>
+                                <th><i class="fa-solid fa-pills"></i> Dosage</th>
+                                <th><i class="fa-solid fa-pills"></i> Category</th>
+                                <th><i class="fa-solid fa-clock-rotate-left"></i> Duration</th>
+                                <th><i class="fa-solid fa-clock-rotate-left"></i> Discharge Med</th>
+                                <th><i class="fa-regular fa-hand-pointer"></i> Action</th>
+
+                            </tr>
+                        </thead>
+                        <tbody id="MedicineListTable">
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!--MEDICINE TAB ENDS HERE-->
+
+            <!--Operation TAB-->
+            <div id="Operation" class="Operation">
+                <div style="text-align: end;">
+                    <button style="padding: 8px; display: inline-block;" class="btn btn-primary" onclick="popupoperationwindow()">Add Operation</button>
+                </div>
+                <div id="addnewoperation" class="card text-center">
                     <div style="margin: 1%; text-align: right;">
                         <i onclick="closepopup()" style="align-items: end;" class="fa-regular fa-circle-xmark fa-2x"></i>
                     </div>
@@ -287,14 +372,14 @@
                         </div>
                     </div>
                     <div style="text-align: left; padding-left: 8%;font-size: small;"><span><i>* Mandatory Fields</i></span><br></div>
-                    <button class="btn" style="margin: 2%; padding: 10px; width: 40% !important; background-color: #025E73 ;" onclick="AddNewOperation()"><i class="fa-solid fa-file-circle-plus"></i> Add Medicine</button>
+                    <button class="btn" style="margin: 2%; padding: 10px; width: 40% !important; background-color: #025E73 ;" onclick="AddNewOperation()"><i class="fa-solid fa-file-circle-plus"></i> Add Operation</button>
                 </div>
 
                 <div class="table-body" style="margin-top: 2%; width: 100%; overflow-y: scroll; height: 68vh;">
                     <table class="table-bordered table-striped">
                         <caption>End of List</caption>
                         <thead>
-                            <tr class="bgmedicinetable">
+                            <tr class="bgoperationtable">
                                 <th>#</th>
                                 <th><i class="fa-solid fa-prescription-bottle"></i> Name</th>
                                 <th><i class="fa-regular fa-hand-pointer"></i> Action</th>

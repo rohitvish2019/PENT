@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ENT Patient Visit</title>
+  <link rel="stylesheet" href="/css/visitHome.css">
+</head>
+<body>
+    <header>
+        <%- include('_header')%>
+    </header>
+    <div style="display: flex;">
+        <div class="left box">
+            <h3>Patient Details</h3>
+            <p><strong>Name:</strong> John Doe</p>
+            <p><strong>Age:</strong> 34</p>
+            <p><strong>Gender:</strong> Male</p>
+            <p><strong>Visit Date:</strong> 2025-05-15</p>
+        </div>
+        <div class="right box">
+            <!-- Complaints Section -->
+            <div class="section">
+            <h3>Complaints</h3>
+            <div class="input-group">
+                <input list="complaint-options" id="complaintInput" placeholder="Enter complaint..." />
+                <datalist id="complaint-options">
+                <option value="Ear Pain">
+                <option value="Hearing Loss">
+                <option value="Tinnitus">
+                <option value="Nasal Blockage">
+                <option value="Sore Throat">
+                </datalist>
+                <button onclick="addEntry('complaint')">Add</button>
+            </div>
+            <div id="complaintList" class="entry-list"></div>
+            </div>
+
+            <!-- History Section -->
+            <div class="section">
+            <h3>History</h3>
+            <div class="input-group">
+                <input list="history-options" id="historyInput" placeholder="Enter history..." />
+                <datalist id="history-options">
+                <option value="Previous ENT Surgery">
+                <option value="Chronic Sinusitis">
+                <option value="Allergies">
+                <option value="Frequent Infections">
+                </datalist>
+                <button onclick="addEntry('history')">Add</button>
+            </div>
+            <div id="historyList" class="entry-list"></div>
+            </div>
+
+            <!-- Medicines Section -->
+            <div class="section">
+            <h3>Medicines</h3>
+            <div class="input-group">
+                <input list="medicine-options" id="medicineInput" placeholder="Enter medicine..." />
+                <datalist id="medicine-options">
+                <option value="Amoxicillin 500mg">
+                <option value="Cetrizine 10mg">
+                <option value="Paracetamol 650mg">
+                <option value="Nasal Spray">
+                </datalist>
+                <button onclick="addEntry('medicine')">Add</button>
+            </div>
+            <div id="medicineList" class="entry-list"></div>
+            </div>
+        </div>
+    </div>
+  <div class="container">
+    <!-- Patient Details -->
+    <div class="section">
+      
+    </div>
+
+    
+  </div>
+  <script src="/js/visitHome.js"></script>
+</body>
+</html>

@@ -15,26 +15,9 @@
 </head>
 
 <body class="container" onload="getDischargeData()">
-    <%if(birthInfo && birthInfo.Gender == 'Male'){%>
-        <div style="display: flex;height: 100%;flex-direction: column; border: 1px solid black;background-color: #93d8f1;">
-    <%}else{%>
-        <div style="display: flex;height: 100%;flex-direction: column; border: 1px solid black;background-color: #e9aca8;">
-    <%}%>
-    
-        <div class="hospital-details" style="height: 6%;text-align:left; display: flex;">
-            <div style="height: 100%; width: 30%;">
-                <img style="width: 110px; height: auto;" src="/images/CJNH_Logo_Black.png" alt="">
-            </div>
-            <label style="padding-top: 5px; font-size: 27px;font-weight: bolder;display: block;">डॉ. चंदा &nbsp;जैन &nbsp;नर्सिंग &nbsp;होम</label>
-            <div style="margin-top: 2%;margin-left: 25px;">
-                <label>Reg No. NH/9255/JUN-2023</label>
-            </div>
-
-        </div>
-        <label style="text-align: center; margin-bottom: 5px;">323, सिविल वार्ड नंबर 7 दमोह (म. प्र.). Mob : 6263169195, Ph. No :
-            07812-222441</label>
-        <label style="font-size: 22px;font-weight: bold;text-align: center;">Discharge Sheet</label>
-        
+    <div style="display: flex;height: 100%;flex-direction: column; border: 1px solid black;">
+        <%-include('_pdfHeader')%>
+        <label style="font-size: 22px;font-weight: bold;text-align: center;margin-top: 25px;margin-bottom: 10px;">Discharge Sheet</label>
         <!-- Patient Information-->
         <div class="patient-info">
             <label hidden for="" id="visitId"><%=visit._id%></label>
@@ -66,7 +49,7 @@
         </div>
 
         <!-- Admission and Discharge Date Section-->
-         <% let dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',hour: '2-digit', minute: '2-digit',}%>
+        <% let dateOptions = { year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit',hour: '2-digit', minute: '2-digit',}%>
         <div class="dischargeItems" style="height: 3%; display: flex;justify-content: space-between;">
             <div style="width: 50%; padding: 5px; text-align: left;">
                 <%let admDT = visit.AdmissionDate + ' '+visit.AdmissionTime%>
@@ -79,9 +62,7 @@
                 <%}%>
             </div>
         </div>  
-        <div style="margin-bottom: 4px;">
-            <input onchange="addChanged('Diagnosis'), updateOP()" style="width: 99.5%;text-align: left;border-bottom: 1px solid black;" type="text" name="" id="Diagnosis" placeholder="Diagnosis" value="Diagnosis :- ">
-        </div>
+        
         <!-- Conditions Input Text Box-->
         <div class="condition" style="height: 14%; display: flex;justify-content: space-between;">
             <div style="text-align: left; width: 49%;">
@@ -90,34 +71,15 @@
             </div>
             <div style="text-align: left; width: 49%; border-left: .5px dotted black;padding-left: 13px;">
                 <span><b>Condition on Discharge</b></span>
-                <textarea rows="6" cols="44" onchange="addChanged('cod')" id="cod">O/E AFEBRILE
-VITALS STABLE
-P/A UT RETRACTED
-L/E NO ACTIVE BLEEDING</textarea>
+                <textarea rows="6" cols="44" onchange="addChanged('cod')" id="cod"></textarea>
             </div>
         </div>
+
+        
 
         <!-- Investigation Section-->
         <div class="investigation-tables" style="height: 22%; display: flex; border-top: .5px dashed black;">
             <div class="ohms" style="width:95%; height: 20%;text-align: center;">
-                <span><b>O/H</b></span>
-                <div style="text-align: left;margin-left: 1px;">
-                    <textarea name="" onchange="addChanged('oh_ms')" id="oh_ms" rows="1" cols="40" placeholder="MS" style="border: 1px solid black;">MS : </textarea>
-                    <textarea name="" id="edd" cols="21" rows="1" onchange="addChanged('edd')" style="border: 1px solid black;">EDD : </textarea>
-                </div>
-                <div>
-                    <table class="table" style="text-align: center;width: 100%;padding: 0;">
-                        <tr class="ohms-inputs">
-                            <td style="width: 25%;"><input onchange="addChanged('oh_g')" id="oh_g" style="width: 90%;" type="text" value="G-"></td>
-                            <td style="width: 25%;"><input onchange="addChanged('oh_p')" id="oh_p" style="width: 90%;" type="text" value="P-"></td>
-                            <td style="width: 25%;"><input onchange="addChanged('oh_l')" id="oh_l" style="width: 90%;" type="text" value="L-"></td>
-                            <td style="width: 25%;"><input onchange="addChanged('oh_a')" id="oh_a" style="width: 90%;" type="text" value="A-"></td>
-                        </tr>
-                    </table>
-                </div>
-                <div style="text-align: left;margin-top: 10px;">
-                    <textarea name="" onchange="addChanged('oh_other')" id="oh_other" rows="2" cols="67" placeholder="Other" style="border: 1px solid black;"></textarea>
-                </div>
                 <span><b>Invst Done:</b></span>
                 <div class="invstdone" style="width:100%;  height: 65%; text-align: center;margin-left: 0 !important;">
                     <table class="table" style="height: 40%;width: 100%; ">
@@ -193,19 +155,7 @@ L/E NO ACTIVE BLEEDING</textarea>
                 <span style="padding-left: 10px;"><b>Operative Notes</b></span>
                 <textarea rows="6" cols="44" id="opnotes" onchange="addChanged('opnotes')"></textarea>
             </div>
-            <div style="text-align: left; width: 49%;border-left: .5px dotted black;padding-left: 13px;">
-
-                <% if(birthInfo){%>
-                <%dt = birthInfo.BirthDate + ' '+birthInfo.BirthTime%>
-                <%}%>
-                <span><b>Baby Notes</b></span>
-                <textarea  rows="6" cols="44" id="babynotes" onchange="addChanged('babynotes')"><%if(birthInfo){%>Attended By:<%}%>
-<%if(birthInfo){%><%=birthInfo.Gender%> Child<%}%>
-On <%=new Date(dt).toLocaleString('en-IN',{day:'2-digit',month:'2-digit',year:'numeric'})%> at <%=new Date(dt).toLocaleString('en-IN',{hour:'2-digit',minute:'2-digit'})%>
-Baby Weight : <%if(birthInfo){%><%=birthInfo.ChildWeight%> Kg <%}%>
-Cried immediately
-                </textarea>
-            </div>
+            
         </div>
 
 
@@ -248,29 +198,20 @@ Cried immediately
                 <div style="margin-left: 5px;">
                     <textarea style="border-bottom: .5px solid black;" id="otherAdvices" onchange="addChanged('otherAdvices')" rows="5" cols="35" placeholder="Other Advice">Other Advice :- </textarea>
                 </div>
-                <div style=" width: 100%; height: 55%; padding-left:8px ; text-align: center; margin-top: 7%;">
-                    <span>- बच्चे का टीकाकरण नियमित करायें ।</span><br><hr>
-                    <span>- ⁠परिवार नियोजन अपनाए ।</span><br><hr>
-                    <span>- ⁠आवश्यकता पड़ने पर या 1 - 1/2 माह बाद दिखाये ।</span>
-                </div>
-                
             </div>
             
         </div>
         
-        <span style="text-align: center;"><b> बच्चे का जन्म पंजीयन 15 दिवस के अंदर नगर पालिका या ग्राम पंचायत से करवाये ।<b></span>
-        <div style="display: flex; ">
-            <table style="text-align: center; width: 100%;">
+        <div style="display: flex;margin-right: 20px;">
+            <table style="text-align: right; width: 100%;">
                 <thead>
                     <tr class="b5">
-                        <td>Dr. Anuj Jain</td>
-                        <td>Dr. Swati jain</td>
+                        <td>Dr. Vinod Kukreja</td>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="b5">
-                        <td>(DGO)</td>
-                        <td>(DGO)</td>
+                    <tr class="b5" >
+                        <td style="padding-right: 43px">(ENT)</td>
                     </tr>
                 </tbody>
             </table>

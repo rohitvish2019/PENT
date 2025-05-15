@@ -6,7 +6,7 @@ function registerPatient() {
 
     for (let i = 0; i < inputData.length; i++) {
         data[inputData[i]] = document.getElementById(inputData[i]).value;
-        if (inputData[i] != 'IdProof' && (document.getElementById(inputData[i]).value == null || document.getElementById(inputData[i]).value == '' )) {
+        if (inputData[i] != 'IdProof' && inputData[i] != 'weight' && (document.getElementById(inputData[i]).value == null || document.getElementById(inputData[i]).value == '' )) {
             new Noty({
                 theme: 'relax',
                 text: inputData[i] + ' is mandatory',

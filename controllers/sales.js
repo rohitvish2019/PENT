@@ -7,10 +7,12 @@ const Inventories = require('../models/inventories')
 const PropertiesReader = require('properties-reader');
 const properties = PropertiesReader('./configs/hospital.properties');
 const HospitalName = properties.get('HospitalName');
-const HospitalAddress2 = properties.get('HospitalAddress2')
+const HospitalAddress2 = properties.get('HospitalAddress2');
 const HospitalAddress = properties.get('HospitalAddress');
 const logo = properties.get('logoPath');
-const regNo = properties.get('HospitalRegNo')
+const regNo = properties.get('HospitalRegNo');
+const hospitalMobile = properties.get('HospitalMobile');
+const doctorMobile = properties.get('DoctorMobile');
 const InventoriesController = require('../controllers/Inventories');
 module.exports.salesHistoryHome = function(req, res){
     try{
@@ -210,7 +212,7 @@ module.exports.getBillById = async function(req, res){
                 bill
             })
         }else if(bill && !req.xhr){
-            return res.render('billTemplate',{bill, user:req.user,HospitalName,HospitalAddress,HospitalAddress2,regNo,logo})
+            return res.render('billTemplate',{bill, user:req.user,HospitalName,HospitalAddress,HospitalAddress2,regNo,logo,hospitalMobile, doctorMobile, docName:'Cash Memo'})
         }
         else if(req.xhr && (!bill || bill == null)){
             return res.status(404).json({

@@ -23,35 +23,39 @@
 
 <body onload="initilizeApp()">
     <div class="main-body" style="overflow: hidden;">
-        <div class="header">
-            <label for="" style="font-size: small;margin-left: 10px;">Reg No. CL/1097</label>
-            <div class="name">
-                <label style="font-size: 31px;font-weight: bolder; color: rgb(201, 8, 8);">पूजा &nbsp;&nbsp; क्लीनिक&nbsp;</label>
-                <label style="font-size: 18px; font-weight: 500;margin-top: 0.3%;">राधा भवन, अग्रवाल स्कूल के सामने, तीन गुल्ली चौराहा, दमोह (म.
-                    प्र.)</label>
-                <label style="font-size: 14px;">Mob: 8109244931, 9300720734</label>
+        <div class="header" style="display: flex;">
+            <div style="width: 30%;">
+                <label for="" style="font-size: small;margin-left: 1px;">Reg No. CL/1097</label>
             </div>
-            
+            <div style="width: 35%;" class="name">
+                <label style="font-size: 31px;font-weight: bolder; color: rgb(201, 8, 8);">पूजा ENT हॉस्पिटल&nbsp;</label>
+                <label style="font-size: 18px; font-weight: 500;margin-top: 0.3%;">सिंधी कैम्प, दमोह (म.
+                    प्र.)</label>
+                <label style="font-size: 14px;">Mob: 8109244931, Whatsapp-9300720734</label>
+            </div>
+            <div style="width: 30%;height: 100px !important;width: 150px;margin-left: 60px;">
+                <img src="/images/allergy.PNG" alt="" width="100%" height="100%">
+            </div>
         </div>
         <%let boldTure = 'bold'%>
         <%let boldFalse = '100'%>
         <div class="doctors-info">
             <div class="doc-info-left">
                 <label class="doc-name" style="font-weight: bold;font-family: 'Yatra One', cursive;color: rgb(201, 8, 8);">डॉ. विनोद कुकरेजा</label><br>
-                <label style="font-weight: bold;">MBBS, DLO</label>
+                <label style="font-weight: bold;">MBBS, DLO <small></small></label>
                 <div>
-                    <label class="old-info">गोल्ड मेडल, Reg : MP 8958</label>
+                    <label style="font-size: 15px;font-weight: bold;">गोल्ड मेडल, Reg : MP 8958</label>
                 </div>
 
+                
+            </div>
+            <div class="hospital-photo" style="display: flex;justify-content: center;flex-direction: column;align-items: center;">
+                <img style="background-color: black;border-radius: 50%;" height="65%" width="30%" src="/images/PENT_logo.png" alt="">
                 <div>
-                    <label class="old-info">मिलने का समय</label>
-                    <label class="old-info">सुबह 10 बजे से शाम 5 बजे तक</label>
+                    <label><b>मिलने का समय :सुबह 10 बजे से शाम 5 बजे तक</b></label>
                 </div>
             </div>
-            <div class="hospital-photo" style="display: flex;justify-content: center;flex-direction: column;align-items: center;margin-left: 12%;">
-                <img style="background-color: black;border-radius: 50%;" height="70%" width="80%" src="/images/PENT_logo.png" alt="">
-            </div>
-            <div style="margin-left: 15%;margin-right: -30px;margin-top: 15px;">
+            <div class="doc-info-right" style="margin-top: 15px;">
                 <h4 style="font-family: 'Yatra One', cursive;">
                     नाक कान गला एवं कैंसर रोग विशेषज्ञ
                 </h4>
@@ -96,67 +100,84 @@
 
         <div class="prescription-data">
             <div class="left-side">
+                <div>
+                    <div style="border-bottom: 1px dotted black;padding-bottom: 2px;">
+                        Pulse / BP :- &nbsp;&nbsp;<input class="test-inputs" type="text" x-webkit-speech>
+                        SPO<small>2</small> :- &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input class="test-inputs" type="text"><br>
+                    </div>
+                    <div style="margin-top: 5px;border-bottom: 1px dotted black;">
+                        <input type="checkbox" name="" id=""> CBC/CRP <br>
+                        <input type="checkbox" name="" id=""> B.Sugar <br>
+                        <input type="checkbox" name="" id=""> S.Creatinin <br>
+                        <input type="checkbox" name="" id=""> HBS Ag/HIV <br>
+                        <input type="checkbox" name="" id=""> BT/CT <br>
+                        <input type="checkbox" name="" id=""> T3,T4,TSH <br>
+                    </div>
+                    <div style=" margin-top: 5px;border-bottom: 1px dotted black;">
+                        <input type="checkbox" name="" id=""> <span class="othertests">Audiometry</span> <input class="test-inputs" type="text"><br>
+                        <input type="checkbox" name="" id=""> <span class="othertests">X Ray</span> <input class="test-inputs" type="text"><br>
+                        <input type="checkbox" name="" id=""> <span class="othertests">Mastoid</span> <input class="test-inputs" type="text"><br>
+                        <input type="checkbox" name="" id=""> <span class="othertests">ECG</span> <input class="test-inputs" type="text"><br>
+                    </div>
+                    
+                </div>
+                <label style="font-size: 14px;font-weight: bold;">विशेष सुविधाएं</label>
                 <label>दूरबीन द्वारा कान के पर्दे की जांच एवं ऑपरेशन</label>
-                <div style="display: flex;justify-content: center;height: 20px;width: 100%;">
+                <div style="display: flex;justify-content: center;height: 8px;width: 100%;">
                     <img src="/images/sun.svg" alt="" >
                 </div>
                 
                 <label>दूरबीन द्वारा नाक की जांच एवं ऑपरेशन</label>
-                <div style="display: flex;justify-content: center;height: 20px;width: 100%;">
+                <div style="display: flex;justify-content: center;height: 8px;width: 100%;">
                     <img src="/images/sun.svg" alt="" >
                 </div>
                 <label>दूरबीन द्वारा गले की जांच एवं ऑपरेशन</label>
-                <div style="display: flex;justify-content: center;height: 20px;width: 100%;">
+                <div style="display: flex;justify-content: center;height: 8px;width: 100%;">
                     <img src="/images/sun.svg" alt="" >
                 </div>
                 <label>श्रवण क्षमता की डिजिटल मशीन द्वारा जांच एवं श्रवण यंत्र का चुनाव</label>
-                <div style="display: flex;justify-content: center;height: 20px;width: 100%;">
+                <div style="display: flex;justify-content: center;height: 8px;width: 100%;">
                     <img src="/images/sun.svg" alt="" >
                 </div>
                 <label>मुंह एवं गले के कैंसर की जांच एवं इलाज</label>
-                <div style="display: flex;justify-content: center;height: 20px;width: 100%;">
+                <div style="display: flex;justify-content: center;height: 8px;width: 100%;">
                     <img src="/images/sun.svg" alt="" >
                 </div>
                 <label>नाक से रक्त स्त्राव का इलाज</label>
-                <div style="display: flex;justify-content: center;height: 20px;width: 100%;">
+                <div style="display: flex;justify-content: center;height: 8px;width: 100%;">
                     <img style="color: red;" src="/images/sun.svg" alt="" >
                 </div>
                 <label>चक्कर से पीड़ित रोगियों की जांच एवं इलाज</label>
-                <div style="display: flex;justify-content: center;height: 20px;width: 100%;">
+                <div style="display: flex;justify-content: center;height: 8px;width: 100%;">
                     <img src="/images/sun.svg" alt="" >
                 </div>
                 <label>थायराइड एवं पैरोटिड ग्रंथियों का आपरेशन</label>
-                <div style="display: flex;justify-content: center;height: 20px;width: 100%;">
+                <div style="display: flex;justify-content: center;height: 8px;width: 100%;">
                     <img src="/images/sun.svg" alt="" >
                 </div>
                 <label style="text-align: center !important;">सिरदर्द का इलाज</label>
-                <div style="display: flex;justify-content: center;height: 20px;width: 100%;">
+                <div style="display: flex;justify-content: center;height: 8px;width: 100%;">
                     <img src="/images/sun.svg" alt="" >
                 </div>
                 <label>Foreign body removal</label>
             </div>
             <div class="right-side">
                 <div style="font-size: 13px;">
-                    <div style="width: 100%;display: flex;">
-                        <div style="width: 60%;">
-                            <b style="display: block;">Complaint</b>
-                            <textarea rows="3" cols="80" name="" id="complaint" placeholder=""></textarea>
+                    <div style="width: 50%;height: 330px;">
+                        <div style="width: 100%;display: flex;">
+                            <div style="width: 100%;">
+                                <b style="display: block;">Complaint</b>
+                                <textarea rows="7" style="width: 100%;" name="" id="complaint" placeholder=""></textarea>
+                            </div>
                         </div>
-                    </div>
-                    <div>
-                        <b>History</b>
-                        <% if(lastVisit && lastVisit.VisitData){ %>
-                            <textarea rows="3" cols="80" name="" id="history" placeholder=""><%=lastVisit == undefined ? '' : lastVisit.VisitData.history%></textarea>
-                        <%}else{%>
-                            <textarea rows="3" cols="80" name="" id="history" placeholder=""></textarea>
-                        <%}%>
-                    </div>
-                    <div>
-                        <b>O/E</b>
-                        <textarea rows="5" style="width: 100%;" name="" id="OEs" placeholder="">
-AFEBRILE, &nbsp;BP =  MM OF HG, &nbsp;P = BPM, &nbsp; PALLOR 
-P/A 
-P/V </textarea>
+                        <div>
+                            <b>History</b>
+                            <% if(lastVisit && lastVisit.VisitData){ %>
+                                <textarea rows="7" style="width: 100%;" name="" id="history" placeholder=""><%=lastVisit == undefined ? '' : lastVisit.VisitData.history%></textarea>
+                            <%}else{%>
+                                <textarea rows="7" style="width: 100%;" name="" id="history" placeholder=""></textarea>
+                            <%}%>
+                        </div>
                     </div>
                     
                 </div>
@@ -184,20 +205,6 @@ P/V </textarea>
                                             </tr>
                                         </thead>
                                         <tbody id="prescribedMeds" style="font-size: small;">
-                                            <!--
-                                            <tr>
-                                                <td style="width: 33%;">
-                                                    <label style="display: block;">Ecosprinb-AV 75/10 Capsule</label>
-                                                    <small style="font-size: 10px !important;"><b>Comp. </b>Aspirin 75 MG + Atorvastatin 10 MG</small>
-                                                </td>
-                                                <td style="width: 10%;">
-                                                    0--0--1
-                                                </td>
-                                                <td style="font-size: 12px;width: 33%;">
-                                                    Night-After food everyday for 6 months
-                                                </td>
-                                            </tr>
-                                            -->
                                         </tbody>
                                     </table>
                                     
@@ -210,204 +217,6 @@ P/V </textarea>
                     </div>
                 </div>
             </div>
-            <!--
-            <div class="right-side">
-                <div class="investigationItems" style="font-size: 13px;">
-                    <div style="text-align: center;">
-                        <label style="text-align: center;font-weight: bold;margin-top: 0%;">Investigation Advice</label>
-                    </div>
-                    <div style="text-align: left;">
-                        <input type="checkbox"><label style="text-align: center;font-weight: bold;margin-top: 0%;">&nbsp;Outside
-                            Tests</label>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">CBC</label>
-                        <input style="width: 56%;border: none;border-bottom: 1px dotted black;" type="text"
-                            onchange="addChanges('CBC')" id="CBC">
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">Bl gr & Rh</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('Blgr')" id="Blgr" list="values1">
-                        <datalist id="values1">
-                            <option value="A Positive"></option>
-                            <option value="B Positive"></option>
-                            <option value="AB Positive"></option>
-                            <option value="O Positive"></option>
-                            <option value="A Negative"></option>
-                            <option value="B Negative"></option>
-                            <option value="AB Negative"></option>
-                            <option value="O Negative"></option>
-                        </datalist>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">RBS</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('RBS')" id="RBS">
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">HIV</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('HIV')" id="HIV" list="values2">
-                        <datalist id="negpos">
-                            <option value="Negative">Negative</option>
-                            <option value="Positive">Positive</option>
-                        </datalist>
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">HBsAg</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('HBsAg')" id="HBsAg" list="values2">
-                    </div>
-                    <datalist id="values2">
-                        <option value="Nil"></option>
-                        <option value="Reactive"></option>
-                        <option value="Non-Reactive"></option>
-                    </datalist>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">TSH</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('TSH')" id="TSH">
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">&nbsp&nbsp;&nbsp; DM</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('DM')" id="DM">
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">Urine P.test</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('Urine-Ptest')" id="Urine-Ptest" list="negpos">
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">&nbsp&nbsp;&nbsp; Albumin</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('Urine-alb')" id="Urine-alb" list="uri">
-                    </div>
-                    <datalist id="uri">
-                        <option value="Nil">Nil</option>
-                        <option value="Traces">Traces</option>
-                        <option value="+">+</option>
-                        <option value="++">++</option>
-                        <option value="+++">+++</option>
-                    </datalist>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">&nbsp&nbsp;&nbsp; Sugar</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('Urine-sugar')" id="Urine-sugar" list="uri">
-                    </div>
-                    
-
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;"><b>USG Obst</b></label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('USG-Obst')" id="USG-Obst" list="usglist">
-                    </div>
-                    <datalist id="usglist">
-                        <option value="GA"></option>
-                        <option value="FWB"></option>
-                        <option value="NT/NB/PE Screening"></option>
-                        <option value="Target Scan"></option>
-                        <option value="Growth Scan"></option>
-                        <option value="Col. Dop."></option>
-                        <option value="2D Foetal echo"></option>
-                    </datalist>
-                    
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">&nbsp&nbsp;&nbsp; L.Abd</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('USG-LAbd')" id="USG-LAbd">
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 33%;">&nbsp&nbsp;&nbsp; W.Abd</label>
-                        <input style="width: 56%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('USG-WAbd')" id="USG-WAbd">
-                    </div>
-                    <div>
-                        <input type="checkbox" name="" id="">
-                        <label style="width: 42%;">Semen Analysis</label>
-                        <input style="width: 46%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('SemenAnalysis')" id="SemenAnalysis">
-                    </div>
-                    <div>
-                        <label style="width: 19%;">Other</label>
-                        <input style="width: 78%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('otheInv')" id="otheInv">
-                    </div>
-                </div>
-                <div style="margin-top: 25px;margin-left: 2%;">
-                    <b>Other advice</b>
-                    <textarea rows="5" style="width: 99%;border-bottom: none;" name="" id="OtherAdvice" placeholder=""></textarea>
-                </div>
-
-                <div
-                    style="font-size: 13px;padding-left: 5px;margin-top: 20px;display: flex;flex-direction: column;justify-content: space-between;">
-                    <div style="text-align: center;">
-                        <label style="text-align: center;font-weight: bold;margin-top: 0%;">Miscellaneous</label>
-                    </div>
-                    <div>
-                        <label style="width: 35%;">T1</label>
-                        <input style="width: 63%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('T1')" id="T1" list="vals">
-                    </div>
-
-                    <div>
-                        <label style="width: 35%;">T2</label>
-                        <input style="width: 63%;border: none;border-bottom: .5px dotted black;" type="text" onchange="addChanges('T2')" id="T2" list="vals">
-                        <datalist id="vals">
-                            <option value="Yes"></option>
-                            <option value="No"></option>
-                        </datalist>
-                    </div>
-
-                    <div>
-                        <label style="width: 35%;">NT on</label>
-                        <input style="width: 63%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('NT')" id="NT">
-                    </div>
-
-                    <div>
-                        <label style="width: 35%;">TS on</label>
-                        <input style="width: 63%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('TS')" id="TS">
-                    </div>
-
-                    <div>
-                        <label style="width: 35%;">CD on</label>
-                        <input style="width: 63%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onchange="addChanges('CD')" id="CD">
-                    </div>
-                    <div>
-                        <label style="width: 35%;">F/up on</label>
-                        <input style="width: 63%;border: none;border-bottom: .5px dotted black;" type="text"
-                            onload="addEmptyValues('FUP')" onchange="addChanges('FUP')" id="FUP" list="fuplist">
-
-                        <datalist id="fuplist">
-                            <option value="1 महीने में"></option>
-                            <option value="15 दिन में"></option>
-                            <option value="10 दिन में"></option>
-                            <option value="7 दिन में"></option>
-                            <option value="महीने के D2-D3 scan"></option>
-                            <option value="महीने के D5-D10 scan"></option>
-                        </datalist>
-                    </div>
-                </div>
-                
-            </div>
-            -->
         </div>
     </div>
     <div style="width: 730px;display: flex;justify-content: center;margin-top: 15px;">
@@ -439,13 +248,11 @@ P/V </textarea>
                 <%}%>
             </tbody>
         </table>
-        <div id="audioInput" style="position: fixed;top: 60%;left: 55%;display: none;">
+        <div id="audioInput" style="position: fixed;top: 60%;left: 55%;">
             <h1>Audio input</h1>
             <button id="startButton">Start Listening</button>
             <button id="stopButton" disabled>Stop Listening</button>
         </div>
-        
-    
     </div>
 </div>
 

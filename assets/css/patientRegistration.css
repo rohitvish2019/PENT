@@ -61,7 +61,9 @@ input[type="submit"]:hover {
     background-color: #45a049;
 }
 
-
+input{
+    text-transform: uppercase;
+}
 @media (max-width: 768px) {
     .detail-display{
         position: static;

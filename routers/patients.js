@@ -16,9 +16,11 @@ Router.post('/admit', passport.checkAuthentication, PatientsController.admitPati
 Router.get('/showAdmitted', passport.checkAuthentication, PatientsController.showAdmitted);
 Router.get('/viewAdmitted/:id', passport.checkAuthentication, PatientsController.admittedPatientProfile);
 Router.get('/getPrescription/:visitId', passport.checkAuthentication, PatientsController.showPrescription);
+Router.get('/showVisit/:visitId', passport.checkAuthentication, PatientsController.visitHome);
 Router.get('/dischargeSheet/:id', passport.checkAuthentication, PatientsController.dischargeSheet);
 Router.get('/AdmissionCard/:id', passport.checkAuthentication, PatientsController.getAdmissionCard);
 Router.get('/DischargeReceipt/:id', passport.checkAuthentication, PatientsController.dischargeReceipt);
+Router.get('/consentForm/:id', passport.checkAuthentication, PatientsController.consentForm)
 Router.post('/saveDischargeDate', passport.checkAuthentication, PatientsController.saveDischargeDate);
 Router.post('/saveRoomType', passport.checkAuthentication, PatientsController.saveRoomType);
 Router.post('/saveDeliveryType', passport.checkAuthentication, PatientsController.saveDeliveryType);
@@ -37,4 +39,5 @@ Router.post('/cancel/IPD/:id', passport.checkAuthentication, PatientsController.
 Router.post('/save/dischargeData', passport.checkAuthentication, PatientsController.saveDischargeData);
 Router.get('/get/dischargeData/:id', passport.checkAuthentication, PatientsController.getDischargeData);
 Router.get('/getIPDData/Range', passport.checkAuthentication, PatientsController.getIPDData);
+
 module.exports = Router;

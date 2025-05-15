@@ -10,16 +10,16 @@
 }
 .left{
     padding-left: 5px;
-    width: 60%;
+    width: 50%;
 }
 .right{
     padding-left: 5px;
-    width: 40%;
+    width: 50%;
 }
 .patient-data{
     font-size: 20px;
 }
-label{
+.pheading{
     width: 150px !important;
     display: inline-block;
     margin-left: 5px;

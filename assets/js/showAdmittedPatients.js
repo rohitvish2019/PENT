@@ -207,6 +207,7 @@ function setIPDData(visits, rooms){
                 <button style="color: white;font-size:smaller !important;" class="btn btn-info dropdown-toggle" type="button" id="actions" data-bs-toggle="dropdown" aria-expanded="false">Action</button>
                 <ul class="dropdown-menu">
                     <li><a target='_blank' class="dropdown-item" href="/patients/AdmissionCard/${visits[i]._id}">Get Admission Card</a></li>
+                    <li><a target='_blank' class="dropdown-item" href="/patients/consentForm/${visits[i]._id}">Operation Consent</a></li>
                     <li><a target='_blank' class="dropdown-item" href="/patients/dischargeSheet/${visits[i]._id}">Generate Discharge Sheet</a></li>
                     <li><a target='_blank' class="dropdown-item" href="/patients/AdmissionBill/${visits[i]._id}">Generate Discharge Bill</a></li>
                     <li><a target='_blank' class="dropdown-item" href="/patients/DischargeReceipt/${visits[i]._id}">Generate Final Receipt</a></li>

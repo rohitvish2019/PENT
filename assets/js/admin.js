@@ -10,6 +10,8 @@ function openDashboard() {
     document.getElementById('profile').style.display = 'none'
     document.getElementById('dashboard').style.display = 'block'
     document.getElementById('Medicine').style.display = 'none'
+    document.getElementById('Operation').style.display = 'none'
+    
     getDashboardData()
 }
 
@@ -19,6 +21,7 @@ function openUsers() {
     document.getElementById('profile').style.display = 'none'
     document.getElementById('dashboard').style.display = 'none'
     document.getElementById('Medicine').style.display = 'none'
+    document.getElementById('Operation').style.display = 'none'
     getUsers()
 }
 
@@ -28,6 +31,7 @@ function openSettings() {
     document.getElementById('profile').style.display = 'none'
     document.getElementById('dashboard').style.display = 'none'
     document.getElementById('Medicine').style.display = 'none'
+    document.getElementById('Operation').style.display = 'none'
     getServices()
 }
 
@@ -37,6 +41,7 @@ function openProfile() {
     document.getElementById('profile').style.display = 'block'
     document.getElementById('dashboard').style.display = 'none'
     document.getElementById('Medicine').style.display = 'none'
+    document.getElementById('Operation').style.display = 'none'
     getMyProfile()
 }
 
@@ -46,6 +51,17 @@ function openMedicine() {
     document.getElementById('profile').style.display = 'none'
     document.getElementById('dashboard').style.display = 'none'
     document.getElementById('Medicine').style.display = 'block'
+    document.getElementById('Operation').style.display = 'none'
+    getMedicineData()
+}
+
+function openOperation(){
+    document.getElementById('users').style.display = 'none'
+    document.getElementById('settings').style.display = 'none'
+    document.getElementById('profile').style.display = 'none'
+    document.getElementById('dashboard').style.display = 'none'
+    document.getElementById('Medicine').style.display = 'none'
+    document.getElementById('Operation').style.display = 'block'
     getOperationsData()
 }
 
@@ -179,7 +195,146 @@ function getServices() {
     })
 
 }
+function getMedicineData() {
+    $.ajax({
+        url: '/meds/getAll',
+        type: 'GET',
+        success: function (data) {
+            console.log(data.medsList);
+            let container = document.getElementById('MedicineListTable');
+            container.innerHTML = ``;
+            for (let i = 0; i < data.medsList.length; i++) {
+                let item = document.createElement('tr');
+                item.innerHTML =
+                    `
+                    <tr id="data.medsList[i]._id">
+                        <td style="text-align:center; ">${i+1}</td>         
+                        <td style="padding-left:10px; font-weight:bold;">${data.medsList[i].Name}</td>
+                        <td style="padding-left:10px; ">${data.medsList[i].Composition}</td>
+                        <td style="text-align:center">${data.medsList[i].Dosage}</td>
+                        <td style="text-align:center">${data.medsList[i].Category}</td>
+                        <td style="text-align:center">${data.medsList[i].Duration}</td>
+                        <td style="text-align:center">${data.medsList[i].Type == 'DischargeMed' ? "Yes":"No"}</td>
+                        <td style="text-align:center">
+                            <div onclick = "deleteMedicine('${data.medsList[i]._id}')">
+                            <label id="dustbinLight${data.medsList[i]._id}" onmouseover = "highlight('${data.medsList[i]._id}')" onmouseout = "unhighlight('${data.medsList[i]._id}')" ><i class="fa-solid fa-trash-can"></i></label>
+							<label style="display:none;" id="dustbinDark${data.medsList[i]._id}" onmouseover = "highlight('${data.medsList[i]._id}')" onmouseout = "unhighlight('${data.medsList[i]._id}')" ><i class="fa-regular fa-trash-can"></i></label>
+                            </div>
+                        </td>
+                    </tr>
+                `
+                container.appendChild(item)
+            }
+        },
+        error: function (err) {}
+    })
+}
 
+function AddNewMedicine() {
+    console.log('Adding meds')
+    let Name = document.getElementById('MedicineName').value;
+    let Composition = document.getElementById('Composition').value;
+    let Dosage = document.getElementById('Dosage').value;
+    let Duration = document.getElementById('Duration').value;
+    let Type = document.getElementById('medType').value
+    let Category = document.getElementById('Category').value
+    
+    if (!Name || Name == '') {
+        new Noty({
+            theme: 'relax',
+            text: 'Medicine Name is mandatory',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 1500
+        }).show();
+        return
+    }
+    if (!Dosage || Dosage == '') {
+        new Noty({
+            theme: 'relax',
+            text: 'Medicine Dosage is mandatory',
+            type: 'error',
+            layout: 'topRight',
+            timeout: 1500
+        }).show();
+        return
+    }
+
+    $.ajax({
+        url: '/meds/addNew',
+        data: {
+            Name,
+            Composition,
+            Dosage,
+            Duration,
+            Type,
+            Category
+        },
+        type: 'POST',
+        success: function (data) {
+            closepopup()
+            getMedicineData()
+            new Noty({
+                theme: 'relax',
+                text: 'New Medicine record saved successfully',
+                type: 'success',
+                layout: 'topRight',
+                timeout: 1500
+            }).show();
+            document.getElementById('MedicineName').value = ''
+            document.getElementById('Composition').value = ''
+            document.getElementById('Dosage').value = ''
+            document.getElementById('Duration').value = ''
+            document.getElementById('Category').value = ''
+            return
+        },
+        error: function (data) {
+            new Noty({
+                theme: 'relax',
+                text: 'Unable to add Medicine',
+                type: 'error',
+                layout: 'topRight',
+                timeout: 1500
+            }).show();
+            return
+        },
+    })
+
+}
+
+function deleteMedicine(id){
+    let confirmation = window.confirm("Medicine will be deleted permanently, Please Confirm !")
+    if (confirmation) {
+        $.ajax({
+            url: '/meds/deleteMedicine/' + id,
+            type: 'Delete',
+            success: function (data) {
+                new Noty({
+                    theme: 'relax',
+                    text: 'Medicine deleted successfully',
+                    type: 'success',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
+                getMedicineData();
+                return
+            },
+            error: function (err) {
+                new Noty({
+                    theme: 'relax',
+                    text: 'Unable to Delete Medicine',
+                    type: 'error',
+                    layout: 'topRight',
+                    timeout: 1500
+                }).show();
+            }
+
+        })
+    } else {
+        return
+    }
+
+}
 function popupuserwindow() {
     document.getElementById('addnewuser').style.display = 'block'
 }
@@ -192,10 +347,15 @@ function popupmedicinewindow() {
     document.getElementById('addnewmedicine').style.display = 'block'
 }
 
+function popupoperationwindow() {
+    document.getElementById('addnewoperation').style.display = 'block'
+}
+
 function closepopup() {
     document.getElementById('addnewuser').style.display = 'none'
     document.getElementById('addnewservice').style.display = 'none'
     document.getElementById('addnewmedicine').style.display = 'none'
+    document.getElementById('addnewoperation').style.display = 'none'
 }
 
 function highlight(x) {

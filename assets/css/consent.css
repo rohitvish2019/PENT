@@ -1,0 +1,13 @@
+.main-body{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(7, 6, 6);
+    width: 730px;
+    height: 1040px;
+    overflow-x: hidden;
+    padding: 4px;
+}
+p{
+    font-size: 19px;
+    padding: 4px;
+}

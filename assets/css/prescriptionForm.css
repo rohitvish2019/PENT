@@ -30,6 +30,7 @@ input::-webkit-inner-spin-button {
     width: 99.9%;
     display: flex;
     margin-top: 5%;
+    justify-content: space-between;
 }
 .patient-info{
     height: 5%;
@@ -45,19 +46,19 @@ input::-webkit-inner-spin-button {
 
 
 .doc-info-left{
-    width: 50%;
+    width: 25%;
     text-align: left;
-    margin-left: 1%;
+    margin-left: 1px;
 }
 
 .doc-info-right{
-    width: 40%;
+    width: 25%;
     text-align: right;
-    margin-right: 1%;
+    margin-right: 2px;
 }
 
 .hospital-photo{
-    width: 25%;
+    width: 45%;
 }
 
 .old-info{
@@ -203,11 +204,19 @@ button:disabled {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 2);
 }
 .left-side label{
-    font-size: 15px;
-    text-align: center;
+    font-size: 12px;
+    text-align: left;
     margin-top: 5px;
     margin-bottom: 5px;
+    padding-left: 1px;
 }
-svg{
-    
+.test-inputs{
+    width: 41%;
+    border: none;
+    border-bottom: 1px dotted black;
+}
+
+.othertests{
+    display: inline-block;
+    width: 100px ;
 }

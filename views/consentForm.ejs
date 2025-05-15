@@ -1,101 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Informed Consent Form</title>
-  <style>
-    @page {
-      size: A4;
-      margin: 20mm;
-    }
-    body {
-      font-family: Arial, sans-serif;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-    h2 {
-      text-align: center;
-      margin-bottom: 20px;
-      text-transform: uppercase;
-    }
-    .section {
-      margin-bottom: 15px;
-    }
-    label {
-      display: block;
-      font-weight: bold;
-    }
-    .field {
-      border-bottom: 1px solid #000;
-      display: inline-block;
-      min-width: 300px;
-    }
-    .dual {
-      display: flex;
-      justify-content: space-between;
-    }
-    .dual div {
-      width: 48%;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/consent.css">
+    <title>Consent</title>
 </head>
 <body>
-  <h2>POOJA ENT CLINIC, DAMOH<br>INFORMED CONSENT / जानकारी एवं सहमति</h2>
-
-  <div class="section">
-    <div class="dual">
-      <div>
-        <label>Name (नाम):</label>
-        <div class="field"></div>
-      </div>
-      <div>
-        <label>Age / Sex (आयु / लिंग):</label>
-        <div class="field"></div>
-      </div>
+    <div class="main-body">
+        <div>
+            <%-include('_pdfHeader')%>
+        </div>
+        <div style="text-align: center;margin-top: 35px;">
+            <label style="font-weight: bold;font-size: 23px;">INFORMED CONSENT</label>
+            <br>
+            <label style="font-weight: bold;font-size: 23px;">जानकारी एवं सहमति</label>
+        </div>
+        <div>
+            <p>
+                मैं &nbsp;<%=visit.Patient.Name%> , उम्र <%=visit.Patient.Age%> वर्ष , लिंग <%=visit.Patient.Gender%> पुत्र / पुत्री / पत्नी निवासी <%=visit.Patient.Address%>। मैं अपनी स्वेच्छा से शल्य चिकित्सा करने की सहमति देता हूं कि डॉ <input type="text" value="विनोद कुकरेजा "> अपने तहत चेतना शून्य करके शल्य चिकित्सा करके रोगी का इलाज करे
+            </p>
+            <p>
+                इस शल्य चिकित्सा क्रिया व चेतना शून्य करके व इससे जुड़ी सभी संभावनाएं जैसे कि मृत्यु विकलांगता के बारे में मुझे पूर्ण रूप से अपनी समझ आने वाली भाषा में बता दिया गया है
+            </p>
+            <p>
+                और शल्य चिकित्सा व चेतना शून्य करने के बाद किसी भी तरह की जिम्मेदारी नहीं ली गई है
+            </p>
+        </div>
+        <div></div>
+        <div></div>
+        <div></div>
     </div>
-    <label>S/o, D/o, W/o (पिता / पति का नाम):</label>
-    <div class="field"></div>
-    <label>Resident of (निवासी):</label>
-    <div class="field"></div>
-    <label>Relationship with Patient (रोगी से संबंध):</label>
-    <div class="field"></div>
-  </div>
-
-  <div class="section">
-    <label>My consent to the (मैं सहमति देता / देती हूँ कि)</label>
-    <div class="field"></div>
-    <label>(Type of surgical procedure / शल्यक्रिया का प्रकार)</label>
-
-    <label>To be performed by Dr. (डॉ द्वारा की जाने वाली):</label>
-    <div class="field"></div>
-    <label>(Name of Surgeon / शल्य चिकित्सक का नाम)</label>
-
-    <label>Under (Type of Anaesthesia / संज्ञाहरण का प्रकार):</label>
-    <div class="field"></div>
-
-    <label>By Dr. (Name of Anaesthesiologist / संज्ञाहरण विशेषज्ञ का नाम):</label>
-    <div class="field"></div>
-  </div>
-
-  <div class="section">
-    <p>I have been explained the consent in my mother tongue <span class="field"></span> language (मुझे मेरी मातृभाषा में यह सहमति समझाई गई है).</p>
-    <p>I have been explained in detail about the results of anaesthesia and surgery as well as the possibility of death and disability (मुझे संज्ञाहरण एवं शल्यक्रिया के परिणामों, मृत्यु एवं विकलांगता की संभावना के बारे में पूरी जानकारी दी गई है).</p>
-  </div>
-
-  <div class="section">
-    <label>Patient / Guardian or NOK (रोगी या अभिभावक या नजदीकी रिश्तेदार):</label>
-    <label>Signature (हस्ताक्षर):</label>
-    <div class="field"></div>
-    <label>Name & Address (नाम व पता):</label>
-    <div class="field"></div>
-  </div>
-
-  <div class="section">
-    <label>Witness (गवाह):</label>
-    <label>Signature (हस्ताक्षर):</label>
-    <div class="field"></div>
-    <label>Name & Address (नाम व पता):</label>
-    <div class="field"></div>
-  </div>
 </body>
 </html>

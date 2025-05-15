@@ -15,6 +15,11 @@ const HospitalName = properties.get('HospitalName');
 const HospitalAddress2 = properties.get('HospitalAddress2')
 const HospitalAddress = properties.get('HospitalAddress');
 const HospitalRegNo = properties.get('HospitalRegNo');
+const logo = properties.get('logoPath');
+const regNo = properties.get('HospitalRegNo');
+const hospitalMobile = properties.get('HospitalMobile');
+const doctorMobile = properties.get('DoctorMobile');
+const InventoriesController = require('../controllers/Inventories');
 module.exports.patientRegistartionHome = function(req, res){
     try{
         return res.render('patientRegistration',{user:req.user, HospitalName})
@@ -592,12 +597,43 @@ module.exports.showPrescription = async function(req, res){
     }
 }
 
+module.exports.visitHome = async function(req, res){
+    try{
+        let medsList = await MedsData.find({}).sort('Name')
+        let visit = await VisitData.findById(req.params.visitId).populate('Patient');
+        let today = new Date().toLocaleDateString();
+        //let updateddate = new Date(visit.updatedAt).toLocaleDateString();
+        /*
+        if(!visit.isOpened){
+            await visit.updateOne({isOpened:true});
+            visit = await VisitData.findById(req.params.visitId).populate('Patient');
+        }
+            */
+        //let visits = await VisitData.find({Patient:visit.Patient}).sort({createdAt:-1});
+        /*let lastVisit = null
+        if(visits.length > 1){
+            lastVisit = visits[1]
+        }*/
+        if(req.xhr){
+            return res.status(200).json({
+                visitData:visit.VisitData,
+                Prescriptions: visit.Prescriptions,
+                medsList
+            })
+        }
+        return res.render('visitHome', {visit, user:req.user, medsList,HospitalName})
+    }catch(err){
+        console.log(err)
+        return res.render('Error_500')
+    }
+}
+
 module.exports.dischargeSheet = async function(req, res){
     try{
         let visit = await VisitData.findById(req.params.id).populate('Patient');
         let birthCerts = await BirthData.find({Visit:visit._id, isCancelled:false, isValid:true}).sort({createdAt:-1});
         let meds = await MedsData.find({Type:'DischargeMed'});
-        return res.render('dischargeSheetTemplate', {visit, user:req.user,HospitalName, meds, birthInfo:birthCerts[0]})
+        return res.render('dischargeSheetTemplate', {visit, user:req.user,HospitalName, meds,docName:'Discharge Sheet', hospitalMobile, HospitalAddress, HospitalAddress2, doctorMobile, logo, regNo})
     }catch(err){
         console.log(err);
         return res.render('Error_500')
@@ -827,7 +863,7 @@ module.exports.dischargeReceipt = async function(req, res){
     try{
         let visit = await VisitData.findById(req.params.id,'Patient DischargeBillNumber FinalBillAmount AdmissionDate DischargeDate').populate('Patient');
         let RecieptNo = await Tracker.findOne({});
-        return res.render('paymentReceiptTemplate', {visit, user:req.user,RecieptNo:RecieptNo.RecieptNo,HospitalName,HospitalAddress,HospitalRegNo, HospitalAddress2})
+        return res.render('paymentReceiptTemplate', {visit, user:req.user,RecieptNo:RecieptNo.RecieptNo,HospitalName,HospitalAddress,regNo, HospitalAddress2, docName:'Receipt',logo, hospitalMobile, doctorMobile})
     }catch(err){
         console.log(err);
         return res.render('Error_500')
@@ -838,7 +874,7 @@ module.exports.getAdmissionCard = async function(req, res){
     try{
         let visit = await VisitData.findById(req.params.id).populate('Patient');
         console.log(visit);
-        return res.render('AdmissionCard',{HospitalName, HospitalAddress, HospitalAddress2, HospitalRegNo, visit})
+        return res.render('AdmissionCard',{HospitalName, HospitalAddress, HospitalAddress2, regNo, logo, visit, hospitalMobile, doctorMobile, docName:'Admission Card'})
     }catch(err){
         return res.render('Error_500')
     }
@@ -894,5 +930,15 @@ module.exports.getIPDData = async function(req, res){
         return res.status(500).json({
             message:'Unable to find IPDs'
         })
+    }
+}
+
+module.exports.consentForm = async function(req, res) {
+    try{
+        let visit = await VisitData.findById(req.params.id).populate('Patient');
+        return res.render('consentForm',{HospitalName, HospitalAddress, HospitalAddress2, HospitalRegNo, visit, logo, regNo, hospitalMobile, doctorMobile, docName:'Consent Form'});
+    }catch(err){
+        console.log(err);
+        return res.render('Error_500');
     }
 }

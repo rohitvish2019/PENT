@@ -8,67 +8,42 @@
 </head>
 <body>
     <div class="container">
-        <div style="display: flex;justify-content: space-between;padding: 10px;">
-            <div class="logo">
-                <img src="/images/PENT_Logo.png" alt="Pooja ENT Clinic, Logo" height="100%" width="100%">
-            </div>
-            <div style="text-align: center;">
-                <h1><%=HospitalName%></h1>
-                <div><%=HospitalAddress%></div>
-                <div><%=HospitalAddress2%></div>
-            </div>
-            <div>
-                <h4>Reg : <%=HospitalRegNo%></h4>
-            </div>
-        </div>
+        <%-include('_pdfHeader')%>
         <h2 style="text-align: center;background-color: #e4e1e1;">ADMISSION CARD</h2>
         <div style="display: flex;justify-content: space-between;">
             <div class="left patient-data">
                     <div class="patient-item">
-                        <label>Name : </label>
+                        <label class="pheading">Name : </label>
                         <span><%=visit.Patient.Name%></span>
                     </div>
                     <div class="patient-item">
-                        <label>Mobile : </label>
-                        <span><%=visit.Patient.Mobile%></span>
-                    </div>
-                    <div class="patient-item">
-                        <label>Age/Sex : </label>
+                        <label class="pheading">Age/Sex : </label>
                         <span><%=visit.Patient.Age%> / <%=visit.Patient.Gender%></span>
                     </div>
                     
                     <div class="patient-item">
-                        <label>Address : </label>
+                        <label class="pheading">Address : </label>
                         <span><%=visit.Patient.Address%></span>
                     </div>
             </div>
             <div class="right patient-data">
                 <div class="patient-item">
-                    <label>Patient Id : </label>
+                    <label class="pheading">Patient Id : </label>
                     <span><%=visit.Patient.Id%></span>
                 </div>
                 <div class="patient-item">
-                    <label>IPD Number : </label>
+                    <label class="pheading">IPD Number : </label>
                     <span><%=visit.IPDNumber%></span>
                 </div>
                 <div class="patient-item">
-                    <label>Brought By : </label>
-                    <span><%=visit.BroughtBy%></span>
-                </div>
-                <div class="patient-item">
-                    <label>Admission Date : </label>
-                    <span><%=new Date(visit.AdmissionDate).toLocaleDateString("en-IN",{month:'2-digit',day:'2-digit', year:'numeric'})%></span>
-                 </div>
-                <div class="patient-item">
-                    <label>Admission Time : </label>
+                    <label class="pheading">Admitted On : </label>
                     <% let dateTime = visit.AdmissionDate + " "+visit.AdmissionTime%>
-                    <span><%= new Date(dateTime).toLocaleString("en-IN", {hour:'2-digit',minute:'2-digit'})%></span>
+                    <span><%=new Date(visit.AdmissionDate).toLocaleDateString("en-IN",{month:'2-digit',day:'2-digit', year:'numeric'})%> , <%= new Date(dateTime).toLocaleString("en-IN", {hour:'2-digit',minute:'2-digit'})%></span>
                  </div>
-                
             </div>
         </div>
         <div>
-            <label style="font-size: 18px;font-weight: bold;">Complaint : -</label>
+            <label style="font-size: 18px;font-weight: bold;">Dignosis : -</label>
             <textarea cols="93" rows="6" name="" id=""></textarea>
         </div>
         <div>
@@ -82,19 +57,19 @@
         </div>
         <div style="font-size: 20px;display: flex;justify-content: space-between;">
             <div class="consent-items">
-                <label  for="">Admitted By</label>
-                <label for="">Name :</label>
+                <label  for="">Admitted By</label> <br><br><br>
+                <label for="">Name :</label><br><br><br>
                 <label for="">Signature</label>
             </div>
             <div class="consent-items">
-                <label for="">Witness 1</label>
-                <label for="">Name :</label>
+                <label for="">Witness 1</label><br><br><br>
+                <label for="">Name :</label><br><br><br>
                 <label for="">Signature</label>
             </div>
             
-            <div class="consent-items">
-                <label for="">Witness 2</label>
-                <label for="">Name : </label>
+            <div class="consent-items" style="margin-right: 120px;">
+                <label for="">Witness 2</label><br><br><br>
+                <label for="">Name : </label><br><br><br>
                 <label for="">Signature</label>
             </div>
         </div>

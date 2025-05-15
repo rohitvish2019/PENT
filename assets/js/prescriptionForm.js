@@ -6,7 +6,7 @@ function printPrescription() {
     document.getElementById('printButton').style.display = 'none'
     changes['complaint'] = document.getElementById('complaint').value
     changes['history'] = document.getElementById('history').value
-    changes['OEs'] = document.getElementById('OEs').value
+    //changes['OEs'] = document.getElementById('OEs').value
     $.ajax({
         url: '/patients/saveVisitPrescriptions',
         data: {
@@ -216,7 +216,7 @@ function uploadReport(visitId, patient_id){
         
 
         // Set recognition properties
-        recognition.lang = 'en-US'; // Language set to English (US)
+        recognition.lang = 'en-IN'; // Language set to English (US)
         recognition.interimResults = false; // Complete results only
         recognition.continuous = false; // Stop after one utterance
 
@@ -225,7 +225,9 @@ function uploadReport(visitId, patient_id){
             recognition.start();
             startButton.disabled = true;
             stopButton.disabled = false;
-            speechToTextResultDiv.textContent = "Listening...";
+            if(speechToTextResultDiv.textContent.length > 0){
+                speechToTextResultDiv.textContent = speechToTextResultDiv.textContent+ '\n'
+            }
         });
 
         // Stop recognition
@@ -238,7 +240,7 @@ function uploadReport(visitId, patient_id){
         // Process recognition result
         recognition.addEventListener('result', (event) => {
             const transcript = event.results[0][0].transcript;
-            speechToTextResultDiv.textContent = `${transcript}`;
+            speechToTextResultDiv.textContent = speechToTextResultDiv.textContent+`${transcript}`;
         });
 
         // Handle recognition errors
