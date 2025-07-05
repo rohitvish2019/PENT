@@ -67,13 +67,13 @@ function getAppointmentsToday(){
                     <tr id="${data.visits[i]._id}">
                         <th scope="row">${i+1}</th>
                         <td>${data.visits[i].Patient.Id}</td>
-                        <td>${data.visits[i].Patient.Doctor}</td>
                         <td>${data.visits[i].Patient.Name}</td>
                         <td>${data.visits[i].Patient.Age}</td>
-                        <td>${data.visits[i].Patient.Husband}</td>
+                        
                         <td>${data.visits[i].Patient.Address}</td>
                         <td style='background-color:${color};font-weight:bold;color:black'>${data.visits[i].Fees}</td>
                         <td><a target='_blank' href="/patients/getHistory/${data.visits[i].Patient._id}">Patient History</a></td>
+                        <td><a target='_blank' href="/patients/showVisit/${data.visits[i]._id}">Visit Pad</a></td>
                         <td><a target='_blank' href="/patients/getPrescription/${data.visits[i]._id}">Prescription</a></td>
                         <td>
                         <div class="form-check form-switch">

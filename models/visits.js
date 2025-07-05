@@ -32,6 +32,11 @@ const Visits = new mongoose.Schema({
             type:String
         }
     ],
+    Medicines:[
+        {
+            type:String
+        }
+    ],
     DischargeData:Object,
     prescribedMeds:Array,
     advancedPayments:Array,

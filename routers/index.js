@@ -10,5 +10,6 @@ Router.use('/',passport.checkAuthentication, require('./users'));
 Router.use('/uploads', require('./uploads'));
 Router.use('/meds', require('./meds'));
 Router.use('/inventory', passport.checkAuthentication, require('./inventory'));
-Router.use('/operation', passport.checkAuthentication, require('./operations'))
+Router.use('/operation', passport.checkAuthentication, require('./operations'));
+Router.use('/prefrences', passport.checkAuthentication, require('./prefrences'));
 module.exports = Router;

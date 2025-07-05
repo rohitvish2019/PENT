@@ -7,6 +7,7 @@ const Reportsdata = require('../models/reports')
 const ServicesData = require('../models/servicesAndCharges')
 const SalesData = require('../models/sales');
 const MedsData = require('../models/meds');
+const Prefrences = require('../models/prefrences')
 const BirthData = require('../models/birthCertificates');
 const Patient = require('../models/patients');
 const PropertiesReader = require('properties-reader');
@@ -72,7 +73,9 @@ module.exports.addVisitAndPatient = async function(req, res){
                 Id:newPatientId,
                 Gender:req.body.Gender,
                 Husband:req.body.Husband,
-                IdProof:req.body.IdProof
+                IdProof:req.body.IdProof,
+                RelativeName: req.body.RelativeName,
+                patientRel:req.body.patientRel
             });
             await tracker.updateOne({patientId:newPatientId})
         }
@@ -571,16 +574,19 @@ module.exports.showPrescription = async function(req, res){
     try{
         let medsList = await MedsData.find({}).sort('Category')
         let visit = await VisitData.findById(req.params.visitId).populate('Patient');
-        let today = new Date().toLocaleDateString();
-        let updateddate = new Date(visit.updatedAt).toLocaleDateString();
         if(!visit.isOpened){
             await visit.updateOne({isOpened:true});
             visit = await VisitData.findById(req.params.visitId).populate('Patient');
         }
         let visits = await VisitData.find({Patient:visit.Patient}).sort({createdAt:-1});
         let lastVisit = null
-        if(visits.length > 1){
-            lastVisit = visits[1]
+        let l=0;
+        while(l < visits.length){
+            if(visits[l].Histories.length > 0){
+                lastVisit = visits[l];
+                break
+            }
+            l++
         }
         if(req.xhr){
             return res.status(200).json({
@@ -599,8 +605,11 @@ module.exports.showPrescription = async function(req, res){
 
 module.exports.visitHome = async function(req, res){
     try{
-        let medsList = await MedsData.find({}).sort('Name')
+        let complaints = await Prefrences.find({Type:'complaint'}).sort('Value')
+        let meds = await Prefrences.find({Type:'medicine'}).sort('Value')
+        let histories = await Prefrences.find({Type:'history'}).sort('Value')
         let visit = await VisitData.findById(req.params.visitId).populate('Patient');
+        let dosage = await Prefrences.find({Type:'dosage'}).sort('Value');
         let today = new Date().toLocaleDateString();
         //let updateddate = new Date(visit.updatedAt).toLocaleDateString();
         /*
@@ -618,10 +627,12 @@ module.exports.visitHome = async function(req, res){
             return res.status(200).json({
                 visitData:visit.VisitData,
                 Prescriptions: visit.Prescriptions,
-                medsList
+                complaints,
+                meds,
+                histories
             })
         }
-        return res.render('visitHome', {visit, user:req.user, medsList,HospitalName})
+        return res.render('visitHome', {visit, user:req.user,histories,meds,dosage, complaints,HospitalName})
     }catch(err){
         console.log(err)
         return res.render('Error_500')
@@ -940,5 +951,22 @@ module.exports.consentForm = async function(req, res) {
     }catch(err){
         console.log(err);
         return res.render('Error_500');
+    }
+}
+
+module.exports.saveVisitPad = async function(req, res) {
+    try{
+        visit = await VisitData.findByIdAndUpdate(req.body.visitId, {
+            Histories:req.body.Histories,
+            Medicines:req.body.Medicines,
+            Complaints:req.body.Complaints
+        });
+        return res.status(200).json({
+            message:'visit pad data saved'
+        })
+    }catch(err){
+        return res.status(500).json({
+            message:'Unabe to save visit pad data'
+        })
     }
 }

@@ -4,6 +4,8 @@ let prescribedMeds = new Array();
 
 function printPrescription() {
     document.getElementById('printButton').style.display = 'none'
+    document.getElementById('fileInputs').style.display='none'
+    /*
     changes['complaint'] = document.getElementById('complaint').value
     changes['history'] = document.getElementById('history').value
     //changes['OEs'] = document.getElementById('OEs').value
@@ -29,6 +31,8 @@ function printPrescription() {
             window.print()
         }
     })
+    */
+   window.print();
 }
 
 function removeEmptyValuesFromArray(inputArray){
@@ -195,7 +199,8 @@ function uploadReport(visitId, patient_id){
             let item = document.createElement('tr');
             item.innerHTML=
             `
-                <td><a href='${link}' target='_blank'>${fileName}</a></td>
+                <td>${fileName}</td>
+                <td><a href='${link}' target='_blank'>View</a></td>
             `    
             container.appendChild(item)
             document.getElementById('fileName').value=''
@@ -204,6 +209,7 @@ function uploadReport(visitId, patient_id){
     });
         
   }
+  /*
   let speechToTextResultDiv;
   function speechToText(){
     const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -285,7 +291,7 @@ function addDaysToDate(inputDate, daysToAdd) {
 
     return `${year}-${month}-${day}`;
 }
-
+*/
 /*
 function countWeeksAndDays() {
     
@@ -389,5 +395,5 @@ function initilizeApp(){
     addChanges('lmpdate')
     addChanges('calculatedTime')
     //calculateFullGAA()
-    speechToText()
+    //speechToText()
 }

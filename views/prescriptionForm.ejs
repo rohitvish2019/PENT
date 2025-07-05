@@ -25,7 +25,7 @@
     <div class="main-body" style="overflow: hidden;">
         <div class="header" style="display: flex;">
             <div style="width: 30%;">
-                <label for="" style="font-size: small;margin-left: 1px;">Reg No. CL/1097</label>
+                <label for="" style="font-size: medium;margin-left: 1px;">Reg No. CL/1097</label>
             </div>
             <div style="width: 35%;" class="name">
                 <label style="font-size: 31px;font-weight: bolder; color: rgb(201, 8, 8);">पूजा ENT हॉस्पिटल&nbsp;</label>
@@ -163,20 +163,33 @@
             </div>
             <div class="right-side">
                 <div style="font-size: 13px;">
-                    <div style="width: 50%;height: 330px;">
+                    <div style="width: 50%;">
                         <div style="width: 100%;display: flex;">
                             <div style="width: 100%;">
-                                <b style="display: block;">Complaint</b>
-                                <textarea rows="7" style="width: 100%;" name="" id="complaint" placeholder=""></textarea>
+                                <img src="/images/complaints.png" alt="" srcset="" height="25px" width="30px" style="display: inline;margin-top: -10px;"> &nbsp;&nbsp;                                
+                                <b style="display: inline-block;font-size: 19px;margin-bottom: 15px;padding-top: 5px;"> Complaints :- </b>
+                                
+                                <!--
+                                <textarea rows="7" style="width: 100%;" name="" id="complaint" placeholder=""><%for(let i=0;i<visit.Complaints.length;i++){%>
+* <%=visit.Complaints[i]%><%}%>
+
+                                </textarea>
+                                -->
+                                <ul>
+                                    <%for(let i=0;i<visit.Complaints.length;i++) {%>
+                                        <li><%=visit.Complaints[i]%></li>
+                                    <%}%>
+                                </ul>
                             </div>
                         </div>
                         <div>
-                            <b>History</b>
-                            <% if(lastVisit && lastVisit.VisitData){ %>
-                                <textarea rows="7" style="width: 100%;" name="" id="history" placeholder=""><%=lastVisit == undefined ? '' : lastVisit.VisitData.history%></textarea>
-                            <%}else{%>
-                                <textarea rows="7" style="width: 100%;" name="" id="history" placeholder=""></textarea>
-                            <%}%>
+                            <img src="/images/history.png" alt="" srcset="" height="25px" width="30px" style="display: inline;margin-top: -10px;"> &nbsp;&nbsp;                                
+                            <b style="display: inline-block;font-size: 19px;margin-bottom: 15px;padding-top: 5px;">History :- </b>
+                            <ul>
+                                <%for(let i=0;i<visit.Histories.length;i++) {%>
+                                    <li><%=visit.Histories[i]%></li>
+                                <%}%>
+                            </ul>
                         </div>
                     </div>
                     
@@ -184,6 +197,7 @@
                 <div class="medicines" style="padding-left: 3px;">
                     <div style="display: flex;justify-content: space-between;">
                         <div style="width: 99.5%;">
+                            <!--
                             <div style="display: flex;">
                                 <input style="width: 95% !important;" type="text" placeholder="Medicine" id="searchBox" list="meds">
                                 <datalist id="meds">
@@ -194,21 +208,23 @@
                                 
                                 <input style="font-size: large;" type="button" id="AddMed" value="Add" onclick="addMed()">
                             </div>
+                            -->
                             <div style="height: 400px;">
-                                <div  style="font-size: 14px !important;">
+                                <img src="/images/meds.png" alt="" srcset="" height="25px" width="30px" style="display: inline;margin-top: -10px;"> &nbsp;&nbsp;                                
+                                <b style="display: inline-block;font-size: 19px;margin-bottom: 15px;padding-top: 5px;">Prescribed Medicines :-</b>
+                                <div style="font-size: 14px !important;margin-top: 10px;">
                                     <table>
                                         <thead>
-                                            <tr>
-                                                <th>Medicine</th>
-                                                <th>Dosage</th>
-                                                <th>Time-Freq-Duration</th>
-                                            </tr>
+                                            
                                         </thead>
                                         <tbody id="prescribedMeds" style="font-size: small;">
+                                            <% for(let i=0;i<visit.Medicines.length;i++) { %>
+                                                <tr>
+                                                    <td><li><%=visit.Medicines[i]%></li></td>
+                                                </tr>
+                                            <%}%>
                                         </tbody>
                                     </table>
-                                    
-                                    
                                 </div>
                                 
                             </div>
@@ -220,39 +236,48 @@
         </div>
     </div>
     <div style="width: 730px;display: flex;justify-content: center;margin-top: 15px;">
-        <button class="btn btn-success" style="width: 70%;" id="printButton" onclick="printPrescription()">Save &
-            Print</button>
+        <button class="btn btn-success" style="width: 70%;" id="printButton" onclick="printPrescription()">Print</button>
     </div>
     <script src="/js/prescriptionForm.js"></script>
 
     
 </body>
-<div id="fileInputs" style="position: absolute;top: 5%; left: 65%;">
-    Enter file name <input type="text" name="" id="fileName">
-    <input  type="file" id="file" accept="*" onchange="setname()">
-    <button style="padding: 5px;" onclick="uploadReport('<%=visit._id%>','<%=visit.Patient._id%>')">Upload</button>
+<div id="fileInputs" style="position: absolute;">
+    <h3>Upload documents</h3>
+    <div style="display: flex; border-bottom: 2px dotted black;padding-bottom: 20px;">
+        <input type="text" name="" id="fileName">
+        <input  type="file" id="file" accept="*" onchange="setname()">
+        <button style="padding: 3px;padding-left: 13px;padding-right: 13px;border-radius: 5px;" onclick="uploadReport('<%=visit._id%>','<%=visit.Patient._id%>')">Upload</button>
+    </div>
     <div style="margin-top: 5%;">
-        <label for="">Other documents</label>
-        <table border="1px solid gray">
-            <thead>
+        <b style="margin-bottom: 10px;">
+            <label for="">Uploaded documents</label>
+        </b>
+        
+        <table border="1px solid gray" >
+            <thead style="background-color: antiquewhite;">
                 <tr>
-                    <th>Documents List</th>
+                    <th>Name</th>
+                    <th>Open</th>
                 </tr>
             </thead>
             
             <tbody id="otherDocs">
                 <%for(let i=0;i<visit.OtherDocs.length;i++){%>
-                    <tr>
-                        <td><a target="_blank" href="<%=visit.OtherDocs[i]%>"><%=visit.OtherDocs[i].toString().split('_')[3]%></a></td>
+                    <tr style="border: 1px solid black;">
+                        <td><%=visit.OtherDocs[i].toString().split('_')[3]%></td>
+                        <td><a target="_blank" href="<%=visit.OtherDocs[i]%>">View</a></td>
                     </tr>
                 <%}%>
             </tbody>
         </table>
+        <!--
         <div id="audioInput" style="position: fixed;top: 60%;left: 55%;">
             <h1>Audio input</h1>
             <button id="startButton">Start Listening</button>
             <button id="stopButton" disabled>Stop Listening</button>
         </div>
+        -->
     </div>
 </div>
 

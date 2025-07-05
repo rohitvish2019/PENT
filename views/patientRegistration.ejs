@@ -54,9 +54,25 @@
               onclick="searchById()"><i class="fas fa-search"></i></button>
           </div>
           <div class="form-floating mb-2">
-            <input type="text" class="form-control" id="Name" placeholder="name@example.com">
-            <label for="Name"><i class="fas fa-user"></i> Full Name <span>*</span></label>
+              <input type="text" class="form-control" id="Name" placeholder="name@example.com">
+              <label for="Name"><i class="fas fa-user"></i> Full Name <span>*</span></label>
+            </div>
+          <div style="display: flex;justify-content: space-between;">
+            <div class="form-floating">
+              <select class="form-select" id="patientRel" aria-label="Floating label select example">
+                <option selected disabled value="">-Select-</option>
+                <option value="S/O">S/O</option>
+                <option value="W/O">W/O</option>
+                <option value="D/O">D/O</option>
+              </select>
+              <label for="patientRel"><i class="fa-solid fa-user-doctor"></i> Rel <span>*</span></label>
+            </div>
+            <div class="form-floating mb-2">
+              <input type="text" class="form-control" id="RelativeName" placeholder="name@example.com">
+              <label for="Name"><i class="fas fa-user"></i> Relative Name <span>*</span></label>
+            </div>
           </div>
+          
 
           <div class="form-floating mb-2">
             <select class="form-select" id="Gender" aria-label="Floating label select example">
@@ -76,11 +92,7 @@
             <input type="text" class="form-control" id="Address" placeholder="name@example.com">
             <label for="Address"><i class="fas fa-map-marker-alt"></i> Address <span>*</span></label>
           </div>
-          <div class="form-floating mb-2">
-            <input type="number" class="form-control" id="Fees" placeholder="name@example.com"
-              value="<%= new Date().getDay() == 0 ? 500 : 400%>">
-            <label for="Mobile"> <b>₹</b> Fees<span>*</span></label>
-          </div>
+          
           <div style="text-align: left; font-size: 12px;">
             <span>* Mandatory Details</span>
           </div>
@@ -105,7 +117,11 @@
             <input type="number" class="form-control" id="weight" placeholder="name@example.com">
             <label for="IdProof"><i class="fa-solid fa-id-badge"></i> Weight </label>
           </div>
-
+          <div class="form-floating mb-2">
+            <input type="number" class="form-control" id="Fees" placeholder="name@example.com"
+              value="<%= new Date().getDay() == 0 ? 500 : 400%>">
+            <label for="Mobile"> <b>₹</b> Fees<span>*</span></label>
+          </div>
           <div class="form-floating">
             <select class="form-select" id="paymentType" aria-label="Floating label select example">
               <option selected disabled value="">--Select--</option>

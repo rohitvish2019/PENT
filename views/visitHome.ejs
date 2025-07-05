@@ -9,73 +9,138 @@
     <header>
         <%- include('_header')%>
     </header>
-    <div style="display: flex;">
+    <div style="display: flex;" class="main-container">
+        <input type="hidden" value="<%=visit._id%>" id="visitId">
         <div class="left box">
-            <h3>Patient Details</h3>
-            <p><strong>Name:</strong> John Doe</p>
-            <p><strong>Age:</strong> 34</p>
-            <p><strong>Gender:</strong> Male</p>
-            <p><strong>Visit Date:</strong> 2025-05-15</p>
-        </div>
-        <div class="right box">
-            <!-- Complaints Section -->
-            <div class="section">
-            <h3>Complaints</h3>
-            <div class="input-group">
-                <input list="complaint-options" id="complaintInput" placeholder="Enter complaint..." />
-                <datalist id="complaint-options">
-                <option value="Ear Pain">
-                <option value="Hearing Loss">
-                <option value="Tinnitus">
-                <option value="Nasal Blockage">
-                <option value="Sore Throat">
-                </datalist>
-                <button onclick="addEntry('complaint')">Add</button>
+            <div class="patient-container ">
+                <label style="font-size:20px ;font-weight:bolder;color: wheat;"><%=(visit.Patient.Name).toUpperCase()%></label>
+                <label style="font-size:18px ;font-weight:bold ;"><%=visit.Patient.patientRel%> <%=(visit.Patient.RelativeName).toUpperCase()%></label>
+                <label style="font-size:15px ;font-weight:bold ;">Age & Sex : <%=visit.Patient.Age%> / <%=visit.Patient.Gender%></label>
+                
+                <label style="font-size:15px ;font-weight:bold ;">Address : <%=visit.Patient.Address%></label>
             </div>
-            <div id="complaintList" class="entry-list"></div>
+            <div style="margin-top: 15px;">
+                <h5 style="margin-bottom: 15px;">Complaints For</h5>
+                <label class="custom-checkbox-container">
+                    <input type="checkbox" name="" id="All_Prefs" checked onchange="updatePreferences('All')">&nbsp;&nbsp;All
+                </label>
+                <label class="custom-checkbox-container">
+                    <input type="checkbox" id="Ear_Prefs" onchange="updatePreferences('Ear')">&nbsp;&nbsp;Ear
+                </label>
+                <label class="custom-checkbox-container">
+                    <input type="checkbox" name="" id="Eye_Prefs" onchange="updatePreferences('Eye')">&nbsp;&nbsp;Eye
+                </label>
+                
+                <label class="custom-checkbox-container">
+                    <input type="checkbox" name="" id="Nose_Prefs" onchange="updatePreferences('Nose')">&nbsp;&nbsp;Nose
+                </label>
+                
+                <label class="custom-checkbox-container">
+                    <input type="checkbox" name="" id="Face_Prefs" onchange="updatePreferences('Face')">&nbsp;&nbsp;Face
+                </label>
+                
+                <label class="custom-checkbox-container">
+                    <input type="checkbox" name="" id="Throat_Prefs" onchange="updatePreferences('Throat')">&nbsp;&nbsp;Throat
+                </label>
+                
+                <label class="custom-checkbox-container">
+                    <input type="checkbox" name="" id="Chakkar_Prefs" onchange="updatePreferences('Chakkar')">&nbsp;&nbsp;Chakkar
+                </label>
+                
+            </div>
+        </div>
+        <div class="right box" style="font-size: 12px;">
+            <!-- Complaints Section -->
+            <div class="section" style="width: 25%;">
+                <h5>Complaints &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/complaints.png" alt="" height="30px" width="30px"></h5> 
+                <div class="input-group">
+                    <input class="big-inputs" list="complaint-options" id="complaintInput" placeholder="Enter complaint..." />
+                    <datalist id="complaint-options">
+                        <%for(let i=0;i<complaints.length;i++){%>
+                            <option value="<%=complaints[i].Value%>"><%=complaints[i].Value%></option>
+                        <%}%>
+                    </datalist>
+                    <button class="plus-button" onclick="addEntry('complaint')"><img src="/images/plus.png" alt="" height="20px" width="20px"></button>
+                </div>
+                <div id="complaintList" class="entry-list"></div>
             </div>
 
             <!-- History Section -->
-            <div class="section">
-            <h3>History</h3>
-            <div class="input-group">
-                <input list="history-options" id="historyInput" placeholder="Enter history..." />
-                <datalist id="history-options">
-                <option value="Previous ENT Surgery">
-                <option value="Chronic Sinusitis">
-                <option value="Allergies">
-                <option value="Frequent Infections">
-                </datalist>
-                <button onclick="addEntry('history')">Add</button>
-            </div>
-            <div id="historyList" class="entry-list"></div>
+            <div class="section" style="width: 25%;">
+                <h5>History &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/history.png" alt="" height="30px" width="30px"></h5>
+                <div class="input-group">
+                    <input class="big-inputs" list="history-options" id="historyInput" placeholder="Enter history..." />
+                    <datalist id="history-options">
+                        <%for(let i=0;i<histories.length;i++){%>
+                            <option value="<%=histories[i].Value%>"><%=histories[i].Value%></option>
+                        <%}%>
+                    </datalist>
+                    <button class="plus-button" onclick="addEntry('history')"><img src="/images/plus.png" alt="" height="20px" width="20px"></button>
+                </div>
+                <div id="historyList" class="entry-list"></div>
             </div>
 
             <!-- Medicines Section -->
-            <div class="section">
-            <h3>Medicines</h3>
-            <div class="input-group">
-                <input list="medicine-options" id="medicineInput" placeholder="Enter medicine..." />
-                <datalist id="medicine-options">
-                <option value="Amoxicillin 500mg">
-                <option value="Cetrizine 10mg">
-                <option value="Paracetamol 650mg">
-                <option value="Nasal Spray">
-                </datalist>
-                <button onclick="addEntry('medicine')">Add</button>
+            <div class="section" style="width: 45%;">
+                <h5>Medicines  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="/images/meds.png" alt="" height="30px" width="30px"></h5>
+                <div class="input-group">
+                    <input style="width: 55%;" list="medicine-options" id="medicineInput" placeholder="Enter medicine..." />
+                    <input type="text" placeholder="Dosage" id="dosageInput" list="dosage-options">
+                    <datalist id="medicine-options">
+                        <%for(let i=0;i<meds.length;i++){%>
+                            <option value="<%=meds[i].Value%>"><%=meds[i].Value%></option>
+                        <%}%>
+                    </datalist>
+                    <datalist id="dosage-options">
+                        <%for(let i=0;i<dosage.length;i++){%>
+                            <option value="<%=dosage[i].Value%>"><%=dosage[i].Value%></option>
+                        <%}%>
+                    </datalist>
+                    <button class="plus-button" onclick="addEntry('medicine');addEntry('dosage')"><img src="/images/plus.png" alt="" height="20px" width="20px"></button>
+
+                    <!--
+                    <div class=" dropdown">
+                    <button style="color: white;font-size:small;border-bottom-left-radius: 0%;border-top-left-radius: 0%;height: 37px;" class="btn btn-info dropdown-toggle" type="button" id="actions" data-bs-toggle="dropdown" aria-expanded="false">Dose</button>
+                        <ul class="dropdown-menu" style="overflow: auto;max-height: 300px;">
+                            <li><button class="dropdown-item">1-OD</button></li>
+                            <li><button class="dropdown-item">1-BD</button></li>
+                            <li><button class="dropdown-item">1-TD</button></li>
+                            <li><button class="dropdown-item">1-QD</button></li>
+
+                            <li><button class="dropdown-item">1/2-OD</button></li>
+                            <li><button class="dropdown-item">1/2-BD</button></li>
+                            <li><button class="dropdown-item">1/2-TD</button></li>
+                            <li><button class="dropdown-item">1/2-QD</button></li>
+
+                            <li><button class="dropdown-item">1-Before breakfast</button></li>
+                            <li><button class="dropdown-item">1-After breakfast</button></li>
+                            <li><button class="dropdown-item">1-Afternoon</button></li>
+                            <li><button class="dropdown-item">1-Evening</button></li>
+                            <li><button class="dropdown-item">1-Before sleep</button></li>
+                            
+                            <li><button class="dropdown-item">1/2-Before breakfast</button></li>
+                            <li><button class="dropdown-item">1/2-After breakfast</button></li>
+                            <li><button class="dropdown-item">1/2-Afternoon</button></li>
+                            <li><button class="dropdown-item">1/2-Evening</button></li>
+                            <li><button class="dropdown-item">1/2-Before sleep</button></li>
+                        </ul>
+                    </div>
+                </div>
+                -->
+                <div id="medicineList" class="entry-list"></div>
             </div>
-            <div id="medicineList" class="entry-list"></div>
+
             </div>
         </div>
     </div>
-  <div class="container">
-    <!-- Patient Details -->
-    <div class="section">
-      
+    <div style="display: flex;justify-content: flex-end;margin-right: 50px;">
+        <div class="scale-on-hover" style="display: flex;padding-left: 10px;padding-right: 10px;border-radius: 1.2rem;padding-top: 1px;padding-bottom: 1px;">
+            <div class="rectangle" style="text-align: center;" onclick="savePrescription()">
+                Save & Proceed
+            </div>
+            <div class="triangle-right"></div>
+        </div>
     </div>
-
-    
-  </div>
   <script src="/js/visitHome.js"></script>
 </body>
 </html>
